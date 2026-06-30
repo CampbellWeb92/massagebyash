@@ -838,6 +838,109 @@ nav a:hover{
     letter-spacing: 0.5px;
 }
 
+/* Restrictions Section Outer Wrapper & Nav Anchor Margin */
+.restrictions-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+    scroll-margin-top: 40px; /* Gives nice breathing room when clicked from navbar */
+}
+
+/* Central High-Contrast Restriction Card Box */
+.restrictions-card {
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(12px);
+    border: 2px solid #e74c3c; /* Red border to clearly indicate disallowed actions */
+    border-radius: 20px;
+    padding: 45px 35px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 15px rgba(231, 76, 60, 0.1);
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+}
+
+/* Card Header Layout */
+.restrictions-header h2 {
+    font-size: 2.2rem;
+    font-family: var(--heading-font);
+    color: #e74c3c; /* Matches the warning red accent */
+    margin: 0 0 10px 0;
+    border-bottom: none; /* Clears any conflicting global underlines */
+    padding-bottom: 0;
+    animation: none; /* Prevents text shimmering from overriding the clear warning red color */
+    -webkit-text-fill-color: initial;
+    background: none;
+}
+
+/* Non-Negotiable Accent Badge */
+.warning-badge {
+    display: inline-block;
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    font-family: var(--text-font);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.restrictions-intro {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Grid Layout for Prohibited Items List */
+.restrictions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left; /* Left-aligns text inside the centered card for easier reading */
+}
+
+.restrictions-list li {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 10px 0 10px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+.restrictions-list li:last-child {
+    border-bottom: none; /* Removes bottom border line from final list entry */
+}
+
+/* Custom Red Multiplier Dot Bullet Points */
+.restrictions-list li::before {
+    content: "•";
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.3rem;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+}
+
+/* Responsive Scaling Overrides for Mobile Phone Viewports */
+@media (max-width: 600px) {
+    .restrictions-card {
+        padding: 30px 20px;
+        margin: 40px auto;
+    }
+    .restrictions-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
 
 
         @media (max-width: 768px) {
@@ -1029,23 +1132,31 @@ nav a:hover{
         </div>
 </section><br>
 
-        <section id="services-not-offered">
-  <h2>Services Not Offered</h2>
-        <div class="rules">
-            <p><strong>🚫Services Not Allowed (Non-negotiable):</strong></p>
-            <ul>
-                <li>Unprotected oral (OWO)</li>
-                <li>Bareback</li>
-                <li>Rubbing/sliding/genital contact without protection</li>
-                <li>Greek/anal play and rimming</li>
-                <li>Golden showers and scat fetishes</li>
-                <li>Spitting</li>
-                <li>Rough or aggressive play</li>
-                <li>Fingering, fisting, and toys</li>
-                <li>Threesomes/couples</li>
-            </ul><br>
+       <section id="services-not-offered" class="restrictions-section">
+    <div class="restrictions-card">
+        
+        <div class="restrictions-header">
+            <h2>Services Not Offered</h2>
+            <div class="warning-badge">Non-Negotiable</div>
         </div>
-</section>
+        
+        <p class="restrictions-intro">🚫 Services Not Allowed:</p>
+        
+        <ul class="restrictions-list">
+            <li>Unprotected oral (OWO)</li>
+            <li>Bareback</li>
+            <li>Rubbing, sliding, or genital contact without protection</li>
+            <li>Greek / anal play and rimming</li>
+            <li>Golden showers and scat fetishes</li>
+            <li>Spitting</li>
+            <li>Rough or aggressive play</li>
+            <li>Fingering, fisting, and toys</li>
+            <li>Threesomes / couples</li>
+        </ul>
+
+    </div>
+</section><br>
+
 
         
 <section id="important-notes">
