@@ -67,7 +67,6 @@ nav a:hover{
         bottom:15px;
     }
 
-
     #backToTop{
 
     position:fixed;
@@ -476,12 +475,7 @@ nav a:hover{
             border-radius: 8px;
             margin: 20px 0;
         }
-
-        footer {
-             text-align:center;
-             padding:25px;
-}
-        
+  
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
@@ -502,7 +496,33 @@ nav a:hover{
         text-align: center;
     }
 }
+/* PREMIUM MATCHING FOOTER STYLE */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 80px;
+            background: linear-gradient(to top, rgba(5, 10, 5, 1), rgba(10, 10, 10, 0.8));
+            border-top: 2px solid var(--gold);
+            box-shadow: 0 -5px 20px rgba(214, 175, 55, 0.1);
+            position: relative;
+            z-index: 10;
+        }
 
+        footer p:first-of-type {
+            font-family: var(--heading-font);
+            color: var(--white);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        footer p:last-of-type {
+            font-family: var(--text-font);
+            color: #888888;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        } 
     </style>
 </head>
 <body>
@@ -721,7 +741,6 @@ window.addEventListener("scroll", function(){
 });
 
 </script>
-<footer>  
     
     <section id="contact" class="whatsapp-section"><br>
 
@@ -751,9 +770,12 @@ window.addEventListener("scroll", function(){
   </a>
 </div><br>
 
+<footer>
  <p>🌹 Massage by Ashleigh |
         Adults 18+ Only |
         Right of Admission Reserved 🌹</p>
 
     <p>© Copyright 2026 CampbellWeb</p>
 </footer>
+</body>
+</html>
