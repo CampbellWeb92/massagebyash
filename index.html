@@ -1051,6 +1051,171 @@ nav a:hover{
     }
 }
 
+/* Payment Section Outer Grid Layout & Anchor Offset */
+.payment-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    scroll-margin-top: 40px; /* Gives perfect spacing when scrolled to from the navbar */
+}
+
+/* Central High-Contrast Payment Card Box */
+.payment-card {
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(12px);
+    border: 2px solid var(--gold); /* Links seamlessly with your root premium variables */
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.1);
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+}
+
+/* Header Element Styles */
+.payment-header h2 {
+    font-size: 2.2rem;
+    font-family: var(--heading-font);
+    color: var(--gold);
+    margin: 0 0 5px 0;
+    border-bottom: none; /* Clears any global underline conflicts */
+    padding-bottom: 0;
+}
+
+/* Luxury Theme Header Badge Layout */
+.payment-badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    font-family: var(--text-font);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+/* Upper Payment Rules Layout */
+.payment-rules {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.rules-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rules-list li {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 8px 0 8px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.rules-list li:last-child {
+    border-bottom: none;
+}
+
+/* Custom Gold Bullet Points */
+.rules-list li::before {
+    content: "•";
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 1.3rem;
+    position: absolute;
+    left: 5px;
+    top: 4px;
+}
+
+/* Specific Highlight for Mandatory Deposit Note */
+.rules-list li.deposit-bullet {
+    color: var(--white);
+    background: rgba(11, 102, 35, 0.08); /* Emerald hint background */
+    padding: 12px 15px 12px 35px;
+    border-radius: 6px;
+    border: 1px dashed rgba(212, 175, 55, 0.3);
+    margin-top: 10px;
+}
+
+.rules-list li.deposit-bullet::before {
+    left: 15px;
+    top: 8px;
+}
+
+/* Bottom Notices Layout Wrapper */
+.payment-notices {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+
+/* Individual Content Rows */
+.notice-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.notice-block p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.notice-pin {
+    font-size: 1.1rem;
+    line-height: 1;
+    user-select: none;
+}
+
+/* Notice Type Accent Color Modifiers */
+.notice-block.info {
+    border-left-color: var(--gold); /* Gold warning tone */
+}
+
+.notice-block.refund {
+    border-left-color: var(--emerald-light); /* Green friendly tone */
+    background: rgba(46, 204, 113, 0.03);
+}
+
+.notice-block.danger {
+    border-left-color: #e74c3c; /* Red absolute boundary enforcement tone */
+    background: rgba(231, 76, 60, 0.03);
+}
+
+/* Responsive Structural Scales for Mobile Screen Profiles */
+@media (max-width: 600px) {
+    .payment-card {
+        padding: 30px 20px;
+        margin: 40px auto;
+    }
+    .payment-header h2 {
+        font-size: 1.8rem;
+    }
+}
 
 
 
@@ -1351,24 +1516,49 @@ nav a:hover{
             <p class="hours-note">Strictly by appointment only.</p>
         </div><br>
         </div>
-</section>
+</section><br>
 
-<section id="payment-info">
-  <h2>Payment Details</h2>
-        <div class="rates">
-            <ul>
-                <p><strong>💳 Payment</strong></p>
-                    <li>Cash or instant EFT/PayShap accepted.<li>
-                    <li>Payment is required before the session begins.</li>
-                    <li><strong>A deposit of R500 via instant EFT/PayShap is required for all new clients to secure a booking.</strong></li>
-                </ul>
-
- <div class="highlight-box">
-            <p><strong>📌Please note:</strong> the deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</p>
-            <p>📌In the unlikely event that I need to cancel, your deposit will be refunded in full via PayShap as soon as I receive your refund details.</p>
-            <p><strong>📌Please note:</strong> Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking, as time and resources have been reserved specifically for your appointment.</p>
+<section id="payment-info" class="payment-section">
+    <div class="payment-card">
+        
+        <div class="payment-header">
+            <h2>Payment Details</h2>
+            <div class="payment-badge">Secure Booking</div>
         </div>
+        
+        <!-- Core Payment Rules Group -->
+        <div class="payment-rules">
+            <p class="rules-title">💳 Payment Methods</p>
+            <ul class="rules-list">
+                <li>Cash or instant EFT / PayShap accepted.</li>
+                <li>Payment is required before the session begins.</li>
+                <li class="deposit-bullet"><strong>A deposit of R500 via instant EFT / PayShap is required for all new clients to secure a booking.</strong></li>
+            </ul>
+        </div>
+
+        <!-- Highlighted Terms Layout Split -->
+        <div class="payment-notices">
+            
+            <div class="notice-block info">
+                <span class="notice-pin">📌</span>
+                <p><strong>Please note:</strong> The deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</p>
+            </div>
+
+            <div class="notice-block refund">
+                <span class="notice-pin">📌</span>
+                <p>In the unlikely event that I need to cancel, your deposit will be refunded in full via PayShap as soon as I receive your refund details.</p>
+            </div>
+
+            <div class="notice-block danger">
+                <span class="notice-pin">📌</span>
+                <p><strong>Please note:</strong> Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking, as time and resources have been reserved specifically for your appointment.</p>
+            </div>
+
+        </div>
+
+    </div>
 </section>
+
 
 <section id="contact">
  <h2>Booking Info:</h2>
@@ -1430,9 +1620,6 @@ window.addEventListener("scroll", function(){
 
 </script>
     
-    
-
-
 
 <footer>
     <div style="text-align: center; width: 100%; margin: 25px 0;">
