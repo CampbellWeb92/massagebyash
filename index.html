@@ -940,6 +940,117 @@ nav a:hover{
         font-size: 1.8rem;
     }
 }
+/* Important Notes Grid Wrapper & Navigation Offset */
+.notes-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    scroll-margin-top: 40px; /* Provides breathing room when arriving via a navbar link */
+}
+
+/* Centralized Container Card Box */
+.notes-card {
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(12px);
+    border: 2px solid var(--gold); /* Integrates beautifully with your luxury gold variables */
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Card Header Configuration */
+.notes-header h2 {
+    font-size: 2.2rem;
+    font-family: var(--heading-font);
+    color: var(--gold);
+    margin: 0 0 5px 0;
+}
+
+/* Subtitle Header Badge Layout */
+.notice-badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    font-family: var(--text-font);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* List Layout Block for Core Rules */
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left; /* Left-aligns inner text for readability while the block stays centered */
+}
+
+/* Individual Content Rows */
+.note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 0 10px 10px 0;
+}
+
+.note-item p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.note-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+    user-select: none;
+}
+
+/* Specialized Border Accents for Higher Priority Items */
+.note-item.alert {
+    border-left-color: #e74c3c; /* Red border focus for exclusive/restricted parameters */
+}
+
+/* Glowing Layout Focus for Financial Deposits */
+.note-item.deposit-highlight {
+    background: linear-gradient(135deg, rgba(11, 102, 35, 0.15) 0%, rgba(10, 10, 10, 0.5) 100%);
+    border-left: 3px solid var(--emerald-light);
+    border-right: 1px solid rgba(22, 160, 133, 0.2);
+    border-top: 1px solid rgba(22, 160, 133, 0.2);
+    border-bottom: 1px solid rgba(22, 160, 133, 0.2);
+    box-shadow: 0 5px 15px rgba(11, 102, 35, 0.1);
+}
+
+.note-item.deposit-highlight p {
+    color: var(--white);
+}
+
+/* Responsive Structural Scales for Mobile Screen Profiles */
+@media (max-width: 600px) {
+    .notes-card {
+        padding: 30px 20px;
+        margin: 40px auto;
+    }
+    .notes-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
 
 
 
@@ -1159,18 +1270,49 @@ nav a:hover{
 
 
         
-<section id="important-notes">
-     <h2>Important Notes</h2>
-        <div class="highlight-box">
-            <ul>
-                <li>⚠️ <strong>I do not provide interracial services</strong> - I cater exclusively to white gentlemen.</li>
-                <li>🚫 <strong>This is a drug-free zone</strong></li>
-                <li>🤧 <strong>Please do not book if you're feeling unwell.</strong></li>
-                <li>💸<strong>A deposit of R500 via instant EFT/PayShap is required for all new clients to secure a booking.</strong></li>
-                <li>⛔<strong>Zero tolerance for harassment or abuse.</strong></li>
-            </ul>
+<section id="important-notes" class="notes-section">
+    <div class="notes-card">
+        
+        <div class="notes-header">
+            <h2>Important Notes</h2>
+            <div class="notice-badge">Terms of Booking</div>
         </div>
+        
+        <div class="notes-list">
+            <!-- Row 1 -->
+            <div class="note-item alert">
+                <span class="note-icon">⚠️</span>
+                <p><strong>I do not provide interracial services</strong> • I cater exclusively to white gentlemen.</p>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="note-item">
+                <span class="note-icon">🚫</span>
+                <p><strong>This is a drug-free zone</strong></p>
+            </div>
+            
+            <!-- Row 3 -->
+            <div class="note-item">
+                <span class="note-icon">🤧</span>
+                <p><strong>Please do not book if you're feeling unwell.</strong></p>
+            </div>
+            
+            <!-- Row 4 (Highlighted Deposit Notice) -->
+            <div class="note-item deposit-highlight">
+                <span class="note-icon">💸</span>
+                <p><strong>A deposit of R500 via instant EFT / PayShap is required</strong> for all new clients to secure a booking.</p>
+            </div>
+            
+            <!-- Row 5 -->
+            <div class="note-item">
+                <span class="note-icon">⛔</span>
+                <p><strong>Zero tolerance for harassment or abuse.</strong></p>
+            </div>
+        </div>
+
+    </div>
 </section>
+
 
             <!-- Business Hours Section (Moved cleanly out of contact-grid) -->
     <section id="business-hours" class="hours-section">
