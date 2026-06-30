@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashleigh | Rates & Services</title>
+    <style>
+        
+        /* Fixed broken font import */
+        @import url('https://googleapis.com');
+
+        :root {
+            --emerald: #0b6623;
+            --emerald-light: #16a085;
+            --gold: #d4af37;
+            --gold-dark: #b8961e;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --text-font: 'Montserrat', sans-serif;
+            --heading-font: 'Cormorant Garamond', serif;
+        }
+
+        body {
+            margin: 0a;
+            padding: 0;
+            background-color: var(--black);
+            color: var(--white);
+            font-family: var(--text-font);
+            overflow-x: hidden;
+            line-height: 1.6;
+            text-align:justify;
+
+        }
+
+        html {
+  scroll-behavior: smooth;
+}
+
+/* Navigation */
+nav{
+
+display:flex;
+justify-content:center;
+gap:30px;
+padding:20px;
+
+}
+
+nav a{
+color: white;
+font-weight: bolder;
+padding:12px 20px;
+border-radius:30px;
+transition:.3s;
+
+}
+
+nav a:hover{
+    color:var(--gold);
+}
+
+           #backToTop{
+        width:45px;
+        height:45px;
+        font-size:20px;
+        right:15px;
+        bottom:15px;
+    }
+
+
+    #backToTop{
+
+    position:fixed;
+
+    bottom:30px;
+    right:30px;
+
+    width:55px;
+    height:55px;
+
+    background:linear-gradient(
+        145deg,
+        #d4af37,
+        #b8902b
+    );
+
+    color:white;
+
+    border-radius:50%;
+
+    text-decoration:none;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:24px;
+    font-weight:bold;
+
+    box-shadow:
+        0 0 10px rgba(212,175,55,.6),
+        0 0 25px rgba(212,175,55,.4);
+
+    transition:.3s;
+
+    opacity:0;
+    visibility:hidden;
+
+    z-index:9999;
+}
+
+#backToTop:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 15px white,
+        0 0 30px gold;
+
+}
+
+/* WhatsApp */
+.whatsapp-section{
+    text-align:center;
+}
+
+.whatsapp-btn{
+    display:inline-block;
+    background:#25D366;
+    color:white;
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:40px;
+    font-size:18px;
+    font-weight:bold;
+
+    transition:all .35s ease;
+}
+
+.whatsapp-btn:hover{
+
+    background:#1ebe5d;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(37,211,102,.45);
+
+}
+
+.whatsapp-btn:active{
+
+    transform:translateY(0);
+
+}
+
+.onlyfans-link{
+    display:inline-block;
+    text-decoration:none;
+    transition:all 0.3s ease;
+}
+
+.onlyfans-link:hover{
+    transform:translateY(-5px);
+    filter:drop-shadow(0 8px 20px rgba(0,175,240,0.5));
+}
+
+/* Age Verification Popup */
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.popup-box{
+    background:white;
+    max-width:500px;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    border:3px solid var(--gold);
+}
+
+.popup-box h2{
+    color:var(--emerald);
+    margin-bottom:17px;
+}
+
+.popup-box p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    
+    /* Fix legibility on white backgrounds */
+    color: #333333 !important;
+    -webkit-text-stroke: 0px transparent !important;
+    text-shadow: none !important;
+    font-size: 15pt;
+    letter-spacing: normal;
+
+    /* Make the text bold */
+    font-weight: bold !important;
+}
+
+
+.popup-box button{
+    background:var(--emerald);
+    color:white;
+    border:none;
+    padding:12px 25px;
+    margin:5px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.popup-box button:hover{
+    background:var(--dark-emerald);
+}
+        /* Floating Gold Glitter Background */
+        .glitter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+        }
+
+        .glitter {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            opacity: 0.7;
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .sparkles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:9999;
+}
+
+.sparkles span{
+    position:absolute;
+    bottom:-30px;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 15px silver,
+        0 0 25px rgba(212,175,55,.7);
+
+    opacity:0;
+
+    animation: sparkleFloat 18s linear infinite;
+}
+
+.sparkles span:nth-child(1){
+    left:8%;
+    animation-delay:0s;
+}
+
+.sparkles span:nth-child(2){
+    left:22%;
+    animation-delay:2s;
+}
+
+.sparkles span:nth-child(3){
+    left:38%;
+    animation-delay:4s;
+}
+
+.sparkles span:nth-child(4){
+    left:55%;
+    animation-delay:6s;
+}
+
+.sparkles span:nth-child(5){
+    left:75%;
+    animation-delay:8s;
+}
+
+.sparkles span:nth-child(6){
+    left:92%;
+    animation-delay:10s;
+}
+
+@keyframes sparkleFloat{
+
+0%{
+    transform:
+        translateY(0)
+        scale(.2);
+
+    opacity:0;
+}
+
+15%{
+    opacity:.8;
+}
+
+50%{
+    opacity:1;
+}
+
+100%{
+    transform:
+        translateY(-110vh)
+        scale(1.4);
+
+    opacity:0;
+}
+
+}
+        /* Section Styling */
+        header {
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: linear-gradient(rgba(10,10,10,0.8), #0a0a0a);
+        }
+
+        /* PREMIUM SPARKLE HEADER EFFECT */
+        h1 {
+            font-family: var(--heading-font);
+            font-size: 4rem;
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            
+            /* Sparkle gradient effect */
+            background: linear-gradient(
+                90deg, 
+                var(--gold) 0%, 
+                #fff8d6 25%, 
+                var(--gold-dark) 50%, 
+                #ffffff 75%, 
+                var(--gold) 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerSparkle 4s linear infinite;
+        }
+
+        @keyframes shimmerSparkle {
+            0% { background-position: 0% center; }
+            100% { background-position: -200% center; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: rgba(11, 102, 35, 0.05);
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        
+        h2 {
+            font-family: var(--heading-font);
+            color: var(--gold);
+            border-bottom: 1px solid var(--emerald);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 2.2rem;
+             background: linear-gradient(
+                90deg, 
+                var(--gold) 0%, 
+                #fff8d6 25%, 
+                var(--gold-dark) 50%, 
+                #ffffff 75%, 
+                var(--gold) 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerSparkle 4s linear infinite;
+        }
+
+        /* Image Gallery */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .gallery-img {
+            width: 280px;
+            height: 350px;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            border-radius: 8px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
+            filter: brightness(0.9);
+        }
+
+        .gallery-img:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Rates and Lists */
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .rates, .rules, .hours {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--emerald);
+        }
+
+        .rules {
+            border-left-color: var(--gold);
+        }
+
+        .highlight-box {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        footer {
+             text-align:center;
+             padding:25px;
+}
+        
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .gallery { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="sparkles">
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span><span></span>
+<span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- AGE POPUP -->
+<div class="popup-overlay" id="agePopup">
+    <div class="popup-box">
+        <h2>18+ Disclaimer</h2>
+        <p>
+            This website is intended for adults aged 18 years and older.
+            By entering this website, you confirm that you are at least
+            18 years old and legally permitted to view adult-oriented content.
+        </p>
+
+        <button onclick="enterSite()">I Am 18+</button>
+        <button onclick="leaveSite()">Exit</button>
+    </div>
+</div>
+ 
+
+    </div>
+</div>
+
+    <!-- Floating Glitter Elements (JS will generate more, this is for initial layout) -->
+    <div class="glitter-container" id="glitter-bg"></div>
+
+    <header>
+        <div class="subtitle">Welcome</div>
+        <h1>Massage by Ashleigh</h1>
+        <p>Pure Relaxation • Professional Service • Private Appointments</p>
+    </header>
+
+    
+<nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#services-not-offered">Services Not Offered</a>
+    <a href="#important-notes">Important Notes</a>
+    <a href="#business-hours">Business Hours</a>
+    <a href="#payment-info">Payment Info</a>
+    <a href="#contact">Contact</a>
+    
+</nav>
+
+<section id="about">
+  <div class="container">
+        <p><strong>Hi there!🤗</strong></p>
+        <p>Thank you for your interest.</p>
+            <p> I offer a full-body sensual massage that includes body-to-body contact and a sensual release.
+            Sessions take place in the nude, and soft, respectful touch is welcome within set boundaries.</p>
+        <p>🏡I am based in <strong>Melrose Arch</strong>, working from a private and upmarket guesthouse close to the BluBird Shopping Centre.</p><br>
+
+        <div class="highlight-box">
+        <p> <strong> Please read all information thoroughly before contacting me.</strong></p>
+        </div>
+</section>
+
+        <!-- Image Space -->
+        <div class="gallery">
+            <img src="greenmsg.png" alt="Relaxing ambiance" class="gallery-img">
+            <img src="green.png" alt="Elegant Setting" class="gallery-img">
+            <img src="table.png" alt="Luxury Suite" class="gallery-img">
+        </div>
+
+        <section id="services">
+        <h2>Massage Rates</h2>
+        <div class="rates">
+            <ul>
+                <li><strong>💆🏻Massage Rates</strong> (with hand/foot release):
+                    <br>• 30 mins – R900
+                    <br>• 1 hour – R1100
+                    <br><small>(R100 extra for covered oral)</small>
+                </li>
+                <br>
+                <li><strong>👩🏻‍❤️‍👨🏼Massage with FH</strong> (includes covered oral):
+                    <br>• 30 mins (FH only) – R1100
+                    <br>• 1 hour (Massage + FH) – R1300
+                </li>
+                <br>
+                <li><strong>🔥FH & GFE only</strong> (no massage):
+                    <br>• 30 mins – R1400
+                    <br>• 1 hour – R1700
+                </li>
+            </ul><br>
+            <p><strong>• 💋GFE (Girlfriend Experience) Add-On:</strong> +R300 <em>(includes kissing and mutual oral – all safe and covered)</em></p><br>
+            <p>🏆 <em>Repeat clients don't pay for GFE</em></p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>📌Please note:</strong> I kindly request that you maintain good personal hygiene. Some or all services may be declined if hygiene standards are not met. I am a professional provider who prioritises both my safety and that of my clients.</p>
+        </div>
+</section>
+
+        <section id="services-not-offered">
+  <h2>Services Not Offered</h2>
+        <div class="rules">
+            <p><strong>🚫Services Not Allowed (Non-negotiable):</strong></p>
+            <ul>
+                <li>Unprotected oral (OWO)</li>
+                <li>Bareback</li>
+                <li>Rubbing/sliding/genital contact without protection</li>
+                <li>Greek/anal play and rimming</li>
+                <li>Golden showers and scat fetishes</li>
+                <li>Spitting</li>
+                <li>Rough or aggressive play</li>
+                <li>Fingering, fisting, and toys</li>
+                <li>Threesomes/couples</li>
+            </ul><br>
+        </div>
+</section>
+
+        
+<section id="important-notes">
+     <h2>Important Notes</h2>
+        <div class="highlight-box">
+            <ul>
+                <li>⚠️ <strong>I do not provide interracial services</strong> - I cater exclusively to white gentlemen.</li>
+                <li>🚫 <strong>This is a drug-free zone</strong></li>
+                <li>🤧 <strong>Please do not book if you're feeling unwell.</strong></li>
+                <li>💸<strong>A deposit of R500 via instant EFT/PayShap is required for all new clients to secure a booking.</strong></li>
+                <li>⛔<strong>Zero tolerance for harassment or abuse.</strong></li>
+            </ul>
+        </div>
+</section>
+
+    <section id="business-hours">
+    <h2>Working Hours</h2>
+        <div class="hours">
+            <p><strong>💼By appointment:</strong></p>
+            <ul>
+                <li>Tuesdays, Wednesdays, Thursdays & Fridays: 09:00 to 17:00</li>
+                <li>Saturdays & Public Holidays: 09:00 to 15:00</li>
+                <li>🔒 CLOSED MONDAYS & SUNDAYS</li>
+            </ul><br>
+            <p>- Outcall appointments can be arranged once we’ve built familiarity.</p>
+            <p>- Overnight bookings are available to trusted regular clients only.</p><br>
+        </div>
+</section>
+
+<section id="payment-info">
+  <h2>Payment Details</h2>
+        <div class="rates">
+            <ul>
+                <p><strong>💳 Payment</strong></p>
+                    <li>Cash or instant EFT/PayShap accepted.<li>
+                    <li>Payment is required before the session begins.</li>
+                    <li><strong>A deposit of R500 via instant EFT/PayShap is required for all new clients to secure a booking.</strong></li>
+                </ul>
+
+ <div class="highlight-box">
+            <p><strong>📌Please note:</strong> the deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</p>
+            <p>📌In the unlikely event that I need to cancel, your deposit will be refunded in full via PayShap as soon as I receive your refund details.</p>
+            <p><strong>📌Please note:</strong> Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking, as time and resources have been reserved specifically for your appointment.</p>
+        </div>
+</section>
+
+<section id="contact">
+ <h2>Booking Info:</h2>
+<p><strong>💬Whatsapp Only</strong></p>
+<p>Please message me directly to arrange an appointment. I’ll reply as soon as possible.</p>
+<ul>
+    <li>- No response to private numbers and international numbers.</li>
+    <li>- No video calls.</li>
+</ul><br>
+
+<p>I look forward to hearing from you,</p><br>
+<p><strong>Ashleigh</strong></p>
+<p>💚</p>
+</section>
+
+        <!-- Image Space -->
+        <div class="gallery">
+            <img src="green.jpg" alt="Elegant Setting" class="gallery-img">
+        </div>
+
+
+<script>
+function enterSite() {
+    document.getElementById('agePopup').style.display = 'none';
+}
+
+function leaveSite() {
+    window.location.href = "https://www.google.com";
+}
+</script>
+<a href="#" id="backToTop" title="Back to Top">▲</a>
+<script>
+
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", function(){
+
+    if(window.scrollY > 300){
+
+        backToTop.style.opacity = "1";
+        backToTop.style.visibility = "visible";
+
+    }else{
+
+        backToTop.style.opacity = "0";
+        backToTop.style.visibility = "hidden";
+
+    }
+
+});
+
+</script>
+<footer>  
+    
+    <section id="contact" class="whatsapp-section"><br>
+
+    <a class="whatsapp-btn"
+       href="https://wa.me/27795567346"
+       target="_blank">
+
+        Chat on WhatsApp
+
+    </a>
+
+</section>
+
+<div style="text-align: center; width: 100%; margin: 25px 0;">
+  <a href="https://onlyfans.com/ashleighreignpta"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="onlyfans-link">
+
+    <!-- OnlyFans SVG Icon (Increased to 42 width and height) -->
+    <svg viewBox="0 0 24 24" width="42" height="42" fill="#00aff0" xmlns="http://w3.org" style="vertical-align: middle;">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.03 15.11c-1.39 0-2.54-1.04-2.71-2.4-.1-.79.13-1.57.62-2.16.5-.59 1.22-.93 1.99-.94h2.24c.78.01 1.5.35 1.99.94.49.59.72 1.37.62 2.16-.17 1.36-1.32 2.4-2.71 2.4h-2.04zm2.14-6.42h-2.22c-.62-.01-1.22-.24-1.68-.66a2.844 2.844 0 0 1-.95-1.95c-.17-1.19.46-2.33 1.5-2.74.34-.14.71-.2 1.07-.19h2.53c1.47.05 2.63 1.25 2.63 2.72 0 1.55-1.26 2.81-2.81 2.82h-.07z"/>
+    </svg>
+
+    <!-- OnlyFans Text (Added font-size: 22px) -->
+    <span style="font-family: sans-serif; font-size: 22px; margin-left: 10px; color: #00aff0; font-weight: bold; vertical-align: middle;">OnlyFans</span>
+  </a>
+</div><br>
+
+ <p>🌹 Massage by Ashleigh |
+        Adults 18+ Only |
+        Right of Admission Reserved 🌹</p>
+
+    <p>© Copyright 2026 CampbellWeb</p>
+</footer>
