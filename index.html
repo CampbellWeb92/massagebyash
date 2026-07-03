@@ -1237,191 +1237,164 @@ Verification Popup */
 
 
         
-/* --- SERVICES & RATES BLOCK MATRIX --- */
-.services-section {
-    background-color: var(--black, #0a0a0a);
-    padding: 80px 24px;
-    max-width: 100%;
-    text-align: center; /* Centers main text titles and headings instantly */
-}
+/* ==========================================================================
+   💳 3-COLUMN SERVICES LAYOUT MATRIX & CENTERED ADD-ONS
+   ========================================================================== */
 
-/* Symmetrical Dynamic Grid layout aligned center */
+/* Main Container: Organizes the grid elements */
 .services-grid {
-    display: flex;
-    justify-content: center; /* Horizontally centers cards when they run horizontally */
-    align-items: stretch;    /* Automatically equalizes individual height bounds */
-    gap: 30px;               /* Space gap parameter separating cards */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Forces an exact 3-column row alignment */
+    gap: 25px;                            /* Premium luxury gutter space between cards */
     max-width: 1200px;
-    margin: 40px auto 60px;  /* Automatically aligns structural block center */
+    margin: 0 auto 40px;                 /* 40px bottom margin separates it from the add-ons block */
     width: 100%;
-    flex-wrap: wrap;         /* Allows clean drop down stacking on smaller monitors */
+    box-sizing: border-box;
 }
 
-/* Individual Rate Cards Styling */
+/* Individual Card Structures */
 .service-card {
-    background-color: #1a1a1a;
-    border: 3px solid var(--border-color, #2a2a2a);
-    padding: 40px 30px;
-    border-radius: 8px;
-    flex: 1;
-    min-width: 300px;        /* Safe mobile structural cell collapse boundary width */
-    max-width: 360px;        /* Prevents cards stretching too wide on massive screens */
+    background: rgba(11, 20, 14, 0.6);   /* Velvet dark emerald transparent background fill */
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Low-intensity gold framing outline */
+    border-radius: 12px;
+    padding: 30px 24px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
-/* Gold border focus highlight for featured card option */
+/* Featured Card Accentuation */
 .service-card.featured {
-    border-color: var(--gold, #d4af37);
-    box-shadow: 0 5px 25px rgba(212, 175, 55, 0.1);
+    border: 2px solid var(--gold, #d4af37); /* Thicker premium border for the primary offer */
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+    transform: scale(1.02); /* Slight luxury scale boost over sibling cards */
 }
 
-/* Gold glow layout integration on hover profiles */
-.service-card:hover {
-    border-color: var(--gold, #d4af37);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.45);
-    transform: translateY(-6px);
-}
-
-/* Internal Card Typography and Pricing Items */
-.service-card h3 {
-    font-family: var(--heading-font, serif);
-    font-size: 1.6rem;
-    margin-bottom: 8px;
-    color: var(--white, #ffffff);
-}
-
-.service-card .subtitle {
-    font-size: 0.85rem;
-    color: var(--gold, #d4af37);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 25px;
-    display: block;
-}
-
-.price-list {
-    margin-bottom: 20px;
-    flex-grow: 1; /* Pushes bottom notes down evenly */
-}
-
-.price-item {
-    display: flex;
-    justify-content: space-between; /* Creates symmetrical alignment spacing split across items */
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.price-item span {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.price-item strong {
-    font-size: 1.2rem;
-    color: var(--white, #ffffff);
-    font-family: var(--text-font), sans-serif;
-}
-
-.extra-note {
-    color: var(--emerald-light, #16a085);
-    margin-top: 15px;
-    font-weight: 500;
-}
-
+/* Popular Badge Layout Alignment */
 .popular-badge {
     position: absolute;
-    top: -14px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--gold, #d4af37);
     color: var(--black, #0a0a0a);
-    padding: 4px 16px;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    padding: 4px 14px;
     border-radius: 20px;
+    letter-spacing: 1px;
 }
 
-/* --- LOWER LOWER COMPACT CENTERED ADDONS DISPLAY CONTAINER --- */
-.addons-container {
-    max-width: 700px;
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Horizontally centers content stack items perfectly */
+/* Card Typography & Internal Items Positioning */
+.service-card h3 {
+    font-family: var(--heading-font, serif);
+    color: var(--white, #ffffff);
+    margin: 10px 0 5px 0;
+    font-size: 1.5rem;
     text-align: center;
 }
 
-.addon-box {
-    background-color: #111111;
-    border: 2px dashed rgba(212, 175, 55, 0.4);
-    padding: 25px 30px;
-    border-radius: 8px;
+.service-card .subtitle {
+    display: block;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
+
+.price-list {
+    margin-bottom: 15px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between; /* Pushes service title left, pricing index bold right */
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.95rem;
+}
+
+.price-item:last-child {
+    border-bottom: none;
+}
+
+.price-item strong {
+    color: var(--gold, #d4af37);
+}
+
+.extra-note {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: auto; /* Glues critical notes securely to the bottom parameter of the card matrix */
+}
+
+/* --- THE ADD-ONS WRAPPER (CENTERED BENEATH) --- */
+.addons-container {
+    max-width: 700px;                    /* Restricts total expanding footprint for visual balance */
+    margin: 0 auto;                      /* Centers the container perfectly horizontally underneath */
     width: 100%;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.addon-box {
+    background: #111111;
+    border-left: 4px solid var(--emerald, #0b6623); /* Elegant emerald accent ribbon layout style */
+    padding: 20px 25px;
+    border-radius: 4px 8px 8px 4px;
 }
 
 .addon-box h4 {
-    font-family: var(--text-font), sans-serif;
+    margin: 0 0 8px 0;
     color: var(--white, #ffffff);
     font-size: 1.1rem;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .addon-box p {
+    margin: 0;
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.8);
 }
 
-.addon-box strong {
+.addon-box p strong {
     color: var(--gold, #d4af37);
-    font-size: 1.15rem;
 }
 
 .loyalty-badge {
-    display: inline-block;
-    background: rgba(11, 102, 35, 0.15);
-    border: 1px solid var(--emerald, #0b6623);
-    color: var(--white, #ffffff);
-    padding: 10px 24px;
-    border-radius: 30px;
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    color: var(--gold, #d4af37);
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
     font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-weight: 500;
 }
 
 /* ==========================================================================
-   ⚡ MOBILE SCREEN OVERRIDES & COMPACT VIEWPOT SCALING
+   ⚡ MOBILE DEVICE VIEWPORT SCREEN RESPONSIVE ENGINE
    ========================================================================== */
-@media (max-width: 768px) {
-    .services-section {
-        padding: 50px 16px;
-    }
+@media (max-width: 992px) {
     .services-grid {
-        flex-direction: column; /* Stacks cards cleanly onto vertical grids on mobile phones */
-        align-items: center;
+        grid-template-columns: 1fr;      /* Collapses the horizontal 3-row layout into a vertical line stack */
+        gap: 30px;
+        max-width: 450px;                /* Controls max width on tablet/phones so fields don't stretch massively */
+        padding: 0 15px;
     }
-    .service-card {
-        width: 100%;
-        max-width: 100%; /* Allows card component width to expand fully on small phone touch models */
+    
+    .service-card.featured {
+        transform: scale(1);             /* Disables scale transformation to prevent layout clipping overlapping bugs */
     }
-    .addon-box {
-        padding: 20px 15px;
-    }
-    .addon-box h4 {
-        font-size: 1rem;
+
+    .addons-container {
+        padding: 0 15px;
+        max-width: 450px;                /* Symmetrically synchronizes column tracking with the cards stack width */
     }
 }
-
 
 /* Intro Section Layout & Navigation Offset */
 .intro-section {
@@ -2005,7 +1978,6 @@ Verification Popup */
             </div>
         </div>
     </section>
-
 
      <section id="services" class="services-section">
     <div class="section-header">
