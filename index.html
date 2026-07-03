@@ -270,6 +270,8 @@ nav a:hover {
     
     .popup-box h2 {
         font-size: 1.8rem;
+    
+    color: var(--emerald);
     }
     
     .popup-box p {
@@ -391,6 +393,7 @@ nav a:hover {
 }
 /* Business Hours Layout */
 /* --- ULTIMATE CENTERING SYSTEM --- */
+
 .hours-section {
     width: 100% !important;
     display: flex !important;
@@ -422,6 +425,7 @@ nav a:hover {
     left: 0 !important;
     transform: none !important;
 }
+
 
 
 /* Responsive adjustment to prevent crowding on small phone screens */
@@ -1842,9 +1846,9 @@ nav a:hover {
     </div>
 </section><br>
 
-            <!-- Business Hours Section (Moved cleanly out of contact-grid) -->
-    <section id="business-hours" class="hours-section">
-    <div class="hours-card">
+   <!-- Business Hours Section (Moved cleanly out of contact-grid) -->
+    <section class="hours-section">
+        <div class="hours-card">
             <div class="hours-header">
                 <h2>Business Hours</h2>
                 <div class="gold-divider-center"></div>
@@ -1855,28 +1859,8 @@ nav a:hover {
                 </div>
             </div>
             <div class="hours-timetable">
-                  <div class="timetable-row closed-day">
-                    <span class="day">Monday</span>
-                    <span class="line-spacer"></span>
-                    <span class="time">Closed</span>
-                </div>
                 <div class="timetable-row">
-                    <span class="day">Tuesday</span>
-                    <span class="line-spacer"></span>
-                    <span class="time">09:00 – 17:00</span>
-                </div>
-                <div class="timetable-row">
-                    <span class="day">Wednesday</span>
-                    <span class="line-spacer"></span>
-                    <span class="time">09:00 – 17:00</span>
-                </div>
-                <div class="timetable-row">
-                    <span class="day">Thursday</span>
-                    <span class="line-spacer"></span>
-                    <span class="time">09:00 – 17:00</span>
-                </div>
-                <div class="timetable-row">
-                    <span class="day">Friday</span>
+                    <span class="day">Tuesday - Friday</span>
                     <span class="line-spacer"></span>
                     <span class="time">09:00 – 17:00</span>
                 </div>
@@ -1885,22 +1869,20 @@ nav a:hover {
                     <span class="line-spacer"></span>
                     <span class="time">09:00 – 15:00</span>
                 </div>
-                  <div class="timetable-row closed-day">
-                    <span class="day">Sunday</span>
-                    <span class="line-spacer"></span>
-                    <span class="time">Closed</span>
-                </div>
                 <div class="timetable-row">
                     <span class="day">Public Holidays</span>
                     <span class="line-spacer"></span>
                     <span class="time">09:00 – 15:00</span>
                 </div>
-              
+                <div class="timetable-row closed-day">
+                    <span class="day">Sunndays &amp; Mondays</span>
+                    <span class="line-spacer"></span>
+                    <span class="time">Closed</span>
+                </div>
             </div>
             <p class="hours-note">Strictly by appointment only.</p>
-        </div><br>
         </div>
-</section><br>
+    </section><br>
 
 <section id="payment-info" class="payment-section">
     <div class="payment-card">
