@@ -771,6 +771,153 @@ nav a:hover {
             box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
             filter: brightness(1.1);
         }
+/* --- 5-IMAGE SLIDER GALLERY SYSTEM --- */
+.gallery-section {
+    background-color: var(--black, #121212);
+    padding: 100px 24px;
+    max-width: 100%;
+    text-align: center;
+    text-size-adjust: 2.2rem;
+}
+
+/* Base Premium Gold Frame Matrix */
+.gallery {
+    position: relative;
+    max-width: 900px; /* Enhanced viewport window for premium photography */
+    width: 100%;
+    margin: 0 auto;
+    border: 3px solid var(--gold, #c5a85c);
+    border-radius: 4px; /* Synchronized across your card element system */
+    overflow: hidden;
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Horizontal Continuous Filmstrip Dynamic Rail Track */
+.slider-track {
+    display: flex;
+    width: 500%; /* 5 slide units at 100% width each = 500% space container */
+    height: 500px; /* Locked desktop frame viewport aspect box aspect height */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Individual Slide Items */
+.slider-item {
+    width: 20%; /* Exactly 1/5th of the total 500% container track width */
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.6s ease;
+}
+
+/* --- HARDWARE ACCELERATED HOVER GLIMMER OVERLAY LAYER --- */
+.gallery::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.02) 30%,
+        rgba(255, 255, 255, 0.22) 50%,
+        rgba(255, 255, 255, 0.02) 70%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Active Hover Transitions Layout Profile */
+.gallery:hover {
+    border-color: #ffffff; /* Smoothly changes frame border to reflection white */
+    box-shadow: 0 0 35px rgba(197, 168, 92, 0.45); /* Luxury champagne gold ambient glow */
+    transform: translateY(-4px);
+}
+
+.gallery:hover::after {
+    animation: imageShineSweep 1.2s ease-in-out forwards;
+}
+
+.gallery:hover .gallery-img {
+    transform: scale(1.02); /* Cinematic slow micro-zoom */
+    filter: brightness(1.02); /* Instantly brightens your photo detail shadows */
+}
+
+@keyframes imageShineSweep {
+    0% { left: -150%; }
+    100% { left: 200%; }
+}
+
+/* --- INTERACTIVE DOT SELECTORS --- */
+.slider-dots {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--gold, #c5a85c);
+    border-radius: 50%;
+    background-color: rgba(18, 18, 18, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot:hover {
+    background-color: var(--white, #FFFFFF);
+    border-color: var(--white, #FFFFFF);
+}
+
+/* --- THE SLIDE LOGIC GRID ACTION TRIGGERS --- */
+#img1:checked ~ .slider-track { transform: translateX(0); }
+#img2:checked ~ .slider-track { transform: translateX(-20%); }
+#img3:checked ~ .slider-track { transform: translateX(-40%); }
+#img4:checked ~ .slider-track { transform: translateX(-60%); }
+#img5:checked ~ .slider-track { transform: translateX(-80%); }
+
+/* Dynamic active dot transformation states */
+#img1:checked ~ .slider-dots .dot:nth-child(1),
+#img2:checked ~ .slider-dots .dot:nth-child(2),
+#img3:checked ~ .slider-dots .dot:nth-child(3),
+#img4:checked ~ .slider-dots .dot:nth-child(4),
+#img5:checked ~ .slider-dots .dot:nth-child(5) {
+    background-color: var(--gold, #c5a85c);
+    width: 24px; /* Premium capsule layout morph animation stretching effect */
+    border-radius: 20px;
+}
+
+/* --- RESPONSIVE TOUCH MOBILE MEDIA SCREEN OVERRIDES --- */
+@media (max-width: 768px) {
+    .gallery-section {
+        padding: 70px 16px;
+    }
+    .slider-track {
+        height: 320px; /* Reduced container tracking viewport height to fit mobile displays neatly */
+    }
+    .slider-dots {
+        bottom: 15px;
+        gap: 10px;
+    }
+}
 
         /* Rates and Lists */
         ul {
@@ -1402,8 +1549,6 @@ nav a:hover {
     }
 }
 
-
-
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .gallery { flex-direction: column; align-items: center; }
@@ -1423,7 +1568,6 @@ nav a:hover {
         text-align: center;
     }
 }
-
 
         footer {
             text-align: center;
@@ -1523,7 +1667,7 @@ nav a:hover {
         </p>
 
         <div class="important-notice">
-            <p><strong>Please read all information thoroughly before contacting me.</strong></p>
+            <p><strong>📌 Please read all information thoroughly before contacting me.</strong></p>
         </div>
         
     </div>
@@ -1632,31 +1776,31 @@ nav a:hover {
         <div class="notes-list">
             <!-- Row 1 -->
             <div class="note-item alert">
-                <span class="note-icon">⚠️</span>
+                <span class="note-icon">📌</span>
                 <p><strong>I do not provide interracial services</strong> • I cater exclusively to white gentlemen.</p>
             </div>
             
             <!-- Row 2 -->
             <div class="note-item">
-                <span class="note-icon">🚫</span>
+                <span class="note-icon">📌</span>
                 <p><strong>This is a drug-free zone</strong></p>
             </div>
             
             <!-- Row 3 -->
             <div class="note-item">
-                <span class="note-icon">🤧</span>
+                <span class="note-icon">📌</span>
                 <p><strong>Please do not book if you're feeling unwell.</strong></p>
             </div>
             
             <!-- Row 4 (Highlighted Deposit Notice) -->
             <div class="note-item deposit-highlight">
-                <span class="note-icon">💸</span>
+                <span class="note-icon">📌</span>
                 <p><strong>A deposit of R500 via instant EFT / PayShap is required</strong> for all new clients to secure a booking.</p>
             </div>
             
             <!-- Row 5 -->
             <div class="note-item">
-                <span class="note-icon">⛔</span>
+                <span class="note-icon">📌</span>
                 <p><strong>Zero tolerance for harassment or abuse.</strong></p>
             </div>
         </div>
@@ -1796,10 +1940,39 @@ nav a:hover {
 </section>
 
 
-       <br> <!-- Image Space -->
-        <div class="gallery">
-            <img src="dark.jpg" alt="Elegant Setting" class="gallery-img">
+          <!-- 5-IMAGE PREMIUM SLIDER GALLERY -->
+    <section id="gallery-showcase" class="gallery-section">
+        <div class="section-header">
+            <h2 class="section-title">Gallery</h2>
         </div>
+
+        <div class="gallery">
+            <!-- Hidden Radio Control Switches for Slide Position Triggers -->
+            <input type="radio" name="gallery-slider" id="img1" checked hidden>
+            <input type="radio" name="gallery-slider" id="img2" hidden>
+            <input type="radio" name="gallery-slider" id="img3" hidden>
+            <input type="radio" name="gallery-slider" id="img4" hidden>
+            <input type="radio" name="gallery-slider" id="img5" hidden>
+
+            <!-- Rolling Filmstrip Container Track Area -->
+            <div class="slider-track">
+                <div class="slider-item"><img src="1.jpg" alt="Elegant Setting 1" class="gallery-img"></div>
+                <div class="slider-item"><img src="2.jpg" alt="Elegant Setting 2" class="gallery-img"></div>
+                <div class="slider-item"><img src="3.jpg" alt="Elegant Setting 3" class="gallery-img"></div>
+                <div class="slider-item"><img src="4.jpg" alt="Elegant Setting 4" class="gallery-img"></div>
+                <div class="slider-item"><img src="5.jpg" alt="Elegant Setting 5" class="gallery-img"></div>
+            </div>
+
+            <!-- Sleek Horizontal Navigation Dots Interface -->
+            <div class="slider-dots">
+                <label for="img1" class="dot"></label>
+                <label for="img2" class="dot"></label>
+                <label for="img3" class="dot"></label>
+                <label for="img4" class="dot"></label>
+                <label for="img5" class="dot"></label>
+            </div>
+        </div>
+    </section>
 
 
 <script>
