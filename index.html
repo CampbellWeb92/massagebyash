@@ -81,7 +81,7 @@ nav a:hover {
     margin: 40px auto 0;                /* Centers the box below your add-ons section */
     width: 100%;
     background-color: #161616;          /* Deep rich background box frame fill */
-    border: 3px solid var(--gold, #d4af37); /* Thick premium solid gold boundary line */
+    border: 3px solid var(--gold, goldenrod); /* Thick premium solid gold boundary line */
     border-radius: 8px;                 /* Synchronized with card element styles */
     padding: 25px 30px;
     text-align: center;                 /* Centers text alignments seamlessly for clean reading */
@@ -92,37 +92,92 @@ nav a:hover {
     box-sizing: border-box;
 }
 
-/* --- PREMIUM SOLID GOLD NOTIFICATION HIGHLIGHT --- */
+PREMIUM HIGH-VISIBILITY NOTIFICATION HIGHLIGHT --- */
+.highlight-box {
+    max-width: 700px;
+    margin: 40px auto 0;                /* Centers the box below your add-ons section */
+    width: 100%;
+    background-color: #161616;          /* Deep rich background box frame fill */
+    border: 3px solid var(--gold, goldenrod); /* Thick premium solid gold boundary line */
+    border-radius: 8px;                 /* Synchronized with card element styles */
+    padding: 25px 30px;
+    text-align: center;                 /* Centers text alignments seamlessly for clean reading */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    
+    /* Hardware-accelerated continuous breathing pulse glow animation loop */
+    animation: goldPulseBreathe 4s ease-in-out infinite;
+    box-sizing: border-box;
+}
+
+/* --- PREMIUM DARK OVERLAY NOTIFICATION HIGHLIGHT --- */
 .highlight-box.full-gold {
     max-width: 700px;
     margin: 40px auto 0;
     width: 100%;
-    background: linear-gradient(135deg, #e5c158 0%, var(--gold, #d4af37) 100%); /* Rich metallic gold background block */
-    border: 3px solid #b8961e;          /* Deep gold structural boundary outline frame */
+    /* Dark premium charcoal background tint with low opacity overlay */
+    background: rgba(22, 22, 22, 0.95); 
+    /* Thick premium structural gold boundary frame */
+    border: 3px solid var(--gold, goldenrod); 
     border-radius: 8px;
     padding: 25px 30px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
     box-sizing: border-box;
     
-    /* Hardware-accelerated gold illumination pulsing loop */
+    /* Hardware-accelerated gold illumination ambient pulsing loop */
     animation: solidGoldPulse 4s ease-in-out infinite;
 }
 
-/* Forces crisp high-contrast black typography over the bright gold backdrop */
+/* --- PREMIUM HIGH-VISIBILITY NOTIFICATION HIGHLIGHT --- */
+.highlight-box {
+    max-width: 700px;
+    margin: 40px auto 0;                /* Centers the box below your add-ons section */
+    width: 100%;
+    background-color: #0b140e;          /* Recalibrated: Deep, rich dark emerald background frame fill */
+    border: 3px solid var(--gold, goldenrod); /* Thick premium solid gold boundary line */
+    border-radius: 8px;                 /* Synchronized with card element styles */
+    padding: 25px 30px;
+    text-align: center;                 /* Centers text alignments seamlessly for clean reading */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    
+    /* Hardware-accelerated continuous breathing pulse glow animation loop */
+    animation: solidGoldPulse 4s ease-in-out infinite; /* Standardised to your premium match animation */
+    box-sizing: border-box;
+}
+
+/* --- PREMIUM DARK OVERLAY NOTIFICATION HIGHLIGHT --- */
+.highlight-box.full-gold {
+    max-width: 700px;
+    margin: 40px auto 0;
+    width: 100%;
+    /* Recalibrated: Deep dark emerald background tint with low opacity overlay */
+    background: rgba(11, 20, 14, 0.95); 
+    /* Thick premium structural gold boundary frame */
+    border: 3px solid var(--gold, goldenrod); 
+    border-radius: 8px;
+    padding: 25px 30px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+    box-sizing: border-box;
+    
+    /* Hardware-accelerated gold illumination ambient pulsing loop */
+    animation: solidGoldPulse 4s ease-in-out infinite;
+}
+
+/* Forces crisp, high-contrast white typography over the dark backdrop overlay */
 .highlight-box.full-gold p {
     font-family: var(--text-font, 'Montserrat'), sans-serif;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: #0a0a0a !important;        /* Pure solid black text for pristine readability */
+    color: #ffffff !important;         /* Crisp white text for absolute legibility */
     margin: 0;
-    font-weight: 500 !important;
-    letter-spacing: 0.1px;
+    font-weight: 400 !important;
+    letter-spacing: 0.2px;
 }
 
-/* Extreme high-visibility accent weighting for the notice tag */
+/* Extreme high-visibility gold accent weighting for your critical warning tags */
 .highlight-box.full-gold p strong {
-    color: #000000 !important;        /* Deep midnight black emphasis text weight */
+    color: var(--gold, goldenrod) !important; /* Highlights note header text in premium brand gold */
     font-weight: 700;
     font-size: 1.05rem;
 }
@@ -130,18 +185,19 @@ nav a:hover {
 /* Premium smooth gold ambient respiration keyframe timeline */
 @keyframes solidGoldPulse {
     0% {
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        border-color: #b8961e;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        border-color: var(--gold, goldenrod);
     }
     50% {
-        box-shadow: 0 0 35px rgba(212, 175, 55, 0.65); /* Expands gold external illumination aura */
-        border-color: #ffffff;                         /* Shifts border cleanly to reflection white */
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.45); /* Expands gold external illumination aura */
+        border-color: var(--emerald, #04432c);         /* Recalibrated: Shifts border cleanly to emerald instead of white */
     }
     100% {
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        border-color: #b8961e;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        border-color: var(--gold, goldenrod);
     }
 }
+
 
 /* ==========================================================================
    ⚡ MOBILE SCREEN OVERRIDES & COMPACT VIEWPORT SCALING (HIGHLIGHT BOX)
