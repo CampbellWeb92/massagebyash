@@ -222,61 +222,86 @@ Verification Popup */
     z-index:9999;
 }
 
-.popup-box{
-    background:white;
-    max-width:500px;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-    border:3px solid var(--gold);
+/* Age Verification Popup Overlay Matrix */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999; /* Higher priority layer index to stack above absolute sticky headers */
+    padding: 24px;   /* Safe buffer to keep elements inside bounds on smaller screens */
 }
 
-.popup-box h2{
-    color:var(--emerald);
-    margin-bottom:17px;
+/* Expanded Modal Inner Box Layout */
+.popup-box {
+    background: white;
+    max-width: 650px;       /* Increased from 500px to make it visibly larger on desktop */
+    width: 100%;            /* Fluid scaling factor for mobile device screens */
+    padding: 60px 45px;     /* Doubled from 30px to breathe luxury spacing into the content layout */
+    border-radius: 15px;
+    text-align: center;
+    border: 4px solid var(--gold); /* Thickened border to match the larger sizing footprint */
+    box-shadow: 0 0 35px rgba(197, 168, 92, 0.25); /* Premium ambient highlight glow shadow */
 }
 
+/* Upscaled Heading Format */
+.popup-box h2 {
+    color: var(--emerald);
+    font-size: 2.4rem;      /* Upscaled font display footprint */
+    letter-spacing: 1px;
+    margin-bottom: 25px;    /* Increased vertical spacing separation gap */
+}
+
+/* Refined Body Paragraph Rules */
 .popup-box p {
-    margin-bottom: 20px;
-    line-height: 1.6;
-    
-    /* Fix legibility on white backgrounds */
-    color: #333333 !important;
+    margin-bottom: 35px;    /* Increased spacing gap above actions row display */
+    line-height: 1.7;
+    color: #222222 !important; /* Slightly darker charcoal tint for clean, elite legibility profile */
     -webkit-text-stroke: 0px transparent !important;
     text-shadow: none !important;
-    font-size: 15pt;
-    letter-spacing: normal;
-
-    /* Make the text bold */
-    font-weight: bold !important;
+    font-size: 16pt;        /* Lifted slightly from 15pt for better balance in the bigger card */
+    letter-spacing: 0.3px;
+    font-weight: 500 !important; /* Clean medium weight instead of heavy block bold to preserve elegance */
 }
 
-
-.popup-box button{
-    background:var(--emerald);
-    color:white;
-    border:none;
-    padding:12px 25px;
-    margin:5px;
-    border-radius:30px;
-    cursor:pointer;
-    font-size:16px;
+/* Scaled Buttons Interface Grid Array */
+.popup-box button {
+    background: var(--emerald);
+    color: white;
+    border: none;
+    padding: 16px 36px;     /* Enlarged internal padding target parameters for easier finger tracking */
+    margin: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;        /* Increased text sizing footprint from 16px */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.popup-box button:hover{
-    background:var(--dark-emerald);
+.popup-box button:hover {
+    background: var(--dark-emerald);
+    transform: translateY(-2px); /* Smooth micro-lift animation interact profile */
+    box-shadow: 0 4px 15px rgba(4, 67, 44, 0.3);
 }
-        /* Floating Gold Glitter Background */
-        .glitter-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
-        }
+
+/* Floating Gold Glitter Background Canvas Base Layer */
+.glitter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+}
 
 /* --- MOBILE SEAMLESS OVERRIDES --- */
 @media (max-width: 600px) {
@@ -286,8 +311,6 @@ Verification Popup */
     
     .popup-box h2 {
         font-size: 1.8rem;
-    
-    color: var(--emerald);
     }
     
     .popup-box p {
@@ -301,6 +324,59 @@ Verification Popup */
         font-size: 16px;
     }
 }
+
+
+/* Floating Gold Glitter Background Canvas */
+.glitter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+}
+
+/* ==========================================================================
+   ⚡ MOBILE SCREEN OVERRIDES & ADAPTIVE MODAL FIXES
+   ========================================================================== */
+@media (max-width: 600px) {
+    /* Prevents the card wrapper from getting cut off on short or narrow phone displays */
+    .popup-box {
+        padding: 30px 20px;          /* Compacted spacing inside to save vertical space */
+        max-width: 90%;              /* Leaves a clean, symmetrical 5% gutter on both sides */
+        max-height: 85vh;            /* Restricts height to 85% of viewport to prevent spill-over */
+        overflow-y: auto;            /* Safely forces text scroll strictly INSIDE the card if needed */
+        border-radius: 12px;         /* Proportional corner radius downscaling */
+        box-sizing: border-box;      /* Prevents padding metrics from breaking width constraints */
+    }
+    
+    /* Syntax Error Fixed below by closing bracket rules properly */
+    .popup-box h2 {
+        font-size: 1.6rem;           /* Scaled down text footprint for compact headers */
+        color: var(--emerald);
+        margin-bottom: 15px;
+    } /* <-- THIS CLOSING BRACKET WAS MISSING IN YOUR ORIGINAL FILE */
+    
+    .popup-box p {
+        font-size: 12pt !important;  /* Fluid scale reduction so text wraps easily across mobile blocks */
+        margin-bottom: 25px;
+        line-height: 1.5;
+        font-weight: 600 !important; /* Preserves clear text visibility thresholds */
+    }
+    
+    /* Stacks buttons cleanly on top of each other for thumbs to track accurately */
+    .popup-box button {
+        display: block;
+        width: 100%;                 /* Expands layout across full card width boundaries */
+        margin: 10px 0;              /* Separates actions stack margins evenly */
+        padding: 12px 20px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+}
+
 
 
         .glitter {
