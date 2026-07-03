@@ -208,59 +208,75 @@ nav a:hover {
     box-shadow: 0 0 35px rgba(197, 168, 92, 0.25); /* Premium ambient highlight glow shadow */
 }
 
-/* Upscaled Heading Format */
-.popup-box h2 {
-    color: var(--emerald);
-    font-size: 2.4rem;      /* Upscaled font display footprint */
-    letter-spacing: 1px;
-    margin-bottom: 25px;    /* Increased vertical spacing separation gap */
+Verification Popup */
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
 }
 
-/* Refined Body Paragraph Rules */
+.popup-box{
+    background:white;
+    max-width:500px;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    border:3px solid var(--gold);
+}
+
+.popup-box h2{
+    color:var(--emerald);
+    margin-bottom:17px;
+}
+
 .popup-box p {
-    margin-bottom: 35px;    /* Increased spacing gap above actions row display */
-    line-height: 1.7;
-    color: #222222 !important; /* Slightly darker charcoal tint for clean, elite legibility profile */
+    margin-bottom: 20px;
+    line-height: 1.6;
+    
+    /* Fix legibility on white backgrounds */
+    color: #333333 !important;
     -webkit-text-stroke: 0px transparent !important;
     text-shadow: none !important;
-    font-size: 16pt;        /* Lifted slightly from 15pt for better balance in the bigger card */
-    letter-spacing: 0.3px;
-    font-weight: 500 !important; /* Clean medium weight instead of heavy block bold to preserve elegance */
+    font-size: 15pt;
+    letter-spacing: normal;
+
+    /* Make the text bold */
+    font-weight: bold !important;
 }
 
-/* Scaled Buttons Interface Grid Array */
-.popup-box button {
-    background: var(--emerald);
-    color: white;
-    border: none;
-    padding: 16px 36px;     /* Enlarged internal padding target parameters for easier finger tracking */
-    margin: 8px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 18px;        /* Increased text sizing footprint from 16px */
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+.popup-box button{
+    background:var(--emerald);
+    color:white;
+    border:none;
+    padding:12px 25px;
+    margin:5px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
 }
 
-.popup-box button:hover {
-    background: var(--dark-emerald);
-    transform: translateY(-2px); /* Smooth micro-lift animation interact profile */
-    box-shadow: 0 4px 15px rgba(4, 67, 44, 0.3);
+.popup-box button:hover{
+    background:var(--dark-emerald);
 }
-
-/* Floating Gold Glitter Background Canvas Base Layer */
-.glitter-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
-}
+        /* Floating Gold Glitter Background */
+        .glitter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+        }
 
 /* --- MOBILE SEAMLESS OVERRIDES --- */
 @media (max-width: 600px) {
@@ -2019,7 +2035,6 @@ window.addEventListener("scroll", function(){
 });
 
 </script>
-    
 
 <footer>
     <div style="text-align: center; width: 100%; margin: 25px 0;">
