@@ -181,75 +181,109 @@ nav a:hover {
     filter:drop-shadow(0 8px 20px rgba(0,175,240,0.5));
 }
 
-/* Age Verification Popup */
-.popup-overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+/* Age Verification Popup Overlay Matrix */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999; /* Higher priority layer index to stack above absolute sticky headers */
+    padding: 24px;   /* Safe buffer to keep elements inside bounds on smaller screens */
 }
 
-.popup-box{
-    background:white;
-    max-width:500px;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-    border:3px solid var(--gold);
+/* Expanded Modal Inner Box Layout */
+.popup-box {
+    background: white;
+    max-width: 650px;       /* Increased from 500px to make it visibly larger on desktop */
+    width: 100%;            /* Fluid scaling factor for mobile device screens */
+    padding: 60px 45px;     /* Doubled from 30px to breathe luxury spacing into the content layout */
+    border-radius: 15px;
+    text-align: center;
+    border: 4px solid var(--gold); /* Thickened border to match the larger sizing footprint */
+    box-shadow: 0 0 35px rgba(197, 168, 92, 0.25); /* Premium ambient highlight glow shadow */
 }
 
-.popup-box h2{
-    color:var(--emerald);
-    margin-bottom:17px;
+/* Upscaled Heading Format */
+.popup-box h2 {
+    color: var(--emerald);
+    font-size: 2.4rem;      /* Upscaled font display footprint */
+    letter-spacing: 1px;
+    margin-bottom: 25px;    /* Increased vertical spacing separation gap */
 }
 
+/* Refined Body Paragraph Rules */
 .popup-box p {
-    margin-bottom: 20px;
-    line-height: 1.6;
-    
-    /* Fix legibility on white backgrounds */
-    color: #333333 !important;
+    margin-bottom: 35px;    /* Increased spacing gap above actions row display */
+    line-height: 1.7;
+    color: #222222 !important; /* Slightly darker charcoal tint for clean, elite legibility profile */
     -webkit-text-stroke: 0px transparent !important;
     text-shadow: none !important;
-    font-size: 15pt;
-    letter-spacing: normal;
-
-    /* Make the text bold */
-    font-weight: bold !important;
+    font-size: 16pt;        /* Lifted slightly from 15pt for better balance in the bigger card */
+    letter-spacing: 0.3px;
+    font-weight: 500 !important; /* Clean medium weight instead of heavy block bold to preserve elegance */
 }
 
-
-.popup-box button{
-    background:var(--emerald);
-    color:white;
-    border:none;
-    padding:12px 25px;
-    margin:5px;
-    border-radius:30px;
-    cursor:pointer;
-    font-size:16px;
+/* Scaled Buttons Interface Grid Array */
+.popup-box button {
+    background: var(--emerald);
+    color: white;
+    border: none;
+    padding: 16px 36px;     /* Enlarged internal padding target parameters for easier finger tracking */
+    margin: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;        /* Increased text sizing footprint from 16px */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.popup-box button:hover{
-    background:var(--dark-emerald);
+.popup-box button:hover {
+    background: var(--dark-emerald);
+    transform: translateY(-2px); /* Smooth micro-lift animation interact profile */
+    box-shadow: 0 4px 15px rgba(4, 67, 44, 0.3);
 }
-        /* Floating Gold Glitter Background */
-        .glitter-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
-        }
+
+/* Floating Gold Glitter Background Canvas Base Layer */
+.glitter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+}
+
+/* --- MOBILE SEAMLESS OVERRIDES --- */
+@media (max-width: 600px) {
+    .popup-box {
+        padding: 40px 24px; /* Automatically scales spacing downward on mobile devices */
+    }
+    
+    .popup-box h2 {
+        font-size: 1.8rem;
+    }
+    
+    .popup-box p {
+        font-size: 13pt; /* Slightly pulls text sizing back on mobile viewports so scrolling isn't triggered */
+    }
+    
+    .popup-box button {
+        width: 100%;    /* Extends button blocks across width matrix for clean touch controls mapping */
+        margin: 8px 0;
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+}
+
 
         .glitter {
             position: absolute;
@@ -1873,7 +1907,7 @@ nav a:hover {
         
         <div class="payment-header">
             <h2>Payment Details</h2>
-            <div class="payment-badge">💳 Payment Methods</div>
+            <div class="payment-badge">Payment Methods</div>
         </div>
         
         <!-- Core Payment Rules Group -->
@@ -1914,7 +1948,7 @@ nav a:hover {
         
         <div class="contact-header">
             <h2>Booking Info</h2>
-            <div class="contact-badge">💬 WhatsApp Only</div>
+            <div class="contact-badge">WhatsApp Only</div>
         </div>
         <p class="contact-text">Please message me directly to arrange an appointment. I’ll reply as soon as possible.</p>
         
@@ -1926,7 +1960,7 @@ nav a:hover {
         <!-- Interactive WhatsApp Button Container -->
         <div class="whatsapp-container">
             <a class="whatsapp-btn" href="https://wa.me/27795567346" target="_blank">
-                <span class="whatsapp-icon">💬</span> Chat on WhatsApp
+                <span class="whatsapp-icon"></span> Chat on WhatsApp
             </a>
         </div>
 
@@ -1943,7 +1977,7 @@ nav a:hover {
           <!-- 5-IMAGE PREMIUM SLIDER GALLERY -->
     <section id="gallery-showcase" class="gallery-section">
         <div class="section-header">
-            <h2 class="section-title">Gallery</h2>
+           
         </div>
 
         <div class="gallery">
