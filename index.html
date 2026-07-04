@@ -438,149 +438,63 @@
     filter:drop-shadow(0 8px 20px rgba(0,175,240,0.5));
 }
 
-/* Age Verification Popup Overlay Matrix */
-.popup-overlay {
+/* --- COMPACT PREMIUM POP-UP MODAL --- */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999999;
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 999999; /* Higher priority layer index to stack above absolute sticky headers */
-    padding: 24px;   /* Safe buffer to keep elements inside bounds on smaller screens */
-}
-
-/* Expanded Modal Inner Box Layout */
-.popup-box {
-    background: white;
-    max-width: 650px;       /* Increased from 500px to make it visibly larger on desktop */
-    width: 100%;            /* Fluid scaling factor for mobile device screens */
-    padding: 60px 45px;     /* Doubled from 30px to breathe luxury spacing into the content layout */
-    border-radius: 15px;
-    text-align: center;
-    border: 4px solid var(--gold); /* Thickened border to match the larger sizing footprint */
-    box-shadow: 0 0 35px rgba(197, 168, 92, 0.25); /* Premium ambient highlight glow shadow */
-}
-
-Verification Popup */
-.popup-overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-/* Age Verification Popup Overlay Matrix */
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 999999; /* Higher priority layer index to stack above absolute sticky headers */
-    padding: 24px;   /* Safe buffer to keep elements inside bounds on smaller screens */
-}
-
-/* Expanded Modal Inner Box Layout */
-.popup-box {
-    background: white;
-    max-width: 650px;       /* Increased from 500px to make it visibly larger on desktop */
-    width: 100%;            /* Fluid scaling factor for mobile device screens */
-    padding: 60px 45px;     /* Doubled from 30px to breathe luxury spacing into the content layout */
-    border-radius: 15px;
-    text-align: center;
-    border: 4px solid var(--gold); /* Thickened border to match the larger sizing footprint */
-    box-shadow: 0 0 35px rgba(197, 168, 92, 0.25); /* Premium ambient highlight glow shadow */
-}
-
-/* Upscaled Heading Format */
-.popup-box h2 {
-    color: var(--emerald);
-    font-size: 2.4rem;      /* Upscaled font display footprint */
-    letter-spacing: 1px;
-    margin-bottom: 25px;    /* Increased vertical spacing separation gap */
-}
-
-/* Refined Body Paragraph Rules */
-.popup-box p {
-    margin-bottom: 35px;    /* Increased spacing gap above actions row display */
-    line-height: 1.7;
-    color: #222222 !important; /* Slightly darker charcoal tint for clean, elite legibility profile */
-    -webkit-text-stroke: 0px transparent !important;
-    text-shadow: none !important;
-    font-size: 16pt;        /* Lifted slightly from 15pt for better balance in the bigger card */
-    letter-spacing: 0.3px;
-    font-weight: 500 !important; /* Clean medium weight instead of heavy block bold to preserve elegance */
-}
-
-/* Scaled Buttons Interface Grid Array */
-.popup-box button {
-    background: var(--emerald);
-    color: white;
-    border: none;
-    padding: 16px 36px;     /* Enlarged internal padding target parameters for easier finger tracking */
-    margin: 8px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 18px;        /* Increased text sizing footprint from 16px */
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.popup-box button:hover {
-    background: var(--dark-emerald);
-    transform: translateY(-2px); /* Smooth micro-lift animation interact profile */
-    box-shadow: 0 4px 15px rgba(4, 67, 44, 0.3);
-}
-
-/* Floating Gold Glitter Background Canvas Base Layer */
-.glitter-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    padding: 16px;
+    opacity: 0;
     pointer-events: none;
-    background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+    transition: opacity 0.3s ease;
 }
 
-/* --- MOBILE SEAMLESS OVERRIDES --- */
-@media (max-width: 600px) {
-    .popup-box {
-        padding: 40px 24px; /* Automatically scales spacing downward on mobile devices */
-    }
-    
-    .popup-box h2 {
-        font-size: 1.8rem;
-    }
-    
-    .popup-box p {
-        font-size: 13pt; /* Slightly pulls text sizing back on mobile viewports so scrolling isn't triggered */
-    }
-    
-    .popup-box button {
-        width: 100%;    /* Extends button blocks across width matrix for clean touch controls mapping */
-        margin: 8px 0;
-        padding: 14px 20px;
-        font-size: 16px;
-    }
+/* Toggle state class to show modal */
+.modal-overlay.is-active {
+    opacity: 1;
+    pointer-events: auto;
 }
+
+.modal-box-compact {
+    background-color: #111111;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    
+    /* CONTROL POP-UP SIZE DIMENSIONS */
+    max-width: 400px;         /* Reduced from 550px to make it narrow */
+    width: 100%;
+    padding: 24px;            /* Reduced inner padding to shrink total surface height */
+    
+    text-align: center;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+}
+
+/* Compact internal typography modifiers */
+.modal-box-compact h2 {
+    font-family: var(--heading-font);
+    font-size: 1.8rem;        /* Smaller typography scaling */
+    color: var(--white);
+    margin: 0 0 10px 0;
+}
+
+.modal-box-compact p {
+    font-size: 0.85rem;       /* Clean, smaller text density */
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+
 
 
 /* Floating Gold Glitter Background Canvas */
@@ -593,6 +507,18 @@ Verification Popup */
     z-index: -1;
     pointer-events: none;
     background: radial-gradient(circle at center, #112211 0%, #050a05 100%);
+}
+/* Styling option to make the exit path look like a secondary choice */
+.btn-exit-secondary {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-exit-secondary:hover {
+    color: #ff4d4d !important; /* Turns subtle red on hover to signal exit */
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.2) !important;
 }
 
 /* ==========================================================================
@@ -1308,8 +1234,6 @@ Verification Popup */
     }
 }
 
-
-        
 /* ==========================================================================
    💳 3-COLUMN SERVICES LAYOUT MATRIX & CENTERED ADD-ONS
    ========================================================================== */
@@ -1983,8 +1907,7 @@ Verification Popup */
         
     </nav>
 
-     
-
+    
     <div class="sparkles">
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
@@ -1992,21 +1915,19 @@ Verification Popup */
 <span></span><span></span><span></span><span></span><span></span>
 </div>
 
-<!-- AGE POPUP -->
-<div class="popup-overlay" id="agePopup">
-    <div class="popup-box">
-        <h2>18+ Disclaimer</h2>
-        <p>
-            This website is intended for adults aged 18 years and older.
-            By entering this website, you confirm that you are at least
-            18 years old and legally permitted to view adult-oriented content.
-        </p>
-
-        <button onclick="enterSite()">I Am 18+</button>
-        <button onclick="leaveSite()">Exit</button>
+<div class="modal-overlay is-active" id="ageGateModal">
+    <div class="modal-box-compact">
+        <!-- THE EXIT BUTTON ELEMENT -->
+        
+        <h2>18+ Verification</h2>
+        <p>This rates and services platform contains content intended for adults. Please verify your age to continue.</p>
+        
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button onclick="document.getElementById('ageGateModal').classList.remove('is-active')" class="hero-btn" style="padding: 10px 20px; font-size: 0.8rem;">Enter</button>
+           <button onclick="window.location.href='https://google.com';" class="hero-btn" style="padding: 10px 20px; font-size: 0.8rem;">Exit</button>
+        </div>
     </div>
 </div>
- 
 
     </div>
 </div>
@@ -2037,32 +1958,7 @@ Verification Popup */
         
         <p class="location-text">
             🏡 I am based in <strong>Melrose Arch</strong>, working from a private and upmarket guesthouse close to the BluBird Shopping Centre.
-        </p>
-
-              <!-- PREMIUM FULL GOLD HIGH-VISIBILITY NOTIFICATION HIGHLIGHT -->
-      <div class="highlight-box">
-        <p><strong>N.B.</strong> Please read all information thoroughly before making contact.</p>
-    </div>
-
-    <!-- CENTERED SQUARE DISPLAY GALLERY -->
-    <section id="gallery-showcase" class="gallery-section">
-        <div class="gallery-grid-three">
-            <div class="gallery-frame-square">
-                <img src="greenmsg.png" alt="Luxury Setting Showcase 1" class="gallery-img">
-            </div>
-            <div class="gallery-frame-square">
-                <img src="green.png" alt="Luxury Setting Showcase 2" class="gallery-img">
-            </div>
-            <div class="gallery-frame-square">
-                <img src="table.png" alt="Luxury Setting Showcase 3" class="gallery-img">
-            </div>
-        </div>
-    </section>
-
-     <section id="services" class="services-section">
-    <div class="section-header">
-        <h2 class="section-title">Massage Rates</h2>
-    </div>
+        </p><br>
     
     <!-- Centered Cards Container Grid -->
     <div class="services-grid">
