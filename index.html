@@ -139,6 +139,74 @@
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     transform: translateY(-2px);
 }
+        /* --- TWO BUTTON FLEX LAYOUT BOX --- */
+        .hero-action-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary-outline {
+            background-color: transparent !important;
+            color: var(--white) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .btn-secondary-outline:hover {
+            border-color: var(--white) !important;
+            background-color: var(--white) !important;
+            color: var(--black) !important;
+        }
+
+        /* --- CENTERED PHILOSOPHY CORE ENGINE --- */
+        .philosophy-section {
+            background-color: var(--black);
+            padding: clamp(60px, 10vw, 120px) 24px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .philosophy-content-box {
+            max-width: 800px; /* Constrains column width for high reading readability */
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .gold-subtitle-tag {
+            font-family: var(--text-font);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .philosophy-section h3 {
+            font-family: var(--heading-font);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--white);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin: 0 0 24px 0;
+            line-height: 1.2;
+        }
+
+        .philosophy-section p {
+            font-family: var(--text-font);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.8); /* mutes off-white color to comfort eye tracking */
+            line-height: 1.8;
+            margin: 0;
+            font-weight: 300;
+        }
+
 
 /* Adjust layout space specifically for smaller mobile displays */
 @media (max-width: 768px) {
@@ -1896,7 +1964,9 @@
             <img src="logo.png">
         </div>
         
-        <nav>   <a href="#about">About</a>
+        <nav>
+        <a href="#philosophy">Our Philosophy</a>
+        <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#services-not-offered">Not on Offer</a>
         <a href="#important-notes">Important</a>
@@ -1941,25 +2011,31 @@
         <div class="subtitle">Welcome</div>
         <h1>Massage by Ashleigh</h1>
         <p>Pure Relaxation • Professional Service • Private Appointments</p>
+
+    <div class="hero-action-container">
+        <!-- BUTTON LINKING DOWN TO PHILOSOPHY SECTION -->
+        <a href="#philosophy" class="hero-btn">Our Philosophy</a>
+        <a href="#contact" class="hero-btn btn-secondary-outline">Book Session</a>
+    </div>
     </header>
 
+    <!-- NEWLY ADDED TARGETED PHILOSOPHY SECTION -->
+<section id="philosophy" class="philosophy-section">
+    <div class="philosophy-content-box">
+        <h3>Our Philosophy</h3>
+        <p>At Massage by Ash, my goal is simple - to help every client leave feeling relaxed, refreshed, and cared for. I believe everyone deserves time to unwind from the stresses of daily life, and I strive to create a calm, welcoming environment where you can truly relax. Every massage is tailored to your individual needs, ensuring you receive the care and attention you deserve so you leave feeling your very best.</p>
+</section>
 
+         <div class="highlight-box full-gold">
+            <p><strong>N.B.</strong> Please read through all of the provided information thoroughly before making contact.<br> Thank you</p>
+        </div>
+</section><br>
 
 <section id="about" class="intro-section">
     <div class="intro-container">
         
-        <p class="greeting">Hi there! 🤗</p>
-        <p class="thanks">Thank you for your interest.</p>
+        <p class="greeting">Services</p><br><br>
         
-        <p class="intro-text">
-            I offer a full-body sensual massage that includes body-to-body contact and a sensual release.
-            Sessions take place in the nude, and soft, respectful touch is welcome within set boundaries.
-        </p>
-        
-        <p class="location-text">
-            🏡 I am based in <strong>Melrose Arch</strong>, working from a private and upmarket guesthouse close to the BluBird Shopping Centre.
-        </p><br>
-    
     <!-- Centered Cards Container Grid -->
     <div class="services-grid">
         
@@ -1975,7 +2051,8 @@
         </div>
 
         <!-- Card 2 (Featured) -->
-        <div class="service-card featured">
+        
+       <div id="services"class="service-card featured">
             <div class="popular-badge">Popular</div>
             <h3>👩🏻‍❤️‍👨🏼 Massage with FH</h3>
             <span class="subtitle">Includes covered oral</span>
@@ -2300,4 +2377,4 @@ window.addEventListener("scroll", function(){
 
 </footer>
 </body>
-</html>
+</html>"
