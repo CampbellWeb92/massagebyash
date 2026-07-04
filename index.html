@@ -69,6 +69,85 @@
             transform: translateY(-2px); 
             box-shadow: 0 5px 15px rgba(214, 175, 55, 0.3); 
         }
+        /* --- LEGIBlLITY VISIBILITY HERO SYSTEM --- */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 80vh; /* Fills 80% of the user's screen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 24px 60px 24px; /* Generous top padding keeps text safe under a fixed navbar */
+    box-sizing: border-box;
+
+    /* THE TRICK: Layer a dark transparent tint directly over your photo file path */
+    background: linear-gradient(
+        rgba(10, 10, 10, 0.75), 
+        rgba(10, 10, 10, 0.85)
+    ), url('greenmass.png'); 
+    
+    background-size: cover;       /* Forces the image to stretch without squeezing */
+    background-position: center;   /* Centers the image asset perfectly */
+    background-repeat: no-repeat;  /* Blocks image repeating patterns */
+    border-bottom: 2px solid var(--gold);
+}
+
+.hero h1 {
+    font-family: var(--heading-font), 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Dynamically shrinks text perfectly on phone screens */
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.hero h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.hero p {
+    font-family: var(--text-font), 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    max-width: 600px; /* Restricts row width so text blocks are fast and easy to scan */
+    color: rgba(255, 255, 255, 0.9); 
+    margin-bottom: 30px;
+}
+
+/* Hero Primary Call to Action Button */
+.hero-btn {
+    display: inline-block;
+    color: var(--black);
+    background-color: var(--gold);
+    font-family: var(--text-font), 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--gold);
+}
+
+.hero-btn:hover {
+    background-color: transparent;
+    color: var(--gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Adjust layout space specifically for smaller mobile displays */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 180px; /* Pushes content down a bit further if navbar wraps on small devices */
+        min-height: 60vh;
+    }
+}
+
 
         /* --- PREMIUM DARK EMERALD NOTIFICATION HIGHLIGHT --- */
         .highlight-box {
@@ -1889,7 +1968,23 @@ Verification Popup */
     </style>
 </head>
 <body>
-    
+    <div class="logo">
+            <img src="logo.png">
+        </div>
+        
+        <nav>   <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#services-not-offered">Not on Offer</a>
+        <a href="#important-notes">Important</a>
+        <a href="#hours">Hours</a>
+        <a href="#rates">Rates</a>
+        <a href="#contact">Contact</a>
+        <a href="#gallery">Gallery</a>
+        
+    </nav>
+
+     
+
     <div class="sparkles">
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
@@ -1919,26 +2014,15 @@ Verification Popup */
     <!-- Floating Glitter Elements (JS will generate more, this is for initial layout) -->
     <div class="glitter-container" id="glitter-bg"></div>
 
- <div class="logo">
-            <img src="logo.png">
-        </div>
 
-    <header>
+
+    <header class="hero" id="hero">
         <div class="subtitle">Welcome</div>
         <h1>Massage by Ashleigh</h1>
         <p>Pure Relaxation • Professional Service • Private Appointments</p>
     </header>
 
-<nav>   <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#services-not-offered">Not on Offer</a>
-        <a href="#important-notes">Important</a>
-        <a href="#hours">Hours</a>
-        <a href="#rates">Rates</a>
-        <a href="#contact">Contact</a>
-        <a href="#gallery">Gallery</a>
-        
-    </nav>
+
 
 <section id="about" class="intro-section">
     <div class="intro-container">
