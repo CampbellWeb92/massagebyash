@@ -1163,20 +1163,6 @@
             animation: shimmerSparkle 4s linear infinite;
         }
 
-        .logo img{
-         width:140px;
-         height: 140px;
-}
-
-        /* Image Gallery */
-        .gallery {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 50px 0;
-            flex-wrap: wrap;
-        }
-
         .gallery-img {
             width: 280px;
             height: 350px;
@@ -1981,6 +1967,57 @@
         text-align: center;
     }
 }
+        /* --- CENTERED TOP LOGO ARCHITECTURE --- */
+        .centered-header-wrapper {
+            display: flex;
+            flex-direction: column;   /* Stacks the logo vertically on top of the menu buttons */
+            align-items: center;      /* Forces the logo box to center horizontally */
+            width: 100%;
+            padding: 40px 20px 20px 20px;
+            background-color: var(--black);
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1); /* Subtle premium divider line */
+        }
+
+        .logo-box-container {
+            margin: 0 auto 20px auto; /* Centers container box and adds bottom breathing room */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Graphic Logo Control Properties */
+        .brand-logo-img {
+            max-width: 180px;         /* Restricts the width so your logo stays elegant */
+            height: auto;             /* Maintains correct proportions without stretching */
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Text Logo Styling (Fallback) */
+        .brand-logo-text {
+            font-family: var(--heading-font), serif;
+            font-size: 2.4rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .brand-logo-text span {
+            color: var(--gold);
+        }
+
+        /* Navigation Buttons Control Row */
+        .centered-nav-links {
+            display: flex;
+            justify-content: center;  /* Keeps all button rows tightly centered below the logo */
+            gap: 15px;
+            flex-wrap: wrap;          /* Allows navigation to wrap cleanly on phone viewports */
+            width: 100%;
+            padding: 0;               /* Resets old navigation wrapper styles */
+        }
+
 
         footer {
             text-align: center;
@@ -2012,11 +2049,20 @@
     </style>
 </head>
 <body>
-    <div class="logo">
-            <img src="logo.png">
-        </div>
+
+  <!-- GLOBAL NAVBAR FRAMEWORK -->
+<div class="centered-header-wrapper">
+    <!-- BRAND LOGO MARKUP CONTAINER -->
+    <div class="logo-box-container">
+        <!-- Option A: Using a graphic image file -->
+        <img src="logo.png" alt="Massage by Ash Logo" class="brand-logo-img">
         
-        <nav>
+        <!-- Option B: Using premium text typography (Uncomment if needed) -->
+        <!-- <a href="#" class="brand-logo-text">Ashleigh<span>.</span></a> -->
+    </div>
+
+    <!-- NAVIGATION LINK BUTTONS MENU -->
+    <nav class="centered-nav-links">
         <a href="#philosophy">My Philosophy</a>
         <a href="#rates-and-services">Rates & Services</a>
         <a href="#services-not-offered">Not on Offer</a>
@@ -2057,7 +2103,6 @@
     <div class="glitter-container" id="glitter-bg"></div>
 
 
-
     <header class="hero" id="hero">
         <div class="subtitle">Welcome</div>
         <h1>Massage by Ashleigh</h1>
@@ -2081,7 +2126,7 @@
          <div class="highlight-box full-gold">
             <p><strong>N.B.</strong> Please read through all of the provided information thoroughly before making contact.<br> Thank you</p>
         </div>
-</section><br>
+</section>
 
 <section id="rates-and-services" class="intro-section">
     <div class="intro-container">
