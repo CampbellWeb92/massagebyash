@@ -731,6 +731,58 @@
 }
 
 }
+
+        /* --- LOCATION GRID ENGINE --- */
+        .location-section {
+            background-color: var(--black);
+            padding: clamp(60px, 10vw, 100px) 24px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .location-container {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .location-title {
+            font-family: var(--heading-font);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--white);
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+        }
+
+        .location-text {
+            font-family: var(--text-font);
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin: 0 0 35px 0;
+            font-weight: 300;
+        }
+
+        .location-text strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .location-action-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
 /* Business Hours Layout */
 /* --- ULTIMATE CENTERING SYSTEM --- */
 
@@ -1969,6 +2021,7 @@
         <a href="#rates-and-services">Rates & Services</a>
         <a href="#services-not-offered">Not on Offer</a>
         <a href="#important-notes">Important</a>
+        <a href="#location">Location</a>
         <a href="#hours">Hours</a>
         <a href="#contact">Contact</a>
         <a href="#gallery">Gallery</a>
@@ -2083,8 +2136,7 @@
             🏆 Repeat clients don't pay for GFE
         </div>
     </div>
-</section>
-
+</section><br>
 
          <div class="highlight-box full-gold">
             <p><strong>N.B.</strong> I kindly request that you maintain good personal hygiene. Some or all services may be declined if hygiene standards are not met. I am a professional provider who prioritises both my safety and that of my clients.</p>
@@ -2229,7 +2281,6 @@
     </div>
 </section>
 
-
 <section id="contact" class="contact-section">
     <div class="contact-card">
         
@@ -2257,6 +2308,16 @@
             <span class="heart-emoji">💚</span>
         </div>
 
+    </div>
+</section>
+
+<!-- --- LOCATION & CONTACT SECTION --- -->
+<section id="location" class="location-section">
+    <div class="location-container">
+        <h2 class="location-title">Location</h2>
+        <p class="location-text">Situated in <strong>Melrose Arch, Johannesburg</strong>, just minutes away from the BluBird Shopping Centre.</p><br>
+        <p></p>Secure, private parking is provided for all scheduled clients.</p>
+        </div>
     </div>
 </section>
 
