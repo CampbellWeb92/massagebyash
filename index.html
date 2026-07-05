@@ -826,7 +826,10 @@ footer span{
   <section id="important-notes" class="section"><div class="info-card card"><h2>Important Notes</h2><span class="small-badge">Please Read</span><div class="list"><div class="note-item danger">I am not interracial and cater exclusively to white gentlemen.</div><div class="note-item">This is a drug-free zone.</div><div class="note-item">Please do not book if you're feeling unwell.</div><div class="note-item danger">Zero tolerance for harassment or abuse.</div></div></div></section>
 
   <section class="section"><div class="container info-grid">
-    <div id="hours" class="info-card card"><h2>Business Hours</h2><div class="status"><span class="dot"></span><span id="status-text">Open Today</span></div><div class="hours-table"><div class="row"><span>Tuesday - Friday</span><span class="dots"></span><span class="time">09:00 – 17:00</span></div><div class="row"><span>Saturday</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row"><span>Public Holidays</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row closed"><span>Sundays & Mondays</span><span class="dots"></span><span class="time">Closed</span></div></div><p class="center muted">Strictly by appointment only.</p></div>
+    <div id="hours" class="info-card card"><h2>Business Hours</h2><div class="status">
+    <span class="dot"></span>
+    <span id="status-text">Checking...</span>
+</div><div class="hours-table"><div class="row"><span>Tuesday - Friday</span><span class="dots"></span><span class="time">09:00 – 17:00</span></div><div class="row"><span>Saturday</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row"><span>Public Holidays</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row closed"><span>Sundays & Mondays</span><span class="dots"></span><span class="time">Closed</span></div></div><p class="center muted">Strictly by appointment only.</p></div>
     <div id="location" class="info-card card"><h2>Location</h2><span class="small-badge">Melrose Arch</span><p class="center muted">Situated in <strong class="gold">Melrose Arch, Johannesburg</strong>, just minutes away from the BluBird Shopping Centre.</p><p class="center muted">Secure, private parking is provided for all scheduled clients.</p></div>
   </div></section>
 
@@ -878,8 +881,60 @@ footer span{
 
 </footer>
   <script>
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => backToTop.classList.toggle('show', window.scrollY > 300));
-  </script>
+ <script>
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("show", window.scrollY > 300);
+});
+
+function updateBusinessStatus() {
+
+    const statusText = document.getElementById("status-text");
+    const status = document.querySelector(".status");
+
+    const now = new Date();
+
+    const day = now.getDay();      // 0 = Sunday
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    const currentMinutes = hour * 60 + minute;
+
+    let isOpen = false;
+
+    // Tuesday - Friday
+    if (day >= 2 && day <= 5) {
+        isOpen = currentMinutes >= 540 && currentMinutes < 1020;
+    }
+
+    // Saturday
+    else if (day === 6) {
+        isOpen = currentMinutes >= 540 && currentMinutes < 900;
+    }
+
+    if (isOpen) {
+
+        statusText.textContent = "Open Now";
+
+        status.style.background = "rgba(46,204,113,.12)";
+        status.style.borderColor = "rgba(46,204,113,.35)";
+        status.style.color = "#2ecc71";
+
+    } else {
+
+        statusText.textContent = "Closed Now";
+
+        status.style.background = "rgba(231,76,60,.12)";
+        status.style.borderColor = "rgba(231,76,60,.35)";
+        status.style.color = "#e74c3c";
+
+    }
+}
+
+updateBusinessStatus();
+
+setInterval(updateBusinessStatus, 60000);
+</script>
 </body>
 </html>
