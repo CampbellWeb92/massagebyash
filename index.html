@@ -765,6 +765,14 @@ footer span{
         0 15px 35px rgba(0,0,0,.55);
 }
 
+
+/* Back to top reliability fix */
+#backToTop.show{
+    opacity:1 !important;
+    visibility:visible !important;
+    display:grid !important;
+}
+
 </style>
 </head>
 <body>
@@ -880,60 +888,55 @@ footer span{
   </a>
 
 </footer>
-  <script>
  <script>
 const backToTop = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-    backToTop.classList.toggle("show", window.scrollY > 300);
-});
+if (backToTop) {
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            backToTop.classList.add("show");
+        } else {
+            backToTop.classList.remove("show");
+        }
+    });
+}
 
 function updateBusinessStatus() {
-
     const statusText = document.getElementById("status-text");
-    const status = document.querySelector(".status");
+    const statusBox = document.querySelector(".status");
+
+    if (!statusText || !statusBox) return;
 
     const now = new Date();
-
-    const day = now.getDay();      // 0 = Sunday
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-
-    const currentMinutes = hour * 60 + minute;
+    const day = now.getDay(); // Sunday = 0, Monday = 1, Tuesday = 2
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
     let isOpen = false;
 
-    // Tuesday - Friday
+    // Tuesday to Friday: 09:00 - 17:00
     if (day >= 2 && day <= 5) {
         isOpen = currentMinutes >= 540 && currentMinutes < 1020;
     }
 
-    // Saturday
-    else if (day === 6) {
+    // Saturday: 09:00 - 15:00
+    if (day === 6) {
         isOpen = currentMinutes >= 540 && currentMinutes < 900;
     }
 
     if (isOpen) {
-
         statusText.textContent = "Open Now";
-
-        status.style.background = "rgba(46,204,113,.12)";
-        status.style.borderColor = "rgba(46,204,113,.35)";
-        status.style.color = "#2ecc71";
-
+        statusBox.style.background = "rgba(46,204,113,.12)";
+        statusBox.style.borderColor = "rgba(46,204,113,.35)";
+        statusBox.style.color = "#2ecc71";
     } else {
-
         statusText.textContent = "Closed Now";
-
-        status.style.background = "rgba(231,76,60,.12)";
-        status.style.borderColor = "rgba(231,76,60,.35)";
-        status.style.color = "#e74c3c";
-
+        statusBox.style.background = "rgba(231,76,60,.12)";
+        statusBox.style.borderColor = "rgba(231,76,60,.35)";
+        statusBox.style.color = "#e74c3c";
     }
 }
 
 updateBusinessStatus();
-
 setInterval(updateBusinessStatus, 60000);
 </script>
 </body>
