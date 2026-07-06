@@ -773,6 +773,101 @@ footer span{
     display:grid !important;
 }
 
+/* ==========================================================
+   POPULAR BADGE + LIGHT GOLD HIGHLIGHT NOTICE
+   ========================================================== */
+
+.read-before-contact{
+    max-width:920px;
+    margin:28px auto 38px;
+    padding:22px 26px;
+    border:1px solid rgba(212,175,55,.55);
+    border-left:5px solid var(--gold);
+    border-radius:18px;
+    background:
+        linear-gradient(135deg, rgba(255,241,168,.18), rgba(212,175,55,.08)),
+        rgba(255,255,255,.035);
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.35),
+        0 0 22px rgba(212,175,55,.16);
+    text-align:center;
+}
+
+.read-before-contact p{
+    margin:0;
+    color:#fff0b0;
+    font-size:clamp(.92rem,2vw,1rem);
+    line-height:1.7;
+    letter-spacing:.35px;
+}
+
+.read-before-contact strong{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+}
+
+/* Stronger rule so later .badge styling does not break the Popular badge */
+.service-image .badge{
+    position:absolute !important;
+    top:14px;
+    right:14px;
+    z-index:5;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        linear-gradient(135deg, #8a6410 0%, #d4af37 28%, #fff1a8 50%, #b88918 75%, #f5df82 100%);
+    background-size:220% 220%;
+    color:#080808;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:1.1px;
+    font-size:.68rem;
+    border-radius:999px;
+    padding:8px 14px;
+    border:1px solid rgba(255,255,255,.45);
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.38),
+        0 0 18px rgba(212,175,55,.55),
+        inset 0 1px 0 rgba(255,255,255,.6);
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.service-image .badge::before{
+    content:"";
+    position:absolute;
+    inset:-20% auto -20% -70%;
+    width:45%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.75),
+        transparent
+    );
+    transform:skewX(-22deg);
+    pointer-events:none;
+}
+
+.service-card:hover .service-image .badge::before{
+    animation:buttonMetallicShimmer .9s ease forwards;
+}
+
+@media(max-width:768px){
+    .read-before-contact{
+        margin:24px auto 30px;
+        padding:18px 16px;
+    }
+
+    .service-image .badge{
+        top:12px;
+        right:12px;
+        font-size:.62rem;
+        padding:7px 12px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -817,7 +912,9 @@ footer span{
       <p>At Massage by Ash, my goal is simple — to help every client leave feeling relaxed, refreshed, and cared for. I believe everyone deserves time to unwind from the stresses of daily life, and I strive to create a calm, welcoming environment where you can truly relax.</p>
     </div>
   </section>
-
+<div class="container read-before-contact">
+      <p><strong>N.B.</strong> Please read all information provided thoroughly before reaching out to me, thank you.</p>
+    </div>
   <section id="rates-and-services" class="section">
     <div class="container center"><span class="eyebrow">Rates & Services</span><h2 class="section-title">Choose your appointment</h2></div>
     <div class="container services-grid">
