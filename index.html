@@ -495,6 +495,24 @@ footer span{
     max-width:100%;
 }
 
+/* Keep the announcement bar centred and responsive */
+.announcement-bar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 16px;
+    text-align:center;
+}
+
+.announcement-bar p{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    text-align:center;
+    text-wrap:balance;
+}
+
 /* Phone-specific layout improvements */
 @media(max-width:768px){
 
@@ -504,6 +522,15 @@ footer span{
 
     body{
         font-size:15px;
+    }
+
+    .announcement-bar{
+        padding:8px 12px;
+    }
+
+    .announcement-bar p{
+        font-size:.78rem;
+        line-height:1.5;
     }
 
     .topbar{
@@ -871,6 +898,13 @@ footer span{
 </style>
 </head>
 <body>
+
+    <div class="announcement-bar">
+        <p>🌹 Massage by Ashleigh |
+        Adults 18+ Only |
+        Right of Admission Reserved 🌹</p>
+    </div>
+
   <div class="topbar">
     <div class="brand"><img src="logo2.png" alt="Massage by Ashleigh Logo"></div>
     <nav class="nav" aria-label="Main navigation">
@@ -966,14 +1000,11 @@ footer span{
     <!-- OnlyFans Text (Added font-size: 22px) -->
     <span style="font-family: sans-serif; font-size: 22px; margin-left: 10px; color: #00aff0; font-weight: bold; vertical-align: middle;">OnlyFans</span>
   </a>
-</div><br>
+</div>
 
-
- <p>🌹 Massage by Ashleigh |
-        Adults 18+ Only |
-        Right of Admission Reserved 🌹</p>
-
-<p style="color: #ffffff;">
+    <p>   &copy; Copyright 2026 Massage by Ashleigh</p>
+    
+    <p style="color: #ffffff;"></p>
   
   <a href="https://campbellweb.co.za"
      target="_blank" 
@@ -981,7 +1012,7 @@ footer span{
      style="color: #ffffff !important; text-decoration: none; transition: color 0.3s;"
      onmouseover="this.style.color='white'" 
      onmouseout="this.style.color='gold'">
-      &copy; Copyright 2026 CampbellWeb
+     Created by CampbellWeb
   </a>
 
 </footer>
