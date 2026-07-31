@@ -1,10 +1,34 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ashleigh | Rates & Services</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ashleigh | Rates &amp; Services</title>
+<!-- Basic SEO metadata -->
+<meta content="View Ashleigh's massage services, rates, booking policies, business hours and location in Melrose Arch, Johannesburg." name="description"/>
+<meta content="massage services, massage rates, professional massage, massage therapist, Melrose Arch, Johannesburg" name="keywords"/>
+<meta content="Ashleigh" name="author"/>
+<meta content="index, follow" name="robots"/>
+<!-- Replace this with your real website address -->
+<link href="https://massagebyash.co.za/" rel="canonical"/>
+<!-- Browser tab icon -->
+<link href="logo2.png" rel="icon" type="image/png"/>
+<link href="logo2.png" rel="apple-touch-icon"/>
+<!-- Facebook and WhatsApp display information -->
+<meta content="website" property="og:type"/>
+<meta content="Ashleigh | Massage Rates &amp; Services" property="og:title"/>
+<meta content="Explore Ashleigh's massage services, rates, booking information, business hours and private Melrose Arch location." property="og:description"/>
+<meta content="https://massagebyash.co.za/" property="og:url"/>
+<meta content="https://massagebyash.co.za/social-preview.jpg" property="og:image"/>
+<meta content="Massage by Ashleigh rates and services in Melrose Arch, Johannesburg" property="og:image:alt"/>
+<meta content="Massage by Ashleigh" property="og:site_name"/>
+<!-- X/Twitter display information -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Ashleigh | Massage Rates &amp; Services" name="twitter:title"/>
+<meta content="Explore Ashleigh's massage services, rates, business hours and private Melrose Arch location." name="twitter:description"/>
+<meta content="https://massagebyash.co.za/social-preview.jpg" name="twitter:image"/>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
     :root{
@@ -35,7 +59,7 @@ body{
 
     .topbar{position:static;top:0;z-index:1000;background:rgba(7,7,7,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(212,175,55,.18);padding:16px 18px}.brand{display:flex;justify-content:center;margin-bottom:14px}.brand img{width:min(170px,45vw);height:auto;display:block}.nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.nav a{text-decoration:none;padding:10px 16px;border:1px solid rgba(212,175,55,.28);border-radius:999px;background:rgba(255,255,255,.03);color:rgba(255,255,255,.86);font-size:.76rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;transition:.28s ease}.nav a:hover{background:var(--gold);color:#080808;transform:translateY(-2px);box-shadow:0 10px 26px rgba(212,175,55,.22)}
 
-    .hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:96px 22px;position:relative;background:linear-gradient(rgba(2,2,2,.66),rgba(2,2,2,.88)),url('greenmass.png') center/cover no-repeat;border-bottom:1px solid var(--line)}
+    .hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:96px 22px;position:relative;background:linear-gradient(rgba(2,2,2,.66),rgba(2,2,2,.88)),url('greenmass.webp') center/cover no-repeat;border-bottom:1px solid var(--line)}
     .hero::after{content:"";position:absolute;inset:auto 0 0;height:160px;background:linear-gradient(transparent,var(--black))}.hero-inner{position:relative;z-index:1;max-width:820px}.hero h1{font-family:var(--heading);font-size:clamp(3rem,8vw,6.5rem);font-weight:600;line-height:.95;margin:0 0 22px;background:linear-gradient(90deg,var(--gold),#fff6c8,var(--gold-dark),#fff,var(--gold));background-size:220% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}.hero p{max-width:680px;margin:0 auto 30px;color:rgba(255,255,255,.86);font-size:clamp(1rem,2vw,1.2rem);letter-spacing:.5px}.hero-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border:none;cursor:pointer;padding:14px 26px;border-radius:999px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;font-size:.78rem;transition:.3s ease}.btn-gold{background:linear-gradient(135deg,var(--gold),#f5df82,var(--gold-dark));color:#080808}.btn-outline{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.28);color:var(--white)}.btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(212,175,55,.22)}@keyframes shine{to{background-position:-220% center}}
 
     .philosophy-card{max-width:880px;margin:auto;padding:clamp(34px,6vw,64px);text-align:center}.philosophy-card p{color:var(--muted);font-size:1.04rem;margin:0 auto;max-width:760px}.notice{max-width:820px;margin:28px auto 0;padding:20px 24px;border:1px solid rgba(212,175,55,.34);border-radius:18px;background:rgba(212,175,55,.06);color:rgba(255,255,255,.86);text-align:center}
@@ -442,14 +466,26 @@ body{
     overflow:hidden;
 }
 
-/* Make service cards naturally responsive */
+/* Keep the four service cards in a 2-column, 2-row desktop layout */
 .services-grid{
-    grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)) !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
 }
 
-/* Make info cards stack cleanly on smaller screens */
+/* Keep general information grids responsive */
 .info-grid{
     grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)) !important;
+}
+
+/* Display the Location card directly below Business Hours on desktop */
+.hours-location-grid{
+    grid-template-columns:1fr !important;
+}
+
+/* Keep service cards easy to read on phones */
+@media(max-width:760px){
+    .services-grid{
+        grid-template-columns:1fr !important;
+    }
 }
 
 /* Prevent long text and inline content from forcing horizontal scroll */
@@ -895,128 +931,479 @@ footer span{
     }
 }
 
+
+
+/* ==========================================================
+   PROFESSIONAL REFINEMENTS
+   One subtle animated element remains: the main hero heading.
+   ========================================================== */
+:root{
+  --warning:#b14c4c;
+  --warning-light:#d18484;
+  --section-space:clamp(78px,9vw,126px);
+}
+
+.section{
+  padding:var(--section-space) 22px;
+}
+
+.section-compact{
+  padding-top:clamp(48px,6vw,78px);
+  padding-bottom:clamp(72px,8vw,108px);
+}
+
+.section-heading-block{
+  max-width:820px;
+  margin:0 auto 40px;
+}
+
+.section-intro{
+  max-width:720px;
+  margin:14px auto 0;
+  color:var(--muted);
+}
+
+/* Quieter announcement */
+.announcement-bar{
+  min-height:34px;
+  padding:8px 16px;
+  background:#050505;
+  border-bottom:1px solid rgba(212,175,55,.18);
+}
+
+.announcement-bar p{
+  margin:0;
+  color:rgba(255,255,255,.7);
+  font-size:.7rem;
+  line-height:1.45;
+  letter-spacing:1.15px;
+  text-transform:uppercase;
+}
+
+/* One primary gold action style */
+.btn-gold,
+.nav .nav-book,
+.primary-whatsapp,
+.service-book-btn{
+  background:linear-gradient(135deg,#b88918 0%,#e2c358 48%,#a98218 100%) !important;
+  color:#080808 !important;
+  border:1px solid rgba(255,242,178,.48) !important;
+  box-shadow:0 10px 26px rgba(212,175,55,.18) !important;
+}
+
+
+.btn:hover,
+.nav a:hover,
+.service-book-btn:hover,
+.primary-whatsapp:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(212,175,55,.22) !important;
+}
+
+.nav .nav-book{
+  padding:10px 20px;
+  font-weight:900;
+}
+
+.btn-outline{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(212,175,55,.45);
+  color:rgba(255,255,255,.9);
+}
+
+/* Original gold title shimmer and decorative sparkles restored */
+.hero h1{
+  background:linear-gradient(90deg,var(--gold),#fff6c8,var(--gold-dark),#fff,var(--gold));
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 6s linear infinite !important;
+  filter:none;
+}
+
+.sparkles{display:block;}
+
+/* Calm cards and consistent borders */
+.card,
+.service-card,
+.info-card,
+.trust-card,
+.policy-card{
+  border:1px solid rgba(212,175,55,.26);
+  box-shadow:0 18px 46px rgba(0,0,0,.42);
+}
+
+.service-card:hover,
+.info-card:hover,
+.trust-card:hover,
+.policy-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(212,175,55,.52);
+  box-shadow:0 22px 50px rgba(0,0,0,.48);
+}
+
+.service-card,
+.trust-card,
+.policy-card{
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+
+.service-card{
+  display:flex;
+  flex-direction:column;
+}
+
+.service-content{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+}
+
+.service-content .price-list,
+.service-content p{
+  flex-grow:0;
+}
+
+.service-book-btn{
+  width:100%;
+  margin-top:auto;
+  padding:12px 18px;
+  font-size:.7rem;
+}
+
+.price-item{
+  border-bottom:1px solid rgba(212,175,55,.17);
+}
+
+.loyalty,
+.read-before-contact{
+  border:1px solid rgba(212,175,55,.42);
+  box-shadow:none;
+}
+
+.loyalty{
+  border-radius:16px;
+  background:rgba(212,175,55,.055);
+}
+
+.read-before-contact{
+  border-left:1px solid rgba(212,175,55,.42);
+  background:rgba(212,175,55,.055);
+}
+
+.service-image{
+  border-bottom:1px solid rgba(212,175,55,.42);
+  box-shadow:none;
+}
+
+.service-image .badge{
+  background:var(--gold);
+  border:0;
+  box-shadow:0 7px 18px rgba(0,0,0,.34);
+}
+
+.gallery-container,
+.gallery-container:hover{
+  border:1px solid rgba(212,175,55,.5) !important;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+
+.gallery-container:hover .gallery-img{
+  filter:brightness(1.02);
+  transform:none;
+}
+
+/* Gold for normal/positive information, muted red for restrictions */
+.list li,
+.note-item,
+.notice-block{
+  border-left:3px solid rgba(212,175,55,.72);
+}
+
+.danger,
+.warning-card{
+  border-color:rgba(177,76,76,.7) !important;
+}
+
+#services-not-offered .info-card,
+#services-not-offered .info-card:hover{
+  border:1px solid rgba(177,76,76,.62);
+  box-shadow:0 18px 46px rgba(0,0,0,.45);
+  transform:none;
+}
+
+#services-not-offered h2,
+#services-not-offered .small-badge{
+  color:var(--warning-light);
+}
+
+#services-not-offered .small-badge{
+  border-color:rgba(177,76,76,.4);
+  background:rgba(177,76,76,.09);
+}
+
+#services-not-offered .list li{
+  border-left-color:rgba(177,76,76,.72);
+}
+
+#services-not-offered .list li::before,
+.closed .time{
+  color:var(--warning-light);
+}
+
+.success{
+  border-left-color:rgba(212,175,55,.72) !important;
+}
+
+.status{
+  box-shadow:none;
+}
+
+.dot{
+  box-shadow:none;
+}
+
+/* Trust and booking policy layouts */
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:18px;
+}
+
+.trust-card,
+.policy-card{
+  padding:28px 24px;
+}
+
+.trust-card h3,
+.policy-card h3{
+  margin:0 0 10px;
+  color:var(--gold);
+  font-family:var(--heading);
+  font-size:1.45rem;
+  font-weight:600;
+  line-height:1.2;
+}
+
+.trust-card p,
+.policy-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.65;
+}
+
+.policy-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+
+.policy-card:last-child{
+  grid-column:1 / -1;
+}
+
+.warning-card{
+  background:linear-gradient(145deg,rgba(32,17,17,.94),rgba(11,9,9,.94));
+}
+
+/* Prominent booking area */
+#contact .info-card{
+  max-width:900px;
+  padding:clamp(38px,6vw,66px);
+  border-color:rgba(212,175,55,.48);
+}
+
+.primary-whatsapp{
+  width:min(100%,440px);
+  min-height:58px;
+  margin:28px auto 18px;
+  font-size:.83rem;
+}
+
+/* Footer legal links */
+.legal-links{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:6px 0 28px;
+  font-size:.78rem;
+  letter-spacing:.5px;
+}
+
+.legal-links a{
+  color:rgba(255,255,255,.74);
+  text-decoration:none;
+  border-bottom:1px solid rgba(212,175,55,.35);
+}
+
+.legal-links a:hover{
+  color:var(--gold);
+}
+
+.onlyfans-link:hover{
+  transform:translateY(-2px);
+  text-shadow:none;
+  filter:none;
+}
+
+@media(max-width:1050px){
+  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trust-card:last-child{grid-column:1 / -1}
+}
+
+@media(max-width:760px){
+  :root{--section-space:56px}
+  .section{padding-left:16px;padding-right:16px}
+  .section-heading-block{margin-bottom:28px}
+  .trust-grid,.policy-grid{grid-template-columns:1fr}
+  .trust-card:last-child,.policy-card:last-child{grid-column:auto}
+  .trust-card,.policy-card{padding:24px 20px}
+  .announcement-bar p{font-size:.62rem;letter-spacing:.75px}
+  .nav .nav-book{flex-basis:100%;max-width:300px}
+  #contact .info-card{padding:34px 20px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero h1{animation:none !important;background-position:50% center}
+}
+
+/* Typography restored from the previous upload */
+body,button,input,select,textarea{
+  font-family:'Montserrat',sans-serif;
+}
+.hero h1,.section-title,.service-content h3,.info-card h2,.modal-box h2,.signature,.trust-card h3,.policy-card h3{
+  font-family:'Cormorant Garamond',serif;
+}
 </style>
-</head>
+<meta content="#06452f" name="theme-color"/><meta content="https://massagebyash.co.za/social-preview.jpg" property="og:image:secure_url"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="image/jpeg" property="og:image:type"/><meta content="Massage by Ashleigh rates and services" name="twitter:image:alt"/></head>
 <body>
-
-    <div class="announcement-bar">
-        <p>🌹 Massage by Ashleigh |
-        Adults 18+ Only |
-        Right of Admission Reserved 🌹</p>
-    </div>
-
-  <div class="topbar">
-    <div class="brand"><img src="logo2.png" alt="Massage by Ashleigh Logo"></div>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#philosophy">Philosophy</a><a href="#rates-and-services">Rates</a><a href="#services-not-offered">Not Offered</a><a href="#important-notes">Important</a><a href="#location">Location</a><a href="#hours">Hours</a><a href="#contact">Contact</a><a href="#gallery-showcase">Gallery</a>
-    </nav>
-  </div>
-
-    <div class="sparkles">
+<div class="announcement-bar">
+<p>Massage by Ashleigh · Adults 18+ · Right of Admission Reserved</p>
+</div>
+<div class="topbar">
+<div class="brand"><img alt="Massage by Ashleigh Logo" src="logo2.png"/></div>
+<nav aria-label="Main navigation" class="nav"><a href="#philosophy">Philosophy</a><a href="#rates-and-services">Rates</a><a href="#services-not-offered">Not Offered</a><a href="#important-notes">Important</a><a href="#location">Location</a><a href="#hours">Hours</a><a href="#booking-policies">Policies</a><a href="#gallery-showcase">Gallery</a><a class="nav-book" href="#contact">Book</a></nav>
+</div>
+<div class="sparkles" aria-hidden="true">
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
 <span></span><span></span><span></span><span></span><span></span>
 </div>
 
-  <div class="modal-overlay is-active" id="ageGateModal">
-    <div class="modal-box card">
-      <h2>18+ Verification</h2>
-      <p>This rates and services platform contains content intended for adults. Please verify your age to continue.</p>
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="document.getElementById('ageGateModal').classList.remove('is-active')">Enter</button>
-        <button class="btn btn-outline" onclick="window.location.href='https://google.com'">Exit</button>
-      </div>
-    </div>
-  </div>
 
-  <header class="hero" id="hero">
-    <div class="hero-inner">
-      <span class="eyebrow">Welcome</span>
-      <h1>Massage by Ashleigh</h1>
-      <p>Pure Relaxation • Professional Service • Private Appointments</p>
-      <div class="hero-actions"><a class="btn btn-gold" href="#rates-and-services">View Rates</a><a class="btn btn-outline" href="#contact">Book on WhatsApp</a></div>
-    </div>
-  </header>
-
-  <section id="philosophy" class="section">
-    <div class="philosophy-card card">
-      <span class="eyebrow">My Philosophy</span>
-      <h2 class="section-title">Relaxed, refreshed & cared for</h2>
-      <p>At Massage by Ash, my goal is simple - to help every client leave feeling relaxed, refreshed, and cared for. I believe everyone deserves time to unwind from the stresses of daily life, and I strive to create a calm, welcoming environment where you can truly relax.</p>
-    </div>
-  </section>
+<div class="modal-overlay is-active" id="ageGateModal">
+<div class="modal-box card">
+<h2>18+ Verification</h2>
+<p>This rates and services platform contains content intended for adults. Please verify your age to continue.</p>
+<div class="modal-actions">
+<button class="btn btn-gold" onclick="document.getElementById('ageGateModal').classList.remove('is-active')">Enter</button>
+<button class="btn btn-outline" onclick="window.location.href='https://google.com'">Exit</button>
+</div>
+</div>
+</div>
+<header class="hero" id="hero">
+<div class="hero-inner">
+<span class="eyebrow">Welcome</span>
+<h1>Massage by Ashleigh</h1>
+<p>Pure Relaxation • Professional Service • Private Appointments</p>
+<div class="hero-actions"><a class="btn btn-outline" href="#rates-and-services">View Rates</a><a class="btn btn-gold booking-cta" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20arrange%20an%20appointment.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20service%20is%20___%2C%20and%20duration%20is%20___." rel="noopener" target="_blank">Book on WhatsApp</a></div>
+</div>
+</header>
+<section class="section" id="philosophy">
+<div class="philosophy-card card">
+<span class="eyebrow">My Philosophy</span>
+<h2 class="section-title">Relaxed, refreshed &amp; cared for</h2>
+<p>At Massage by Ash, my goal is simple - to help every client leave feeling relaxed, refreshed, and cared for. I believe everyone deserves time to unwind from the stresses of daily life, and I strive to create a calm, welcoming environment where you can truly relax.</p>
+</div>
+</section>
 <div class="container read-before-contact">
-      <p><strong>N.B.</strong> Please read all information provided thoroughly before reaching out to me, thank you.</p>
-    </div>
-  <section id="rates-and-services" class="section">
-    <div class="container center"><span class="eyebrow">Rates & Services</span><h2 class="section-title">Choose your appointment</h2></div>
-    <div class="container services-grid">
-      <article class="service-card card"><div class="service-image"><img src="table.png" alt="Massage Rates"></div><div class="service-content"><h3>💆🏻 Massage Rates</h3><span class="sub">With hand/foot release</span><div class="price-list"><div class="price-item"><span>30 Mins</span><strong>R900</strong></div><div class="price-item"><span>1 Hour</span><strong>R1200</strong></div></div><p class="extra-note">+R100 extra for covered oral</p></div></article>
-      <article class="service-card card"><div class="service-image"><img src="msg.png" alt="Massage with FH"><span class="badge">Popular</span></div><div class="service-content"><h3>👩🏻‍❤️‍👨🏼 Massage with FH</h3><span class="sub">Covered oral included</span><div class="price-list"><div class="price-item"><span>30 Mins</span><strong>R1200</strong></div><div class="price-item"><span>1 Hour</span><strong>R1500</strong></div></div></div></article>
-      <article class="service-card card"><div class="service-image"><img src="bed.png" alt="FH Only"></div><div class="service-content"><h3>🔥 FH Only</h3><span class="sub">No massage included</span><div class="price-list"><div class="price-item"><span>30 Mins</span><strong>R1300</strong></div><div class="price-item"><span>1 Hour</span><strong>R1600</strong></div></div></div></article>
-      <article class="service-card card"><div class="service-image"><img src="green.png" alt="GFE Add-on"></div><div class="service-content"><h3>💋 GFE Add-On</h3><p><strong class="gold">+R300</strong> • Includes kissing and mutual oral. Safe and covered only.</p></div></article>
-    </div>
-    <span class="loyalty">🏆 Repeat clients don't pay for GFE</span>
-  </section>
-
-  <section id="services-not-offered" class="section"><div class="info-card card"><h2>Services Not Offered</h2><span class="small-badge">Non-Negotiable</span><ul class="list"><li class="danger">Unprotected oral (OWO)</li><li class="danger">Bareback</li><li class="danger">Rubbing, sliding, or genital contact without protection</li><li class="danger">Greek / anal play and rimming</li><li class="danger">Golden showers and scat fetishes</li><li class="danger">Spitting</li><li class="danger">Rough or aggressive play</li><li class="danger">Fingering, fisting, and toys</li><li class="danger">Threesomes / couples</li></ul></div></section>
-
-  <section id="important-notes" class="section"><div class="info-card card"><h2>Important Notes</h2><span class="small-badge">Please Read</span><div class="list"><div class="note-item danger">I am not interracial and cater exclusively to white gentlemen.</div><div class="note-item">This is a drug-free zone.</div><div class="note-item">Please do not book if you're feeling unwell.</div><div class="note-item danger">Zero tolerance for harassment or abuse.</div></div></div></section>
-
-  <section class="section"><div class="container info-grid">
-    <div id="hours" class="info-card card"><h2>Business Hours</h2><div class="status">
-    <span class="dot"></span>
-    <span id="status-text">Checking...</span>
-</div><div class="hours-table"><div class="row"><span>Tuesday - Friday</span><span class="dots"></span><span class="time">09:00 – 17:00</span></div><div class="row"><span>Saturday</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row"><span>Public Holidays</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row closed"><span>Sundays & Mondays</span><span class="dots"></span><span class="time">Closed</span></div></div><p class="center muted">Strictly by appointment only.</p></div>
-    <div id="location" class="info-card card"><h2>Location</h2><span class="small-badge">Melrose Arch</span><p class="center muted">Situated in <strong class="gold">Melrose Arch, Johannesburg</strong>, just minutes away from the BluBird Shopping Centre.</p><p class="center muted">Secure, private parking is provided for all scheduled clients.</p></div>
-  </div></section>
-
-  <section id="rates" class="section"><div class="info-card card"><h2>Payment Details</h2><span class="small-badge">Payment Methods</span><ul class="list"><li>Cash or instant EFT / PayShap accepted.</li><li>Payment is required before the session begins.</li><li><strong>A deposit of R500 via instant EFT / PayShap is required for all new clients to secure a booking.</strong></li></ul><div class="notice-block" style="margin-top:18px"><strong>Please note:</strong> The deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</div><div class="notice-block success" style="margin-top:12px">In the unlikely event that I need to cancel, your deposit will be refunded in full via PayShap as soon as I receive your refund details.</div><div class="notice-block danger" style="margin-top:12px"><strong>Please note:</strong> Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking.</div></div></section>
-
-  <section id="contact" class="section"><div class="info-card card center"><h2>Booking Info</h2><span class="small-badge">WhatsApp Only</span><p class="muted">Please message me directly to arrange an appointment. I’ll reply as soon as possible.</p><ul class="list" style="text-align:left">
+<p><strong>N.B.</strong> Please read all information provided thoroughly before reaching out to me, thank you.</p>
+</div><section class="section section-compact" id="professional-care">
+<div class="container center section-heading-block">
+<span class="eyebrow">Professional Care</span>
+<h2 class="section-title">Comfort, privacy and discretion</h2>
+<p class="section-intro">Every appointment is arranged with clear communication, a clean private setting and respect for your time.</p>
+</div>
+<div class="container trust-grid">
+<article class="trust-card card"><h3>Private &amp; Discreet</h3><p>Appointments are handled privately and with discretion from first contact to departure.</p></article>
+<article class="trust-card card"><h3>Secure Parking</h3><p>Private, secure parking is available for scheduled clients at the Melrose Arch location.</p></article>
+<article class="trust-card card"><h3>Clean Environment</h3><p>The appointment space is prepared with cleanliness, comfort and hygiene in mind.</p></article>
+<article class="trust-card card"><h3>Professional Communication</h3><p>Booking details, expectations and boundaries are communicated clearly before arrival.</p></article>
+<article class="trust-card card"><h3>Appointment Only</h3><p>All visits are scheduled in advance to protect privacy and avoid interruptions.</p></article>
+</div>
+</section>
+<section class="section" id="rates-and-services">
+<div class="container center"><span class="eyebrow">Rates &amp; Services</span><h2 class="section-title">Choose your appointment</h2></div>
+<div class="container services-grid">
+<article class="service-card card"><div class="service-image"><img alt="Massage Rates" src="table.webp"/></div><div class="service-content"><h3>💆🏻 Massage Rates</h3><span class="sub">With hand/foot release</span><div class="price-list"><div class="price-item"><span>30 Mins</span><strong>R900</strong></div><div class="price-item"><span>1 Hour</span><strong>R1200</strong></div></div><p class="extra-note">+R100 extra for covered oral</p><a aria-label="Book Massage Rates on WhatsApp" class="btn btn-gold service-book-btn" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20Massage%20appointment.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20and%20duration%20is%20___." rel="noopener" target="_blank">Book this service</a></div></article>
+<article class="service-card card"><div class="service-image"><img alt="Massage with FH" src="msg.webp"/><span class="badge">Popular</span></div><div class="service-content"><h3>👩🏻‍❤️‍👨🏼 Massage with FH</h3><span class="sub">Covered oral included</span><div class="price-list"><div class="price-item"><span>30 Mins</span><strong>R1200</strong></div><div class="price-item"><span>1 Hour</span><strong>R1500</strong></div></div><a aria-label="Book Massage with FH on WhatsApp" class="btn btn-gold service-book-btn" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20Massage%20with%20FH.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20and%20duration%20is%20___." rel="noopener" target="_blank">Book this service</a></div></article>
+<article class="service-card card"><div class="service-image"><img alt="FH Only" src="bed.webp"/></div><div class="service-content"><h3>🔥 FH Only</h3><span class="sub">No massage included</span><div class="price-list"><div class="price-item"><span>30 Mins</span><strong>R1300</strong></div><div class="price-item"><span>1 Hour</span><strong>R1600</strong></div></div><a aria-label="Book FH Only on WhatsApp" class="btn btn-gold service-book-btn" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20FH%20Only%20appointment.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20and%20duration%20is%20___." rel="noopener" target="_blank">Book this service</a></div></article>
+<article class="service-card card"><div class="service-image"><img alt="GFE Add-on" src="green.webp"/></div><div class="service-content"><h3>💋 GFE Add-On</h3><p><strong class="gold">+R300</strong> • Includes kissing and mutual oral. Safe and covered only.</p></article>
+</div>
+<span class="loyalty">Repeat clients don't pay for GFE</span>
+</section>
+<section class="section" id="services-not-offered"><div class="info-card card"><h2>Services Not Offered</h2><span class="small-badge">Non-Negotiable</span><ul class="list"><li class="danger">Unprotected oral (OWO)</li><li class="danger">Bareback</li><li class="danger">Rubbing, sliding, or genital contact without protection</li><li class="danger">Greek / anal play and rimming</li><li class="danger">Golden showers and scat fetishes</li><li class="danger">Spitting</li><li class="danger">Rough or aggressive play</li><li class="danger">Fingering, fisting, and toys</li><li class="danger">Threesomes / couples</li></ul></div></section>
+<section class="section" id="important-notes"><div class="info-card card"><h2>Important Notes</h2><span class="small-badge">Please Read</span><div class="list"><div class="note-item danger">I am not interracial and cater exclusively to white gentlemen.</div><div class="note-item">This is a drug-free zone.</div><div class="note-item">Please do not book if you're feeling unwell.</div><div class="note-item danger">Zero tolerance for harassment or abuse.</div></div></div></section>
+<section class="section"><div class="container info-grid hours-location-grid">
+<div class="info-card card" id="hours"><h2>Business Hours</h2><div class="status">
+<span class="dot"></span>
+<span id="status-text">Checking...</span>
+</div><div class="hours-table"><div class="row"><span>Tuesday - Friday</span><span class="dots"></span><span class="time">09:00 – 17:00</span></div><div class="row"><span>Saturday</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row"><span>Public Holidays</span><span class="dots"></span><span class="time">09:00 – 15:00</span></div><div class="row closed"><span>Sundays &amp; Mondays</span><span class="dots"></span><span class="time">Closed</span></div></div><p class="center muted">Strictly by appointment only.</p></div>
+<div class="info-card card" id="location"><h2>Location</h2><span class="small-badge">Melrose Arch</span><p class="center muted">Situated in <strong class="gold">Melrose Arch, Johannesburg</strong>, just minutes away from the BluBird Shopping Centre.</p><p class="center muted">Secure, private parking is provided for all scheduled clients.</p></div>
+</div></section>
+<section class="section" id="rates"><div class="info-card card"><h2>Payment Details</h2><span class="small-badge">Payment Methods</span><ul class="list"><li>Cash or instant EFT / PayShap accepted.</li><li>Payment is required before the session begins.</li><li><strong>A deposit of R500 via instant EFT / PayShap is required for all new clients to secure a booking.</strong></li></ul><div class="notice-block" style="margin-top:18px"><strong>Please note:</strong> The deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</div><div class="notice-block success" style="margin-top:12px">In the unlikely event that I need to cancel, your deposit will be refunded in full via PayShap as soon as I receive your refund details.</div><div class="notice-block danger" style="margin-top:12px"><strong>Please note:</strong> Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking.</div></div></section><section class="section" id="booking-policies">
+<div class="container center section-heading-block">
+<span class="eyebrow">Booking Policies</span>
+<h2 class="section-title">Clear expectations for every appointment</h2>
+<p class="section-intro">Please review these policies before confirming your booking.</p>
+</div>
+<div class="container policy-grid">
+<article class="policy-card card"><h3>Appointment Confirmation</h3><p>A booking is confirmed only after the required information and, for new clients, the R500 deposit have been received and the appointment has been accepted.</p></article>
+<article class="policy-card card"><h3>Cancellation &amp; Rescheduling</h3><p>Deposits are non-refundable. Cancelled appointments may be moved to the next available suitable time by prior arrangement.</p></article>
+<article class="policy-card card"><h3>Late Arrival</h3><p>Please advise as soon as possible if you are delayed. A late arrival may shorten the appointment so later bookings are not affected.</p></article>
+<article class="policy-card card"><h3>Payment Methods</h3><p>Cash, instant EFT and PayShap are accepted. The remaining payment is required before the appointment begins.</p></article>
+<article class="policy-card card warning-card"><h3>Age Restriction</h3><p>Services and website content are strictly for adults aged 18 and over.</p></article>
+<article class="policy-card card warning-card"><h3>Right of Admission</h3><p>Appointments may be declined or ended where rules, boundaries, safety requirements or respectful conduct are not maintained.</p></article>
+<article class="policy-card card"><h3>Privacy &amp; Discretion</h3><p>Booking information is handled discreetly and used only for appointment communication, safety and payment administration.</p></article>
+</div>
+</section>
+<section class="section" id="contact"><div class="info-card card center"><h2>Ready to arrange your appointment?</h2><span class="small-badge">Book on WhatsApp</span><p class="muted">Send your preferred date, time, service and duration so your appointment can be arranged efficiently.</p><ul class="list" style="text-align:left"><li>Include your preferred date, time, service and duration in your first message.</li>
 <li>Bookings are arranged exclusively via WhatsApp.</li>
 <li>Please contact me from a valid South African mobile number.</li>
 <li>Unfortunately, I cannot respond to private, withheld, or international numbers.</li>
 <li>Video and voice calls are not available.</li>
-</ul><a class="whatsapp" href="https://wa.me/27795567346" target="_blank" rel="noopener">Chat on WhatsApp</a><p class="muted">I look forward to hearing from you,</p><p class="signature">Ashleigh 💚</p></div></section>
-
-  <section id="gallery-showcase" class="section">
-    <div class="container center"><span class="eyebrow">Gallery</span><h2 class="section-title">A calm private setting</h2></div><div class="gallery-container"><input type="radio" name="gallery-slider" id="img1" checked><input type="radio" name="gallery-slider" id="img2"><input type="radio" name="gallery-slider" id="img3"><input type="radio" name="gallery-slider" id="img4"><input type="radio" name="gallery-slider" id="img5"><input type="radio" name="gallery-slider" id="img6"><div class="slider-track"><div class="slider-item"><img src="1.jpg" alt="Setting 1" class="gallery-img"></div><div class="slider-item"><img src="2.jpg" alt="Setting 2" class="gallery-img"></div><div class="slider-item"><img src="3.jpg" alt="Setting 3" class="gallery-img"></div><div class="slider-item"><img src="4.jpg" alt="Setting 4" class="gallery-img"></div><div class="slider-item"><img src="5.jpg" alt="Setting 5" class="gallery-img"></div><div class="slider-item"><img src="6.jpg" alt="Setting 6" class="gallery-img"></div></div><div class="slider-arrows arrow-set-1"><label for="img6">‹</label><label for="img2">›</label></div><div class="slider-arrows arrow-set-2"><label for="img1">‹</label><label for="img3">›</label></div><div class="slider-arrows arrow-set-3"><label for="img2">‹</label><label for="img4">›</label></div><div class="slider-arrows arrow-set-4"><label for="img3">‹</label><label for="img5">›</label></div><div class="slider-arrows arrow-set-5"><label for="img4">‹</label><label for="img6">›</label></div><div class="slider-arrows arrow-set-6"><label for="img5">‹</label><label for="img1">›</label></div></div></section>
-
-  <a href="#" id="backToTop" title="Back to Top">▲</a>
-  <footer>
-    <div style="text-align: center; width: 100%; margin: 25px 0;">
-  <a href="https://onlyfans.com/ashleighreignjhb"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="onlyfans-link">
-
-    <!-- OnlyFans SVG Icon (Increased to 42 width and height) -->
-    <svg viewBox="0 0 24 24" width="42" height="42" fill="#00aff0" xmlns="http://w3.org" style="vertical-align: middle;">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.03 15.11c-1.39 0-2.54-1.04-2.71-2.4-.1-.79.13-1.57.62-2.16.5-.59 1.22-.93 1.99-.94h2.24c.78.01 1.5.35 1.99.94.49.59.72 1.37.62 2.16-.17 1.36-1.32 2.4-2.71 2.4h-2.04zm2.14-6.42h-2.22c-.62-.01-1.22-.24-1.68-.66a2.844 2.844 0 0 1-.95-1.95c-.17-1.19.46-2.33 1.5-2.74.34-.14.71-.2 1.07-.19h2.53c1.47.05 2.63 1.25 2.63 2.72 0 1.55-1.26 2.81-2.81 2.82h-.07z"/>
-    </svg>
-
-    <!-- OnlyFans Text (Added font-size: 22px) -->
-    <span style="font-family: sans-serif; font-size: 22px; margin-left: 10px; color: #00aff0; font-weight: bold; vertical-align: middle;">OnlyFans</span>
-  </a>
+</ul><a aria-label="Book an appointment with Ashleigh on WhatsApp" class="btn btn-gold primary-whatsapp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20arrange%20an%20appointment.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20service%20is%20___%2C%20and%20duration%20is%20___." rel="noopener" target="_blank">Book on WhatsApp</a><p class="muted">I look forward to hearing from you,</p><p class="signature">Ashleigh 💚</p></div></section>
+<section class="section" id="gallery-showcase">
+<div class="container center"><span class="eyebrow">Gallery</span><h2 class="section-title">A calm private setting</h2></div><div class="gallery-container"><input checked="" id="img1" name="gallery-slider" type="radio"/><input id="img2" name="gallery-slider" type="radio"/><input id="img3" name="gallery-slider" type="radio"/><input id="img4" name="gallery-slider" type="radio"/><input id="img5" name="gallery-slider" type="radio"/><input id="img6" name="gallery-slider" type="radio"/><div class="slider-track"><div class="slider-item"><img alt="Private massage treatment room" class="gallery-img" src="1.webp"/></div><div class="slider-item"><img alt="Comfortable massage setting in Melrose Arch" class="gallery-img" src="2.webp"/></div><div class="slider-item"><img alt="Clean and discreet appointment environment" class="gallery-img" src="3.webp"/></div><div class="slider-item"><img alt="Private treatment space prepared for clients" class="gallery-img" src="4.webp"/></div><div class="slider-item"><img alt="Relaxing massage room interior" class="gallery-img" src="5.webp"/></div><div class="slider-item"><img alt="Secure and welcoming private setting" class="gallery-img" src="6.webp"/></div></div><div class="slider-arrows arrow-set-1"><label aria-label="Previous gallery image" for="img6">‹</label><label aria-label="Next gallery image" for="img2">›</label></div><div class="slider-arrows arrow-set-2"><label aria-label="Previous gallery image" for="img1">‹</label><label aria-label="Next gallery image" for="img3">›</label></div><div class="slider-arrows arrow-set-3"><label aria-label="Previous gallery image" for="img2">‹</label><label aria-label="Next gallery image" for="img4">›</label></div><div class="slider-arrows arrow-set-4"><label aria-label="Previous gallery image" for="img3">‹</label><label aria-label="Next gallery image" for="img5">›</label></div><div class="slider-arrows arrow-set-5"><label aria-label="Previous gallery image" for="img4">‹</label><label aria-label="Next gallery image" for="img6">›</label></div><div class="slider-arrows arrow-set-6"><label aria-label="Previous gallery image" for="img5">‹</label><label aria-label="Next gallery image" for="img1">›</label></div></div></section>
+<a href="#" id="backToTop" title="Back to Top">▲</a>
+<footer>
+<div style="text-align: center; width: 100%; margin: 25px 0;">
+<a class="onlyfans-link" href="https://onlyfans.com/ashleighreignjhb" rel="noopener noreferrer" target="_blank">
+<!-- OnlyFans SVG Icon (Increased to 42 width and height) -->
+<svg fill="#00aff0" height="42" style="vertical-align: middle;" viewbox="0 0 24 24" width="42" xmlns="http://w3.org">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.03 15.11c-1.39 0-2.54-1.04-2.71-2.4-.1-.79.13-1.57.62-2.16.5-.59 1.22-.93 1.99-.94h2.24c.78.01 1.5.35 1.99.94.49.59.72 1.37.62 2.16-.17 1.36-1.32 2.4-2.71 2.4h-2.04zm2.14-6.42h-2.22c-.62-.01-1.22-.24-1.68-.66a2.844 2.844 0 0 1-.95-1.95c-.17-1.19.46-2.33 1.5-2.74.34-.14.71-.2 1.07-.19h2.53c1.47.05 2.63 1.25 2.63 2.72 0 1.55-1.26 2.81-2.81 2.82h-.07z"></path>
+</svg>
+<!-- OnlyFans Text (Added font-size: 22px) -->
+<span style="font-family: sans-serif; font-size: 22px; margin-left: 10px; color: #00aff0; font-weight: bold; vertical-align: middle;">OnlyFans</span>
+</a>
 </div>
-
-    <p>   &copy; Copyright 2026 Massage by Ashleigh</p>
-    
-    <p style="color: #ffffff;"></p>
-  
-  <a href="https://campbellweb.co.za"
-     target="_blank" 
-     rel="noopener"
-     style="color: #ffffff !important; text-decoration: none; transition: color 0.3s;"
-     onmouseover="this.style.color='white'" 
-     onmouseout="this.style.color='gold'">
+<nav aria-label="Legal information" class="legal-links">
+<a href="privacy-policy.html">Privacy Policy</a>
+<span aria-hidden="true">·</span>
+<a href="booking-terms.html">Booking Terms</a>
+<span aria-hidden="true">·</span>
+<a href="disclaimer.html">Disclaimer</a>
+</nav><p>   © Copyright 2026 Massage by Ashleigh</p>
+<p style="color: #ffffff;"></p>
+<a href="https://campbellweb.co.za" onmouseout="this.style.color='gold'" onmouseover="this.style.color='white'" rel="noopener" style="color: #ffffff !important; text-decoration: none; transition: color 0.3s;" target="_blank">
      Created by CampbellWeb
   </a>
-
 </footer>
- <script>
+<script>
 const backToTop = document.getElementById("backToTop");
 
 if (backToTop) {
@@ -1053,14 +1440,14 @@ function updateBusinessStatus() {
 
     if (isOpen) {
         statusText.textContent = "Open Now";
-        statusBox.style.background = "rgba(46,204,113,.12)";
-        statusBox.style.borderColor = "rgba(46,204,113,.35)";
-        statusBox.style.color = "#2ecc71";
+        statusBox.style.background = "rgba(212,175,55,.12)";
+        statusBox.style.borderColor = "rgba(212,175,55,.35)";
+        statusBox.style.color = "#d4af37";
     } else {
         statusText.textContent = "Closed Now";
-        statusBox.style.background = "rgba(231,76,60,.12)";
-        statusBox.style.borderColor = "rgba(231,76,60,.35)";
-        statusBox.style.color = "#e74c3c";
+        statusBox.style.background = "rgba(177,76,76,.12)";
+        statusBox.style.borderColor = "rgba(177,76,76,.35)";
+        statusBox.style.color = "#c56a6a";
     }
 }
 
