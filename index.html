@@ -1280,22 +1280,20 @@ body,button,input,select,textarea{
 
 
 /* ==========================================================
-   RESPONSIVE NAVIGATION
-   Desktop: sticky normal centred navigation row
-   Mobile: sticky centred hamburger dropdown
+   STATIC CENTRED NAVIGATION
+   Normal navigation links on desktop and mobile
    ========================================================== */
 html{
-  scroll-padding-top:156px;
+  scroll-padding-top:20px;
 }
 
-/* Desktop navigation */
 .topbar{
-  position:sticky !important;
-  top:0;
-  z-index:3000;
+  position:static !important;
+  inset:auto !important;
+  z-index:auto;
   overflow:visible;
   padding:16px 18px;
-  background:rgba(7,7,7,.88);
+  background:rgba(7,7,7,.92);
   border-bottom:1px solid rgba(212,175,55,.18);
   box-shadow:none;
   backdrop-filter:blur(18px);
@@ -1319,30 +1317,27 @@ html{
   display:block;
 }
 
-.menu-toggle{
-  display:none;
-}
-
 .topbar .nav{
-  position:static;
+  position:static !important;
   display:flex !important;
   align-items:center;
   justify-content:center;
   flex-wrap:wrap;
   gap:10px;
-  width:auto;
-  max-height:none;
+  width:100%;
+  max-width:1100px;
+  max-height:none !important;
   margin:0 auto;
   padding:0;
-  overflow:visible;
+  overflow:visible !important;
   border:0;
   border-radius:0;
   background:transparent;
   box-shadow:none;
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transform:none;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:none !important;
 }
 
 .topbar .nav a,
@@ -1360,141 +1355,47 @@ html{
   font-size:.76rem;
 }
 
-.topbar .nav a:focus-visible,
-.menu-toggle:focus-visible{
+.topbar .nav a:focus-visible{
   outline:2px solid #fff3b0;
   outline-offset:3px;
 }
 
-/* Mobile sticky dropdown */
 @media(max-width:768px){
-  html{
-    scroll-padding-top:132px;
-  }
-
   .topbar{
-    position:sticky !important;
-    top:0;
-    padding:9px 12px 11px;
-    background:rgba(7,7,7,.96);
-    border-bottom:1px solid rgba(212,175,55,.28);
-    box-shadow:0 12px 30px rgba(0,0,0,.32);
+    position:static !important;
+    padding:12px 10px 14px;
   }
 
   .topbar .brand{
-    margin-bottom:7px;
+    margin-bottom:10px;
   }
 
   .topbar .brand img{
-    width:min(128px,46vw);
-  }
-
-  .menu-toggle{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    width:min(210px,80vw);
-    min-height:42px;
-    margin:0 auto;
-    padding:10px 20px;
-    border:1px solid rgba(255,242,178,.52);
-    border-radius:999px;
-    background:linear-gradient(135deg,#b88918 0%,#e2c358 48%,#a98218 100%);
-    color:#080808;
-    box-shadow:0 10px 24px rgba(212,175,55,.19);
-    font:800 .78rem/1 var(--body);
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
-  }
-
-  .menu-toggle:hover,
-  .menu-toggle:focus-visible{
-    transform:translateY(-2px);
-    box-shadow:0 14px 30px rgba(212,175,55,.28);
-    filter:brightness(1.05);
-  }
-
-  .hamburger{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:4px;
-    width:21px;
-    height:18px;
-    flex:0 0 21px;
-  }
-
-  .hamburger span{
-    display:block;
-    width:100%;
-    height:2px;
-    border-radius:999px;
-    background:currentColor;
+    width:min(138px,44vw);
   }
 
   .topbar .nav{
-    position:absolute;
-    top:calc(100% - 1px);
-    left:50%;
-    z-index:3001;
-    display:grid !important;
-    grid-template-columns:1fr;
-    gap:8px;
-    width:calc(100vw - 20px);
-    max-height:68vh;
-    margin:0;
-    padding:10px;
-    overflow-y:auto;
-    overscroll-behavior:contain;
-    border:1px solid rgba(212,175,55,.34);
-    border-radius:0 0 20px 20px;
-    background:rgba(8,8,8,.98);
-    box-shadow:0 24px 48px rgba(0,0,0,.58);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transform:translate(-50%,-10px);
-    transform-origin:top center;
-    transition:opacity .22s ease,transform .22s ease,visibility .22s ease;
-  }
-
-  .topbar .nav.is-open{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:translate(-50%,0);
+    gap:7px;
   }
 
   .topbar .nav a,
   .topbar .nav .nav-book{
-    display:block;
-    width:100%;
-    max-width:none !important;
-    flex:initial !important;
-    padding:12px 16px;
-    text-align:center;
-    border-radius:12px;
-    font-size:.75rem;
-  }
-
-  .topbar .nav a:hover{
-    transform:none;
-  }
-
-  .topbar .nav .nav-book{
-    margin-top:2px;
+    min-height:36px;
+    padding:8px 11px;
+    font-size:.65rem;
+    letter-spacing:.75px;
   }
 }
 
-@media(prefers-reduced-motion:reduce){
-  .menu-toggle,
+@media(max-width:420px){
   .topbar .nav{
-    transition:none !important;
+    gap:6px;
+  }
+
+  .topbar .nav a,
+  .topbar .nav .nav-book{
+    padding:8px 9px;
+    font-size:.61rem;
   }
 }
 
@@ -1506,11 +1407,7 @@ html{
 </div>
 <div class="topbar" id="site-navigation">
 <div class="brand"><a href="#hero" aria-label="Go to the top of the Massage by Ashleigh website"><img alt="Massage by Ashleigh Logo" src="logo2.png"/></a></div>
-<button class="menu-toggle" id="menuToggle" type="button" aria-controls="mainNavigation" aria-expanded="false" aria-label="Open main menu">
-<span class="menu-label">Menu</span>
-<span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
-</button>
-<nav aria-label="Main navigation" class="nav" id="mainNavigation" aria-hidden="false"><a href="#philosophy">Philosophy</a><a href="#rates-and-services">Rates</a><a href="#services-not-offered">Not Offered</a><a href="#important-notes">Important</a><a href="#location">Location</a><a href="#hours">Hours</a><a href="#booking-policies">Policies</a><a href="#gallery-showcase">Gallery</a><a class="nav-book" href="#contact">Book</a></nav>
+<nav aria-label="Main navigation" class="nav"><a href="#philosophy">Philosophy</a><a href="#rates-and-services">Rates</a><a href="#services-not-offered">Not Offered</a><a href="#important-notes">Important</a><a href="#location">Location</a><a href="#hours">Hours</a><a href="#booking-policies">Policies</a><a href="#gallery-showcase">Gallery</a><a class="nav-book" href="#contact">Book</a></nav>
 </div>
 <div class="sparkles" aria-hidden="true">
 <span></span><span></span><span></span><span></span><span></span>
@@ -1632,72 +1529,6 @@ html{
   </a>
 </footer>
 <script>
-
-const menuToggle = document.getElementById("menuToggle");
-const mainNavigation = document.getElementById("mainNavigation");
-const siteNavigation = document.getElementById("site-navigation");
-const mobileNavigationQuery = window.matchMedia("(max-width: 768px)");
-
-function setMainMenu(open, returnFocus = false) {
-    if (!menuToggle || !mainNavigation) return;
-
-    if (!mobileNavigationQuery.matches) {
-        mainNavigation.classList.remove("is-open");
-        mainNavigation.setAttribute("aria-hidden", "false");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open main menu");
-        return;
-    }
-
-    mainNavigation.classList.toggle("is-open", open);
-    mainNavigation.setAttribute("aria-hidden", String(!open));
-    menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.setAttribute("aria-label", open ? "Close main menu" : "Open main menu");
-
-    if (returnFocus) menuToggle.focus();
-}
-
-function syncNavigationMode() {
-    setMainMenu(false);
-}
-
-if (menuToggle && mainNavigation && siteNavigation) {
-    menuToggle.addEventListener("click", function () {
-        if (!mobileNavigationQuery.matches) return;
-        const shouldOpen = menuToggle.getAttribute("aria-expanded") !== "true";
-        setMainMenu(shouldOpen);
-    });
-
-    mainNavigation.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () {
-            if (mobileNavigationQuery.matches) setMainMenu(false);
-        });
-    });
-
-    document.addEventListener("pointerdown", function (event) {
-        if (mobileNavigationQuery.matches && !siteNavigation.contains(event.target)) {
-            setMainMenu(false);
-        }
-    });
-
-    document.addEventListener("keydown", function (event) {
-        if (
-            mobileNavigationQuery.matches &&
-            event.key === "Escape" &&
-            menuToggle.getAttribute("aria-expanded") === "true"
-        ) {
-            setMainMenu(false, true);
-        }
-    });
-
-    if (typeof mobileNavigationQuery.addEventListener === "function") {
-        mobileNavigationQuery.addEventListener("change", syncNavigationMode);
-    } else {
-        mobileNavigationQuery.addListener(syncNavigationMode);
-    }
-
-    syncNavigationMode();
-}
 
 const backToTop = document.getElementById("backToTop");
 
