@@ -600,28 +600,43 @@ text-align: center;
       gap: 12px;
     }
 
-    .price-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 12px 13px;
-      border: 1px solid rgba(212, 175, 55, 0.22);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.025);
-      color: var(--white);
-      text-decoration: none;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
+    .price-item strong {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
 
-    .price-item:hover,
-    .price-item:focus-visible {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-      background: rgba(212, 175, 55, 0.1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
-      outline: none;
-    }
+.price-item strong::after {
+  content: "Book Now";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: var(--emerald-light);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.price-item:hover strong::after,
+.price-item:focus-visible strong::after {
+  transform: scale(1.06);
+  background: var(--gold);
+  color: #070707;
+}
 
     .price-item span {
       font-weight: 700;
@@ -1255,8 +1270,17 @@ text-align: center;
       }
 
       .price-item {
-        gap: 10px;
-      }
+  flex-wrap: wrap;
+}
+
+.price-item strong {
+  gap: 7px;
+}
+
+.price-item strong::after {
+  padding: 6px 9px;
+  font-size: 0.65rem;
+}
 
       .gallery-shell {
         border-radius: 16px;
