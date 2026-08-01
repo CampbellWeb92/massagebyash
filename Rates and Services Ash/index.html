@@ -1753,8 +1753,8 @@ text-align: center;
           businessStatus.dataset.state = isOpen ? "open" : "closed";
           statusText.textContent = isOpen ? "Open now" : "Closed now";
           statusDetail.textContent = isOpen
-            ? `Regular hours close at ${closingTime} SAST. Appointment confirmation is still required.`
-            : "Regular hours are calculated in Johannesburg time. Public-holiday availability must be confirmed.";
+            ? `Regular hours close at ${closingTime} I am open. Enquire on availability via WhatsApp.`
+            : "I am currently closed. Please check back later.";
         } catch (error) {
           businessStatus.dataset.state = "holiday";
           statusText.textContent = "Confirm availability";
