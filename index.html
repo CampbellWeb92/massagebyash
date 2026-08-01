@@ -1399,6 +1399,44 @@ html{
   }
 }
 
+
+/* Mobile navigation: 2 columns x 4 rows, with Book centred below */
+@media(max-width:768px){
+  .topbar .nav{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    width:min(100%,380px);
+    max-width:380px;
+    margin-inline:auto;
+  }
+
+  .topbar .nav a:not(.nav-book){
+    width:100%;
+    min-width:0;
+  }
+
+  .topbar .nav .nav-book{
+    grid-column:1 / -1;
+    justify-self:center;
+    width:min(220px,80%);
+    margin-top:4px;
+  }
+}
+
+@media(max-width:380px){
+  .topbar .nav{
+    gap:6px;
+  }
+
+  .topbar .nav a,
+  .topbar .nav .nav-book{
+    padding:8px 7px;
+    font-size:.59rem;
+    letter-spacing:.55px;
+  }
+}
+
 </style>
 <meta content="#06452f" name="theme-color"/><meta content="https://massagebyash.co.za/social-preview.jpg" property="og:image:secure_url"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="image/jpeg" property="og:image:type"/><meta content="Massage by Ashleigh rates and services" name="twitter:image:alt"/></head>
 <body>
