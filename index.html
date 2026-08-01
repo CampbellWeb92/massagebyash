@@ -602,29 +602,47 @@ text-align: center;
 
     .price-item {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.16);
+      padding: 12px 13px;
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--white);
+      text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .price-item:hover,
+    .price-item:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+      outline: none;
+    }
+
+    .price-item span {
+      font-weight: 700;
     }
 
     .price-item strong {
       color: var(--gold);
     }
 
+    .price-item strong::after {
+      content: " · Book";
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.55px;
+      text-transform: uppercase;
+    }
+
     .extra-note {
       margin: 18px 0 0;
       color: rgba(255, 255, 255, 0.58);
       font-style: italic;
-    }
-
-    .service-book-btn {
-      width: 100%;
-      margin-top: auto;
-    }
-
-    .service-content > p + .service-book-btn {
-      margin-top: auto;
     }
 
     .loyalty {
@@ -1173,10 +1191,6 @@ text-align: center;
         min-height: 0;
       }
 
-      .service-book-btn {
-        margin-top: 22px;
-      }
-
       .philosophy-card,
       .info-card,
       .modal-box {
@@ -1371,11 +1385,10 @@ text-align: center;
             <h3>💆🏻 Sensual Massage Rates</h3>
             <span class="sub">With hand/foot release</span>
             <div class="price-list">
-              <div class="price-item"><span>30 Mins</span><strong>R900</strong></div>
-              <div class="price-item"><span>1 Hour</span><strong>R1200</strong></div>
+              <a class="price-item" aria-label="Book Sensual Massage with hand/foot release for 30 minutes at R900 on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20Sensual%20Massage%20with%20hand%2Ffoot%20release%20for%2030%20minutes%20at%20R900.%20My%20preferred%20date%20is%20___%20and%20my%20preferred%20time%20is%20___." target="_blank" rel="noopener noreferrer"><span>30 Mins</span><strong>R900</strong></a>
+              <a class="price-item" aria-label="Book Sensual Massage with hand/foot release for 1 hour at R1200 on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20Sensual%20Massage%20with%20hand%2Ffoot%20release%20for%201%20hour%20at%20R1200.%20My%20preferred%20date%20is%20___%20and%20my%20preferred%20time%20is%20___." target="_blank" rel="noopener noreferrer"><span>1 Hour</span><strong>R1200</strong></a>
             </div>
             <p class="extra-note">+R100 extra for covered oral</p>
-            <a class="btn btn-gold service-book-btn" aria-label="Book Massage Rates on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20a%20massage%20appointment.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20and%20duration%20is%20___." target="_blank" rel="noopener noreferrer">Book this service</a>
           </div>
         </article>
 
@@ -1388,10 +1401,9 @@ text-align: center;
             <h3>👩🏻‍❤️‍👨🏼 Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
-              <div class="price-item"><span>30 Mins</span><strong>R1200</strong></div>
-              <div class="price-item"><span>1 Hour</span><strong>R1500</strong></div>
+              <a class="price-item" aria-label="Book Sensual Massage with FH, including covered oral for 30 minutes at R1200 on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20Sensual%20Massage%20with%20FH%2C%20including%20covered%20oral%20for%2030%20minutes%20at%20R1200.%20My%20preferred%20date%20is%20___%20and%20my%20preferred%20time%20is%20___." target="_blank" rel="noopener noreferrer"><span>30 Mins</span><strong>R1200</strong></a>
+              <a class="price-item" aria-label="Book Sensual Massage with FH, including covered oral for 1 hour at R1500 on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20Sensual%20Massage%20with%20FH%2C%20including%20covered%20oral%20for%201%20hour%20at%20R1500.%20My%20preferred%20date%20is%20___%20and%20my%20preferred%20time%20is%20___." target="_blank" rel="noopener noreferrer"><span>1 Hour</span><strong>R1500</strong></a>
             </div>
-            <a class="btn btn-gold service-book-btn" aria-label="Book Massage with FH on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20a%20Massage%20with%20FH.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20and%20duration%20is%20___." target="_blank" rel="noopener noreferrer">Book this service</a>
           </div>
         </article>
 
@@ -1403,10 +1415,9 @@ text-align: center;
             <h3>🔥 FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
-              <div class="price-item"><span>30 Mins</span><strong>R1300</strong></div>
-              <div class="price-item"><span>1 Hour</span><strong>R1600</strong></div>
+              <a class="price-item" aria-label="Book FH Only, with no massage included for 30 minutes at R1300 on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20FH%20Only%2C%20with%20no%20massage%20included%20for%2030%20minutes%20at%20R1300.%20My%20preferred%20date%20is%20___%20and%20my%20preferred%20time%20is%20___." target="_blank" rel="noopener noreferrer"><span>30 Mins</span><strong>R1300</strong></a>
+              <a class="price-item" aria-label="Book FH Only, with no massage included for 1 hour at R1600 on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20FH%20Only%2C%20with%20no%20massage%20included%20for%201%20hour%20at%20R1600.%20My%20preferred%20date%20is%20___%20and%20my%20preferred%20time%20is%20___." target="_blank" rel="noopener noreferrer"><span>1 Hour</span><strong>R1600</strong></a>
             </div>
-            <a class="btn btn-gold service-book-btn" aria-label="Book FH Only on WhatsApp" href="https://wa.me/27795567346?text=Hi%20Ashleigh%2C%20I%20would%20like%20to%20book%20a%20FH%20Only%20appointment.%20My%20preferred%20date%20is%20___%2C%20time%20is%20___%2C%20and%20duration%20is%20___." target="_blank" rel="noopener noreferrer">Book this service</a>
           </div>
         </article>
 
@@ -1417,7 +1428,6 @@ text-align: center;
           <div class="service-content">
             <h3>💋 GFE Add-On</h3>
             <p><strong class="gold">+R300</strong> · Includes kissing and mutual oral. Safe and covered only.</p>
-            </a>
           </div>
         </article>
       </div>
