@@ -2383,8 +2383,8 @@ text-align: center;
           businessStatus.dataset.state = isOpen ? "open" : "closed";
           statusText.textContent = isOpen ? "Open now" : "Closed now";
           statusDetail.textContent = isOpen
-           ? `Regular hours close at ${closingTime} I am open. Enquire on availability via WhatsApp.`
-            : "I am currently closed. Please check back later.";
+  ? `Open until ${closingTime}. Please enquire about availability via WhatsApp.`
+  : "I am currently closed. Please check back during business hours.";
         } catch (error) {
           businessStatus.dataset.state = "holiday";
           statusText.textContent = "Confirm availability.";
