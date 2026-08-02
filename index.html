@@ -1129,6 +1129,34 @@ text-align: center;
       filter: drop-shadow(0 0 10px rgba(142, 216, 255, 0.65));
     }
 
+    /* BookMe footer link */
+.bookme-link-wrap {
+  display: flex;
+  justify-content: center;
+  margin: -8px 0 24px;
+}
+
+.bookme-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  text-decoration: none;
+  transition:
+    transform 0.24s ease,
+    filter 0.24s ease;
+}
+
+.bookme-link img {
+  width: 120px;
+  height: auto;
+}
+
+.bookme-link:hover {
+  transform: translateY(-3px) scale(1.04);
+  filter: drop-shadow(0 0 12px rgba(255, 70, 150, 0.55));
+}
+
     .legal-links {
       display: flex;
       flex-wrap: wrap;
@@ -2190,7 +2218,7 @@ text-align: center;
 
   <a href="#hero" id="backToTop" aria-label="Back to the top" title="Back to the top" tabindex="-1">▲</a>
 
-  <footer>
+  <footer><br>
     <div class="social-link-wrap">
       <a class="onlyfans-link" href="https://onlyfans.com/ashleighreignjhb" target="_blank" rel="noopener noreferrer" aria-label="Visit Ashleigh's OnlyFans profile">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -2198,7 +2226,35 @@ text-align: center;
         </svg>
         <span>OnlyFans</span>
       </a>
-    </div>
+    </div><br>
+
+   <!-- =========================================================
+     BOOKME LINK — CURRENTLY HIDDEN
+
+     To show this link later:
+     Remove the opening comment characters above:  < !-- 
+     Remove the closing comment characters below:  -- >
+     =========================================================
+
+<div class="bookme-link-wrap">
+  <a
+    class="bookme-link"
+    href="https://bookme.dev"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Visit BookMe.dev"
+  >
+    <img
+      src="bookme-logo.png"
+      alt="BookMe.dev"
+      width="1000"
+      height="1000"
+      loading="lazy"
+    >
+  </a>
+</div>
+
+--><br>
 
     <nav class="legal-links" aria-label="Legal information">
       <a href="privacy-policy.html">Privacy Policy</a>
