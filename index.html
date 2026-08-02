@@ -1729,7 +1729,8 @@ text-align: center;
     (() => {
       "use strict";
 
-      const AGE_GATE_KEY = "massageByAshleighAgeVerified";
+      /* 18+ age-verification popup */
+      const AGE_GATE_KEY = "massageByAshleighAgeVerifiedSessionV2";
       const ageGate = document.getElementById("ageGateModal");
       const ageGateBox = ageGate?.querySelector(".modal-box");
       const enterButton = document.getElementById("ageGateEnter");
@@ -1738,53 +1739,84 @@ text-align: center;
 
       const getFocusableElements = () => {
         if (!ageGate) return [];
-        return [...ageGate.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
-          .filter((element) => !element.hasAttribute("disabled") && !element.hidden);
+
+        return [...ageGate.querySelectorAll(
+          'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )].filter((element) =>
+          !element.hasAttribute("disabled") &&
+          !element.hidden &&
+          element.getClientRects().length > 0
+        );
       };
 
       const openAgeGate = () => {
         if (!ageGate) return;
+
         previouslyFocusedElement = document.activeElement;
         ageGate.hidden = false;
+        ageGate.setAttribute("aria-hidden", "false");
         document.body.classList.add("modal-open");
+
         requestAnimationFrame(() => {
           ageGate.classList.add("is-active");
-          ageGateBox?.focus();
+          enterButton?.focus();
         });
       };
 
       const closeAgeGate = () => {
         if (!ageGate) return;
+
         ageGate.classList.remove("is-active");
+        ageGate.setAttribute("aria-hidden", "true");
         document.body.classList.remove("modal-open");
+
         window.setTimeout(() => {
           ageGate.hidden = true;
           previouslyFocusedElement?.focus?.();
         }, 250);
       };
 
-      const ageVerified = (() => {
+      const hasVerifiedAgeThisSession = () => {
         try {
-          return window.localStorage.getItem(AGE_GATE_KEY) === "true";
+          return window.sessionStorage.getItem(AGE_GATE_KEY) === "true";
         } catch (error) {
           return false;
         }
-      })();
+      };
 
-      if (!ageVerified) {
+      /* Remove the old permanent flag so it cannot suppress the new popup. */
+      try {
+        window.localStorage.removeItem("massageByAshleighAgeVerified");
+      } catch (error) {
+        // Ignore storage errors; the popup still works without storage.
+      }
+
+      if (hasVerifiedAgeThisSession()) {
+        ageGate?.classList.remove("is-active");
+        ageGate?.setAttribute("aria-hidden", "true");
+        if (ageGate) ageGate.hidden = true;
+        document.body.classList.remove("modal-open");
+      } else {
         openAgeGate();
       }
 
       enterButton?.addEventListener("click", () => {
         try {
-          window.localStorage.setItem(AGE_GATE_KEY, "true");
+          window.sessionStorage.setItem(AGE_GATE_KEY, "true");
         } catch (error) {
-          // The gate still closes when storage is unavailable.
+          // The popup still closes when session storage is unavailable.
         }
+
         closeAgeGate();
       });
 
       exitButton?.addEventListener("click", () => {
+        try {
+          window.sessionStorage.removeItem(AGE_GATE_KEY);
+        } catch (error) {
+          // Ignore storage errors.
+        }
+
         if (window.history.length > 1 && document.referrer) {
           window.history.back();
         } else {
@@ -1793,9 +1825,18 @@ text-align: center;
       });
 
       ageGate?.addEventListener("keydown", (event) => {
+        /* Do not allow the age gate to be dismissed with Escape. */
+        if (event.key === "Escape") {
+          event.preventDefault();
+          enterButton?.focus();
+          return;
+        }
+
         if (event.key !== "Tab") return;
+
         const focusable = getFocusableElements();
         if (!focusable.length) return;
+
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
 
