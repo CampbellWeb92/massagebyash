@@ -1977,8 +1977,8 @@ text-align: center;
             <h3>Sensual Massage</h3>
             <span class="sub">With hand/foot release</span>
             <div class="price-list">
-              <a class="price-item" aria-label="Book Sensual Massage with hand/foot release for 30 minutes at R900 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20Sensual%20Massage%20with%20hand%2Ffoot%20release%0APrice%3A%20R900%0ADuration%3A%2030%20minutes" target="_blank" rel="noopener noreferrer"><span class="price-duration">30 Mins</span><strong class="price-amount">R900</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
-              <a class="price-item" aria-label="Book Sensual Massage with hand/foot release for 1 hour at R1200 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20Sensual%20Massage%20with%20hand%2Ffoot%20release%0APrice%3A%20R1200%0ADuration%3A%201%20hour" target="_blank" rel="noopener noreferrer"><span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage" data-details="With hand/foot release" data-duration="30 minutes" data-price="R900"><span class="price-duration">30 Mins</span><strong class="price-amount">R900</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage" data-details="With hand/foot release" data-duration="1 hour" data-price="R1200"><span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
             </div>
             <p class="extra-note">+R100 extra for covered oral</p>
           </div>
@@ -1993,8 +1993,8 @@ text-align: center;
             <h3>Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
-              <a class="price-item" aria-label="Book Sensual Massage with FH, including covered oral for 30 minutes at R1200 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20Sensual%20Massage%20with%20FH%0APrice%3A%20R1200%0ADuration%3A%2030%20minutes" target="_blank" rel="noopener noreferrer"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
-              <a class="price-item" aria-label="Book Sensual Massage with FH, including covered oral for 1 hour at R1500 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20Sensual%20Massage%20with%20FH%0APrice%3A%20R1500%0ADuration%3A%201%20hour" target="_blank" rel="noopener noreferrer"><span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage with FH" data-details="Covered oral included" data-duration="30 minutes" data-price="R1200"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage with FH" data-details="Covered oral included" data-duration="1 hour" data-price="R1500"><span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
             </div>
           </div>
         </article>
@@ -2007,8 +2007,8 @@ text-align: center;
             <h3>FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
-              <a class="price-item" aria-label="Book FH Only, with no massage included for 30 minutes at R1300 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20FH%20Only%0APrice%3A%20R1300%0ADuration%3A%2030%20minutes" target="_blank" rel="noopener noreferrer"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
-              <a class="price-item" aria-label="Book FH Only, with no massage included for 1 hour at R1600 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20FH%20Only%0APrice%3A%20R1600%0ADuration%3A%201%20hour" target="_blank" rel="noopener noreferrer"><span class="price-duration">1 Hour</span><strong class="price-amount">R1600</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item whatsapp-booking" href="#" data-service="FH Only" data-details="No massage included" data-duration="30 minutes" data-price="R1300"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item whatsapp-booking" href="#" data-service="FH Only" data-details="No massage included" data-duration="1 hour" data-price="R1600"><span class="price-duration">1 Hour</span><strong class="price-amount">R1600</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
             </div>
           </div>
         </article>
@@ -2394,6 +2394,45 @@ text-align: center;
 
       updateBusinessStatus();
       window.setInterval(updateBusinessStatus, 60000);
+
+      /* =========================================================
+         EDITABLE WHATSAPP LINKS FOR RATE BUTTONS
+
+         To update the WhatsApp number, edit WHATSAPP_NUMBER once.
+         To update a booking option, edit its data-service,
+         data-details, data-duration and data-price values in HTML.
+         ========================================================= */
+      const WHATSAPP_NUMBER = "27795567346";
+
+      const createWhatsAppBookingLink = (bookingLink) => {
+        const service = bookingLink.dataset.service || "";
+        const details = bookingLink.dataset.details || "";
+        const duration = bookingLink.dataset.duration || "";
+        const price = bookingLink.dataset.price || "";
+
+        const messageLines = [
+          `Service: ${service}`,
+          details ? `Details: ${details}` : "",
+          `Duration: ${duration}`,
+          `Price: ${price}`
+        ].filter(Boolean);
+
+        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageLines.join("\n"))}`;
+      };
+
+      document.querySelectorAll(".whatsapp-booking").forEach((bookingLink) => {
+        const service = bookingLink.dataset.service || "service";
+        const duration = bookingLink.dataset.duration || "selected duration";
+        const price = bookingLink.dataset.price || "selected price";
+
+        bookingLink.href = createWhatsAppBookingLink(bookingLink);
+        bookingLink.target = "_blank";
+        bookingLink.rel = "noopener noreferrer";
+        bookingLink.setAttribute(
+          "aria-label",
+          `Book ${service} for ${duration} at ${price} on WhatsApp`
+        );
+      });
 
       const gallery = document.getElementById("gallery");
       const track = document.getElementById("galleryTrack");
