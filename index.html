@@ -1377,6 +1377,507 @@ text-align: center;
         display: none;
       }
     }
+
+
+    /* =========================================================
+       CLEAN, EASY-TO-READ CARD SYSTEM
+       ========================================================= */
+    :root {
+      --panel: #101010;
+      --panel-light: #141414;
+      --line: rgba(255, 255, 255, 0.11);
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      --radius: 16px;
+    }
+
+    /* One calm surface style throughout the website. */
+    .card {
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: var(--radius);
+      background: rgba(13, 13, 13, 0.96);
+      box-shadow: var(--shadow);
+    }
+
+    .philosophy-card,
+    .info-card {
+      padding: clamp(28px, 4vw, 44px);
+    }
+
+    .section-heading-block {
+      margin-bottom: 26px;
+    }
+
+    /* Use labels as simple text instead of extra pill-shaped boxes. */
+    .small-badge {
+      display: block;
+      width: fit-content;
+      margin: 10px auto 24px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: rgba(212, 175, 55, 0.9);
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+    }
+
+    /* Professional care cards */
+    .trust-grid,
+    .policy-grid {
+      gap: 14px;
+    }
+
+    .trust-card,
+    .policy-card {
+      min-height: 0;
+      padding: 23px;
+    }
+
+    .trust-card h3,
+    .policy-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.5rem;
+    }
+
+    .trust-card p,
+    .policy-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    /* Service cards */
+    .services-grid {
+      gap: 18px;
+    }
+
+    .service-card {
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: none;
+      border-color: rgba(212, 175, 55, 0.34);
+      box-shadow: var(--shadow);
+    }
+
+    .service-image {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-image img,
+    .service-card:hover .service-image img {
+      transform: none;
+      filter: brightness(0.94);
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 8px;
+      background: rgba(8, 8, 8, 0.88);
+      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 0.8px;
+    }
+
+    .service-content {
+      min-height: 0;
+      padding: 23px;
+    }
+
+    .service-content h3 {
+      margin-bottom: 5px;
+      font-size: 1.7rem;
+    }
+
+    .service-content .sub {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.66);
+    }
+
+    /* Flat rate rows: no nested cards. */
+    .price-list {
+      gap: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .price-item {
+      min-height: 56px;
+      padding: 11px 0;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .price-item:hover,
+    .price-item:focus-visible {
+      transform: none;
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.025);
+      box-shadow: none;
+    }
+
+    .price-book {
+      min-height: 34px;
+      padding: 7px 12px;
+      border: 1px solid rgba(212, 175, 55, 0.58);
+      background: transparent;
+      color: var(--gold);
+      box-shadow: none;
+    }
+
+    .price-item:hover .price-book,
+    .price-item:focus-visible .price-book {
+      transform: none;
+      background: var(--gold);
+      color: #070707;
+    }
+
+    .extra-note {
+      margin-top: 14px;
+      font-size: 0.86rem;
+    }
+
+    .addon-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 4px;
+      padding: 15px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .addon-row strong {
+      color: var(--gold);
+      font-size: 1.08rem;
+      white-space: nowrap;
+    }
+
+    .loyalty {
+      margin-top: 26px;
+      padding: 9px 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      font-size: 0.9rem;
+    }
+
+    /* Information cards: turn nested boxes into simple readable rows. */
+    .list,
+    .stacked-notices {
+      gap: 0;
+    }
+
+    .list li,
+    .note-item,
+    .notice-block {
+      padding: 15px 0;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.84);
+      line-height: 1.65;
+    }
+
+    .list li:last-child,
+    .note-item:last-child,
+    .notice-block:last-child {
+      border-bottom: 0;
+    }
+
+    .danger,
+    .success {
+      border-left: 0 !important;
+    }
+
+    #services-not-offered .info-card {
+      border: 1px solid rgba(239, 107, 97, 0.28);
+      background: rgba(13, 13, 13, 0.96);
+    }
+
+    #services-not-offered .small-badge {
+      border: 0;
+      background: transparent;
+      color: rgba(239, 107, 97, 0.88);
+    }
+
+    .hours-location-grid {
+      gap: 18px;
+    }
+
+    .status {
+      padding: 6px 12px;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .status-dot {
+      box-shadow: none;
+    }
+
+    .hours-table {
+      gap: 0;
+      margin-top: 22px;
+    }
+
+    .hours-row {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .hours-row:last-child {
+      border-bottom: 0;
+    }
+
+    /* Calm buttons and modal styling. */
+    .btn-gold,
+    .nav .nav-book,
+    .nav .nav-book:hover,
+    .nav .nav-book[aria-current="location"] {
+      background: var(--gold);
+      color: #070707;
+      box-shadow: none;
+    }
+
+    .btn-gold:hover {
+      background: #e0c25b;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      box-shadow: none;
+    }
+
+    .modal-box {
+      background: #0d0d0d;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+    }
+
+    /* Keep the gallery frame consistent with the cleaner cards. */
+    .gallery-shell {
+      border: 1px solid rgba(212, 175, 55, 0.38);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-control {
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 0, 0, 0.78);
+      box-shadow: none;
+    }
+
+    /* Decorative floating sparkles were adding visual noise. */
+    .sparkles {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .trust-card,
+      .policy-card,
+      .service-content {
+        padding: 21px;
+      }
+
+      .price-item {
+        padding-inline: 0;
+      }
+    }
+
+
+    /* =========================================================
+       RESTORED SUBTLE SPARKLES, SHIMMER & HOVER EFFECTS
+       Keeps the cleaner card system without making it feel busy.
+       ========================================================= */
+
+    /* Floating background sparkles */
+    .sparkles {
+      display: block;
+      opacity: 0.72;
+    }
+
+    .sparkles span {
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      box-shadow:
+        0 0 7px rgba(255, 255, 255, 0.8),
+        0 0 15px rgba(212, 175, 55, 0.62);
+      animation-duration: 21s;
+    }
+
+    /* Gentle card lift and border glow */
+    .card:not(.modal-box) {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transition:
+        transform 0.24s ease,
+        border-color 0.24s ease,
+        box-shadow 0.24s ease;
+    }
+
+    .card:not(.modal-box) > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:not(.modal-box):hover,
+    .card:not(.modal-box):focus-within {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.42);
+      box-shadow:
+        0 16px 38px rgba(0, 0, 0, 0.38),
+        0 0 18px rgba(212, 175, 55, 0.08);
+    }
+
+    /* One soft shimmer pass when a card is hovered or focused. */
+    .card:not(.modal-box)::before {
+      content: "";
+      position: absolute;
+      top: -25%;
+      bottom: -25%;
+      left: -65%;
+      z-index: 0;
+      width: 34%;
+      pointer-events: none;
+      opacity: 0;
+      transform: skewX(-18deg);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.035),
+        rgba(212, 175, 55, 0.12),
+        rgba(255, 255, 255, 0.035),
+        transparent
+      );
+    }
+
+    .card:not(.modal-box):hover::before,
+    .card:not(.modal-box):focus-within::before {
+      animation: clean-card-shimmer 1.05s ease-out;
+    }
+
+    /* Service cards retain a soft image zoom. */
+    .service-card:hover,
+    .service-card:focus-within {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.48);
+      box-shadow:
+        0 17px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .service-image img {
+      transition: transform 0.38s ease, filter 0.38s ease;
+    }
+
+    .service-card:hover .service-image img,
+    .service-card:focus-within .service-image img {
+      transform: scale(1.025);
+      filter: brightness(1);
+    }
+
+    /* Clear but restrained interaction on rate rows. */
+    .price-item:hover,
+    .price-item:focus-visible {
+      transform: translateX(3px);
+      background: rgba(212, 175, 55, 0.045);
+      border-color: rgba(212, 175, 55, 0.24);
+    }
+
+    .price-item:hover .price-book,
+    .price-item:focus-visible .price-book {
+      transform: scale(1.025);
+      background: var(--gold);
+      color: #070707;
+    }
+
+    /* Buttons remain clean, with a small polished hover response. */
+    .btn:hover,
+    .whatsapp:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-gold:hover,
+    .nav .nav-book:hover {
+      background: #e4c85f;
+      box-shadow: 0 10px 24px rgba(212, 175, 55, 0.18);
+    }
+
+    .gallery-shell {
+      transition: border-color 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .gallery-shell:hover,
+    .gallery-shell:focus-within {
+      border-color: rgba(212, 175, 55, 0.62);
+      box-shadow:
+        0 16px 38px rgba(0, 0, 0, 0.38),
+        0 0 18px rgba(212, 175, 55, 0.1);
+    }
+
+    @keyframes clean-card-shimmer {
+      0% {
+        left: -65%;
+        opacity: 0;
+      }
+      18% {
+        opacity: 0.9;
+      }
+      100% {
+        left: 135%;
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sparkles {
+        display: block;
+        opacity: 0.5;
+      }
+
+      .sparkles span {
+        width: 3px;
+        height: 3px;
+      }
+
+      /* Touch screens do not need large movement. */
+      .card:not(.modal-box):hover,
+      .card:not(.modal-box):focus-within,
+      .service-card:hover,
+      .service-card:focus-within {
+        transform: translateY(-2px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sparkles {
+        display: none;
+      }
+
+      .card:not(.modal-box)::before {
+        display: none;
+      }
+
+      .card:not(.modal-box):hover,
+      .card:not(.modal-box):focus-within,
+      .service-card:hover,
+      .service-card:focus-within,
+      .price-item:hover,
+      .price-item:focus-visible,
+      .btn:hover,
+      .whatsapp:hover {
+        transform: none;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1406,6 +1907,8 @@ text-align: center;
   </div>
 
   <div class="sparkles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
 
@@ -1450,12 +1953,12 @@ text-align: center;
         <p class="section-intro">Every appointment is arranged with clear communication, respect and discretion. The space is prepared to provide a clean, comfortable and private experience from arrival to departure.</p>
       </div>
       <div class="container trust-grid">
-        <article class="trust-card card"><h3>Private &amp; Discreet</h3><p>Your privacy is respected at every stage, from the first booking enquiry until you leave the premises.</p></article>
-        <article class="trust-card card"><h3>Clean &amp; Comfortable Environment</h3><p>The appointment space is carefully prepared with cleanliness, hygiene and your comfort in mind.</p></article>
-        <article class="trust-card card"><h3>Clear Communication</h3><p>Booking information, appointment details, expectations and important guidelines are communicated clearly before your arrival.</p></article>
-        <article class="trust-card card"><h3>Respectful Boundaries</h3><p>All appointments are conducted professionally, with clear boundaries and mutual respect maintained at all times.</p></article>
+        <article class="trust-card card"><h3>Private &amp; Discreet</h3><p>Your privacy is respected from booking to departure.</p></article>
+        <article class="trust-card card"><h3>Clean Environment</h3><p>The space is prepared with cleanliness, hygiene and comfort in mind.</p></article>
+        <article class="trust-card card"><h3>Clear Communication</h3><p>Appointment details, expectations and guidelines are shared before arrival.</p></article>
+        <article class="trust-card card"><h3>Respectful Boundaries</h3><p>Professional boundaries and mutual respect are maintained at all times.</p></article>
         <article class="trust-card card"><h3>Secure Parking</h3><p>Private, secure parking is available for scheduled clients visiting the Melrose Arch location.</p></article>
-        <article class="trust-card card"><h3>Appointment Only</h3><p>Visits must be booked in advance to maintain privacy, prepare the space properly and prevent unnecessary interruptions.</p></article>
+        <article class="trust-card card"><h3>Appointment Only</h3><p>All visits must be booked in advance to maintain privacy and avoid interruptions.</p></article>
       </div>
     </section>
 
@@ -1471,7 +1974,7 @@ text-align: center;
             <img src="table.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Prepared massage table in a private treatment room">
           </div>
           <div class="service-content">
-            <h3>• Sensual Massage</h3>
+            <h3>Sensual Massage</h3>
             <span class="sub">With hand/foot release</span>
             <div class="price-list">
               <a class="price-item" aria-label="Book Sensual Massage with hand/foot release for 30 minutes at R900 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20Sensual%20Massage%20with%20hand%2Ffoot%20release%0APrice%3A%20R900%0ADuration%3A%2030%20minutes" target="_blank" rel="noopener noreferrer"><span class="price-duration">30 Mins</span><strong class="price-amount">R900</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
@@ -1487,7 +1990,7 @@ text-align: center;
             <span class="badge">Popular</span>
           </div>
           <div class="service-content">
-            <h3>• Sensual Massage with FH</h3>
+            <h3>Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
               <a class="price-item" aria-label="Book Sensual Massage with FH, including covered oral for 30 minutes at R1200 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20Sensual%20Massage%20with%20FH%0APrice%3A%20R1200%0ADuration%3A%2030%20minutes" target="_blank" rel="noopener noreferrer"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
@@ -1501,7 +2004,7 @@ text-align: center;
             <img src="bed.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Comfortable private appointment room">
           </div>
           <div class="service-content">
-            <h3>• FH Only</h3>
+            <h3>FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
               <a class="price-item" aria-label="Book FH Only, with no massage included for 30 minutes at R1300 on WhatsApp" href="https://wa.me/27795567346?text=Service%3A%20FH%20Only%0APrice%3A%20R1300%0ADuration%3A%2030%20minutes" target="_blank" rel="noopener noreferrer"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
@@ -1515,11 +2018,11 @@ text-align: center;
             <img src="green.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Green and gold private appointment setting">
           </div>
           <div class="service-content">
-            <h3>• GFE Add-On</h3>
-            <span class="sub">Includes kissing and mutual oral. Safe and covered only</span><br>
-             <div class="price-list">
-              <a class="price-amount"><strong></strong>Add to service price</strong></a>
-              <div><p class="extra-note">+R300 extra</p></div>
+            <h3>GFE Add-On</h3>
+            <span class="sub">Includes kissing and mutual oral. Safe and covered only</span>
+            <div class="addon-row">
+              <span>Add-on price</span>
+              <strong>+R300</strong>
             </div>
           </div>
         </article>
