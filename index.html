@@ -888,6 +888,19 @@ text-align: center;
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      /* Discourage saving, dragging and selecting gallery images. */
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-touch-callout: none;
+    }
+
+    .gallery-slide {
+      -webkit-touch-callout: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .gallery-slide figcaption {
@@ -1643,35 +1656,35 @@ text-align: center;
         <div class="gallery-viewport">
           <div class="gallery-track" id="galleryTrack">
             <figure class="gallery-slide" aria-hidden="false">
-              <img src="1.webp" width="1199" height="1600" loading="lazy" decoding="async" alt="Private massage room in Melrose Arch">
+              <img src="1.webp" width="1199" height="1600" loading="lazy" decoding="async" alt="Private massage room in Melrose Arch" draggable="false">
              
             </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="2.webp" width="1470" height="1461" loading="lazy" decoding="async" alt="Prepared massage table with clean linens">
+              <img src="2.webp" width="1470" height="1461" loading="lazy" decoding="async" alt="Prepared massage table with clean linens" draggable="false">
              
             </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="3.webp" width="1537" height="1538" loading="lazy" decoding="async" alt="Clean private treatment setting with ambient lighting">
+              <img src="3.webp" width="1537" height="1538" loading="lazy" decoding="async" alt="Clean private treatment setting with ambient lighting" draggable="false">
               
             </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="4.webp" width="1080" height="795" loading="lazy" decoding="async" alt="Massage room details and relaxing décor">
+              <img src="4.webp" width="1080" height="795" loading="lazy" decoding="async" alt="Massage room details and relaxing décor" draggable="false">
             
             </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="5.webp" width="1080" height="757" loading="lazy" decoding="async" alt="Private appointment room in Johannesburg">
+              <img src="5.webp" width="1080" height="757" loading="lazy" decoding="async" alt="Private appointment room in Johannesburg" draggable="false">
              
             </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="6.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting">
+              <img src="6.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting" draggable="false">
         
                </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="7.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting">
+              <img src="7.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting" draggable="false">
 
                </figure>
             <figure class="gallery-slide" aria-hidden="true">
-              <img src="8.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting">
+              <img src="8.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting" draggable="false">
 
             </figure>
           </div>
@@ -1861,6 +1874,26 @@ text-align: center;
       const nextButton = document.getElementById("galleryNext");
       const dotsContainer = document.getElementById("galleryDots");
       const counter = document.getElementById("galleryCounter");
+
+      /* Prevent the usual right-click, drag and long-press save actions
+         inside the gallery. This deters casual downloads, although no
+         image displayed in a browser can be made completely impossible
+         to copy. */
+      gallery?.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+      });
+
+      gallery?.addEventListener("dragstart", (event) => {
+        event.preventDefault();
+      });
+
+      slides.forEach((slide) => {
+        slide.querySelectorAll("img").forEach((image) => {
+          image.draggable = false;
+          image.setAttribute("draggable", "false");
+        });
+      });
+
       let currentSlide = 0;
       let touchStartX = 0;
       let touchStartY = 0;
