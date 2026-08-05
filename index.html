@@ -1993,22 +1993,6 @@ text-align: center;
         transform: translateY(-8px) rotate(-45deg);
       }
 
-      .mobile-book-now {
-        display: inline-flex;
-        min-height: 42px;
-        align-items: center;
-        justify-content: center;
-        padding: 9px 24px;
-        border-radius: 999px;
-        background: var(--gold);
-        color: #070707;
-        font-size: 0.7rem;
-        font-weight: 800;
-        letter-spacing: 0.9px;
-        text-decoration: none;
-        text-transform: uppercase;
-      }
-
       .nav {
         display: none;
         width: min(100%, 360px);
@@ -2048,8 +2032,30 @@ text-align: center;
         box-shadow: none;
       }
 
-      .nav .nav-book {
-        display: none;
+      .nav .nav-book,
+      .nav .nav-book:hover,
+      .nav .nav-book[aria-current="location"] {
+        display: inline-flex;
+        width: 100%;
+        min-height: 45px;
+        margin-top: 4px;
+        align-items: center;
+        justify-content: center;
+        border-color: transparent;
+        border-radius: 999px;
+        background: var(--gold);
+        color: #070707;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.9px;
+        text-transform: uppercase;
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.18);
+      }
+
+      .nav .nav-book:hover,
+      .nav .nav-book:focus-visible {
+        background: #e4c85f;
+        color: #070707;
       }
 
       .gallery-slide::after {
@@ -2081,7 +2087,6 @@ text-align: center;
         <span class="menu-toggle-line" aria-hidden="true"></span>
         <span class="menu-toggle-line" aria-hidden="true"></span>
       </button>
-      <a class="mobile-book-now" href="#contact">Book Now</a>
     </div>
     <nav class="nav" id="mainNavigation" aria-label="Main navigation">
       <a href="#philosophy">Philosophy</a>
