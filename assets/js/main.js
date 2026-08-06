@@ -393,6 +393,41 @@
   updateAddonAvailability();
   updatePriceSummary();
 
+  // Service cards open the booking form and preselect the matching option.
+  const serviceCards = [...document.querySelectorAll("[data-book-service], [data-book-addon]")];
+
+  const openBookingFromCard = (card) => {
+    if (!bookingForm) return;
+
+    const requestedService = card.dataset.bookService;
+    const requestedAddon = card.dataset.bookAddon;
+
+    if (requestedService && serviceSelect) {
+      serviceSelect.value = requestedService;
+      serviceSelect.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    if (requestedAddon === "gfe" && gfeAddon) {
+      gfeAddon.checked = true;
+      gfeAddon.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    window.setTimeout(() => {
+      serviceSelect?.focus({ preventScroll: true });
+    }, 450);
+  };
+
+  serviceCards.forEach((card) => {
+    card.addEventListener("click", () => openBookingFromCard(card));
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      openBookingFromCard(card);
+    });
+  });
+
   bookingForm?.addEventListener("submit", (event) => {
     event.preventDefault();
 

@@ -452,6 +452,23 @@ a {
   flex-direction: column;
 }
 
+.service-card-link {
+  cursor: pointer;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.service-card-link:hover,
+.service-card-link:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(212, 175, 55, 0.42);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42);
+  outline: none;
+}
+
+.service-card-link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.22), 0 18px 38px rgba(0, 0, 0, 0.42);
+}
+
 .service-image {
   position: relative;
   height: clamp(220px, 28vw, 310px);
@@ -1057,7 +1074,7 @@ a {
   background: rgba(0, 0, 0, 0.22);
   color: rgba(255, 255, 255, 0.78);
   font-family: var(--heading);
-  font-size: clamp(1.75rem, 5vw, 4.25rem);
+  font-size: clamp(1.35rem, 4vw, 3.4rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.04em;
