@@ -848,10 +848,6 @@ text-align: center;
       margin-top: 18px;
     }
 
-    .contact-list {
-      text-align: left;
-    }
-
     .primary-whatsapp {
       margin: 23px auto 14px;
     }
@@ -883,21 +879,20 @@ text-align: center;
 .contact-list {
   list-style: none;
   padding: 0;
-  margin-bottom: 20px;
+  margin: 0;
+ 
 }
 
 .contact-list li {
   margin-bottom: 10px;
   font-size: 14px;
   opacity: 0.9;
+  list-style: none;
+  padding-left: 0;
+  text-align: center;
+  
 }
 
-/* GOLD BULLETS */
-.contact-list li::before {
-  content: "•";
-  color: #c8a96a;
-  margin-right: 8px;
-}
 
 /* TEXT */
 .closing-text {
@@ -2045,25 +2040,6 @@ input:focus, select:focus, textarea:focus {
       color: #070707;
     }
 
-.contact-list {
-  max-width: 500px;
-  margin: 30px auto;
-  padding: 0;
-  list-style: none;
-  text-align: center;
-}
-
-.contact-list li {
-  margin-bottom: 10px;
-  position: relative;
-  padding-left: 0;
-}
-
-.contact-list li::before {
-  content: "•";
-  color: #c8a96a; /* gold accent */
-  margin-right: 8px;
-}
     /* Buttons remain clean, with a small polished hover response. */
     .btn:hover,
     .whatsapp:hover {
@@ -2536,9 +2512,9 @@ input:focus, select:focus, textarea:focus {
             <li>Payment is required before the session begins.</li>
             <li><strong>A deposit of R500 via instant EFT / PayShap is required for all new clients to secure a booking. The outstanding balance is paid in person.</strong></li>
       
-            <li class="notice-block danger"><strong>Please note:</strong> The deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</li>
+            <li class="notice-block danger">The deposit is non-refundable. If you cancel, I will gladly reschedule your appointment for the next available slot.</li>
             <li class="notice-block success">In the unlikely event that I need to cancel, your deposit will be refunded in full via PayShap as soon as I receive your refund details.</li>
-            <li class="notice-block danger"><strong>Please note:</strong> Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking.</li>
+            <li class="notice-block danger">Appointments may be cancelled without refund if you are disrespectful, fail to respect my rules and boundaries, or provide false information when booking.</li>
           </ul>
           </div>
         </div>
@@ -2592,7 +2568,7 @@ input:focus, select:focus, textarea:focus {
     </form>
 
     <div class="booking-card">
-
+<h2>Booking Notes</h2>
   <ul class="list contact-list">
     <li>Bookings are arranged exclusively via WhatsApp.</li>
     <li>Please contact me from a valid South African mobile number.</li>
