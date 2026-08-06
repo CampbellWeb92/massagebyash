@@ -2,16 +2,18 @@
   "use strict";
 
   const WHATSAPP_NUMBER = "27795567346";
-  const AGE_GATE_KEY = "massageByAshleighAgeVerifiedSessionV3";
+  const AGE_GATE_KEY = "massageByAshleighAgeVerifiedSessionV4";
 
-  const ageGate = document.getElementById("ageGateModal");
-  const enterButton = document.getElementById("ageGateEnter");
-  const exitButton = document.getElementById("ageGateExit");
+  const byId = (id) => document.getElementById(id);
+
+  // Age gate
+  const ageGate = byId("ageGateModal");
+  const enterButton = byId("ageGateEnter");
+  const exitButton = byId("ageGateExit");
   let previouslyFocusedElement = null;
 
   const getFocusableElements = () => {
     if (!ageGate) return [];
-
     return [...ageGate.querySelectorAll(
       'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     )].filter((element) =>
@@ -23,12 +25,10 @@
 
   const openAgeGate = () => {
     if (!ageGate) return;
-
     previouslyFocusedElement = document.activeElement;
     ageGate.hidden = false;
     ageGate.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
-
     window.requestAnimationFrame(() => {
       ageGate.classList.add("is-active");
       enterButton?.focus();
@@ -37,11 +37,9 @@
 
   const closeAgeGate = () => {
     if (!ageGate) return;
-
     ageGate.classList.remove("is-active");
     ageGate.setAttribute("aria-hidden", "true");
     document.body.classList.remove("modal-open");
-
     window.setTimeout(() => {
       ageGate.hidden = true;
       previouslyFocusedElement?.focus?.();
@@ -69,7 +67,7 @@
     try {
       window.sessionStorage.setItem(AGE_GATE_KEY, "true");
     } catch {
-      // Session storage is optional; the modal can still close.
+      // The gate can still close when storage is unavailable.
     }
     closeAgeGate();
   });
@@ -111,11 +109,12 @@
     }
   });
 
+  // Shared page utilities
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });
 
-  const backToTop = document.getElementById("backToTop");
+  const backToTop = byId("backToTop");
   const updateBackToTop = () => {
     if (!backToTop) return;
     const show = window.scrollY > 420;
@@ -126,9 +125,10 @@
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   updateBackToTop();
 
-  const businessStatus = document.getElementById("businessStatus");
-  const statusText = document.getElementById("statusText");
-  const statusDetail = document.getElementById("statusDetail");
+  // Live Johannesburg business status. Public holidays are always confirmed manually.
+  const businessStatus = byId("businessStatus");
+  const statusText = byId("statusText");
+  const statusDetail = byId("statusDetail");
 
   const getJohannesburgTime = () => {
     const formatter = new Intl.DateTimeFormat("en-ZA", {
@@ -165,75 +165,286 @@
       businessStatus.dataset.state = isOpen ? "open" : "closed";
       statusText.textContent = isOpen ? "Open now" : "Closed now";
       statusDetail.textContent = isOpen
-        ? `Regular hours run until ${closingTime}. Please confirm appointment availability on WhatsApp.`
-        : "Please confirm availability on WhatsApp.";
+        ? `Regular hours run until ${closingTime}. Strictly by appointment.`
+        : "Please check availability on WhatsApp.";
     } catch {
       businessStatus.dataset.state = "unknown";
       statusText.textContent = "Confirm availability";
-      statusDetail.textContent = "Please confirm current availability on WhatsApp.";
+      statusDetail.textContent = "Strictly by appointment. Please check availability on WhatsApp.";
     }
   };
 
   updateBusinessStatus();
   window.setInterval(updateBusinessStatus, 60000);
 
+  // Booking form
   const bookingForm = document.querySelector("[data-whatsapp-form]");
-  const dateInput = document.getElementById("date");
+  const nameInput = byId("name");
+  const clientType = byId("clientType");
+  const serviceSelect = byId("service");
+  const dateInput = byId("date");
+  const timeSelect = byId("time");
+  const gfeAddon = byId("gfeAddon");
+  const coveredAddon = byId("coveredAddon");
+  const coveredAddonLabel = byId("coveredAddonLabel");
+  const addonHelp = byId("addonHelp");
+  const notesInput = byId("message");
+  const basePriceOutput = byId("basePrice");
+  const addonPriceOutput = byId("addonPrice");
+  const totalPriceOutput = byId("totalPrice");
+  const depositPriceOutput = byId("depositPrice");
+  const balancePriceOutput = byId("balancePrice");
+
+  const formatMoney = (amount) => {
+    if (!Number.isFinite(amount)) return "—";
+    return new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      maximumFractionDigits: 0
+    }).format(amount).replace(/\u00a0/g, " ");
+  };
+
+  const localDateString = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const parseLocalDate = (value) => {
+    if (!value) return null;
+    const [year, month, day] = value.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  const formatDate = (value) => {
+    const date = parseLocalDate(value);
+    if (!date) return "";
+    return new Intl.DateTimeFormat("en-ZA", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }).format(date);
+  };
+
+  const isClosedDay = (value) => {
+    const date = parseLocalDate(value);
+    if (!date) return false;
+    return date.getDay() === 0 || date.getDay() === 1;
+  };
+
+  const getSelectedService = () => {
+    const option = serviceSelect?.selectedOptions?.[0];
+    if (!option || !option.value) return null;
+    return {
+      value: option.value,
+      title: option.dataset.title || option.textContent.trim(),
+      duration: Number(option.dataset.duration) || 30,
+      price: Number(option.dataset.price) || 0,
+      coveredAddonAllowed: option.dataset.coveredAddon === "true",
+      label: option.textContent.trim()
+    };
+  };
+
+  const setDateHelp = (input, message, isError = false) => {
+    const helperId = input?.getAttribute("aria-describedby");
+    const helper = helperId ? byId(helperId) : null;
+    if (!helper) return;
+    helper.textContent = message;
+    helper.classList.toggle("field-error", isError);
+  };
+
+  const validateDateInput = (input) => {
+    if (!input) return false;
+    input.setCustomValidity("");
+    input.removeAttribute("aria-invalid");
+
+    if (!input.value) {
+      setDateHelp(input, "Tuesday to Saturday only. Strictly by appointment.");
+      return false;
+    }
+
+    if (isClosedDay(input.value)) {
+      input.setCustomValidity("Appointments are not available on Sundays or Mondays.");
+      input.setAttribute("aria-invalid", "true");
+      setDateHelp(input, "Sundays and Mondays are unavailable. Please choose Tuesday to Saturday.", true);
+      return false;
+    }
+
+    setDateHelp(input, "Available day selected. Strictly by appointment.");
+    return true;
+  };
+
+  const minutesToTime = (minutes) => {
+    const hours = String(Math.floor(minutes / 60)).padStart(2, "0");
+    const mins = String(minutes % 60).padStart(2, "0");
+    return `${hours}:${mins}`;
+  };
+
+  const populateTimes = (dateValue, select) => {
+    if (!select) return;
+    const previousValue = select.value;
+    select.innerHTML = "";
+
+    const service = getSelectedService();
+    const date = parseLocalDate(dateValue);
+
+    if (!dateValue || !date || !service || isClosedDay(dateValue)) {
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = "Choose a date and service first";
+      select.appendChild(option);
+      select.disabled = true;
+      return;
+    }
+
+    const day = date.getDay();
+    const open = 9 * 60;
+    const close = day === 6 ? 15 * 60 : 17 * 60;
+    const latestStart = close - service.duration;
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Choose a time";
+    select.appendChild(placeholder);
+
+    for (let minutes = open; minutes <= latestStart; minutes += 30) {
+      const value = minutesToTime(minutes);
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = value;
+      select.appendChild(option);
+    }
+
+    select.disabled = false;
+    select.required = true;
+    if ([...select.options].some((option) => option.value === previousValue)) {
+      select.value = previousValue;
+    }
+  };
+
+  const updateAddonAvailability = () => {
+    const service = getSelectedService();
+    const allowed = Boolean(service?.coveredAddonAllowed);
+
+    if (coveredAddon) {
+      coveredAddon.disabled = !allowed;
+      if (!allowed) coveredAddon.checked = false;
+    }
+
+    coveredAddonLabel?.classList.toggle("is-disabled", !allowed);
+    if (addonHelp) {
+      addonHelp.textContent = allowed
+        ? "Covered oral is available for the selected Sensual Massage appointment."
+        : "Select a Sensual Massage option to enable the covered-oral add-on.";
+    }
+  };
+
+  const getPriceBreakdown = () => {
+    const service = getSelectedService();
+    const base = service?.price || 0;
+    const isReturning = clientType?.value === "returning";
+    const gfePrice = gfeAddon?.checked ? (isReturning ? 0 : 300) : 0;
+    const coveredPrice = coveredAddon?.checked ? 100 : 0;
+    const addons = gfePrice + coveredPrice;
+    const total = base + addons;
+    const deposit = clientType?.value === "new" && total ? Math.min(500, total) : 0;
+    const balance = total ? total - deposit : 0;
+    return { service, base, gfePrice, coveredPrice, addons, total, deposit, balance };
+  };
+
+  const updatePriceSummary = () => {
+    const price = getPriceBreakdown();
+    if (basePriceOutput) basePriceOutput.textContent = price.service ? formatMoney(price.base) : "—";
+    if (addonPriceOutput) addonPriceOutput.textContent = formatMoney(price.addons);
+    if (totalPriceOutput) totalPriceOutput.textContent = price.service ? formatMoney(price.total) : "—";
+
+    if (depositPriceOutput) {
+      if (!clientType?.value) depositPriceOutput.textContent = "Choose client type";
+      else if (clientType.value === "new") depositPriceOutput.textContent = formatMoney(price.deposit || 500);
+      else depositPriceOutput.textContent = "Not required";
+    }
+
+    if (balancePriceOutput) {
+      balancePriceOutput.textContent = price.service ? formatMoney(price.balance) : "—";
+    }
+  };
 
   if (dateInput) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    dateInput.min = `${yyyy}-${mm}-${dd}`;
+    dateInput.min = localDateString(new Date());
   }
+
+  serviceSelect?.addEventListener("change", () => {
+    updateAddonAvailability();
+    populateTimes(dateInput?.value || "", timeSelect);
+    updatePriceSummary();
+  });
+
+  clientType?.addEventListener("change", updatePriceSummary);
+  gfeAddon?.addEventListener("change", updatePriceSummary);
+  coveredAddon?.addEventListener("change", updatePriceSummary);
+
+  dateInput?.addEventListener("change", () => {
+    validateDateInput(dateInput);
+    populateTimes(dateInput.value, timeSelect);
+  });
+
+  updateAddonAvailability();
+  updatePriceSummary();
 
   bookingForm?.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const name = document.getElementById("name")?.value.trim() || "";
-    const service = document.getElementById("service")?.value || "";
-    const date = dateInput?.value || "";
-    const time = document.getElementById("time")?.value || "";
-    const notes = document.getElementById("message")?.value.trim() || "";
+    validateDateInput(dateInput);
+    populateTimes(dateInput?.value || "", timeSelect);
 
-    let formattedDate = "";
-    if (date) {
-      const [year, month, day] = date.split("-").map(Number);
-      formattedDate = new Intl.DateTimeFormat("en-ZA", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      }).format(new Date(year, month - 1, day));
+    if (!bookingForm.checkValidity()) {
+      bookingForm.reportValidity();
+      return;
     }
+
+    const price = getPriceBreakdown();
+    const addOns = [];
+    if (gfeAddon?.checked) {
+      addOns.push(price.gfePrice === 0 ? "GFE add-on (repeat-client rate: R0)" : "GFE add-on (+R300)");
+    }
+    if (coveredAddon?.checked) addOns.push("Covered oral add-on (+R100)");
 
     const message = [
       "Hello Ashleigh,",
       "",
-      "I'd like to make a booking:",
-      `• Name: ${name}`,
-      `• Service: ${service}`,
-      formattedDate ? `• Preferred date: ${formattedDate}` : "",
-      time ? `• Preferred time: ${time}` : "",
-      notes ? `• Notes: ${notes}` : "",
+      "I'd like to request an appointment:",
+      `• Name: ${nameInput?.value.trim() || ""}`,
+      `• Client type: ${clientType?.selectedOptions?.[0]?.textContent || ""}`,
+      `• Service: ${price.service?.label || ""}`,
+      `• Add-ons: ${addOns.length ? addOns.join(", ") : "None"}`,
+      `• Calculated appointment total: ${formatMoney(price.total)}`,
+      clientType?.value === "new"
+        ? `• New-client deposit: ${formatMoney(price.deposit)} required to secure the booking`
+        : "• Deposit: Not required for returning client",
+      `• Remaining balance: ${formatMoney(price.balance)}`,
+      `• First preference: ${formatDate(dateInput?.value || "")} at ${timeSelect?.value || ""}`,
+      notesInput?.value.trim() ? `• Notes: ${notesInput.value.trim()}` : "",
+      "",
+      "I understand that appointments are strictly by appointment and that the booking is not confirmed until accepted.",
       "",
       "Thank you 💚"
     ].filter(Boolean).join("\n");
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    const newWindow = window.open(whatsappUrl, "_blank");
-    if (newWindow) newWindow.opener = null;
-    else window.location.href = whatsappUrl;
+    const newWindow = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    if (!newWindow) window.location.href = whatsappUrl;
   });
 
-  const gallery = document.getElementById("gallery");
-  const track = document.getElementById("galleryTrack");
+  // Gallery carousel
+  const gallery = byId("gallery");
+  const track = byId("galleryTrack");
   const slides = track ? [...track.querySelectorAll(".gallery-slide")] : [];
-  const previousButton = document.getElementById("galleryPrev");
-  const nextButton = document.getElementById("galleryNext");
-  const dotsContainer = document.getElementById("galleryDots");
-  const counter = document.getElementById("galleryCounter");
+  const previousButton = byId("galleryPrev");
+  const nextButton = byId("galleryNext");
+  const dotsContainer = byId("galleryDots");
+  const counter = byId("galleryCounter");
   let currentSlide = 0;
   let touchStartX = 0;
   let touchStartY = 0;
@@ -308,37 +519,21 @@
 
   goToSlide(0);
 
-  const stickyNavigation = document.getElementById("site-navigation");
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNavigation = document.getElementById("mainNavigation");
+  // Static mobile navigation menu
+  const menuToggle = byId("menuToggle");
+  const mainNavigation = byId("mainNavigation");
   const mobileMenuQuery = window.matchMedia("(max-width: 768px)");
-
-  const updateStickyNavigationOffset = () => {
-    if (!stickyNavigation) return;
-    document.documentElement.style.setProperty(
-      "--sticky-nav-offset",
-      `${Math.ceil(stickyNavigation.getBoundingClientRect().height) + 16}px`
-    );
-  };
-
-  updateStickyNavigationOffset();
-  window.addEventListener("resize", updateStickyNavigationOffset, { passive: true });
-  window.addEventListener("load", updateStickyNavigationOffset, { once: true });
-  document.fonts?.ready.then(updateStickyNavigationOffset).catch(() => {});
 
   const setMobileMenuState = (isOpen, returnFocus = false) => {
     if (!menuToggle || !mainNavigation) return;
-
     mainNavigation.classList.toggle("is-open", isOpen);
-    updateStickyNavigationOffset();
     menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
     if (returnFocus) menuToggle.focus();
   };
 
   menuToggle?.addEventListener("click", () => {
-    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-    setMobileMenuState(!isOpen);
+    setMobileMenuState(menuToggle.getAttribute("aria-expanded") !== "true");
   });
 
   mainNavigation?.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -363,6 +558,7 @@
     mobileMenuQuery.addListener(resetMenuForViewport);
   }
 
+  // Highlight the section currently in view.
   const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
   const observedSections = navLinks
     .map((link) => document.querySelector(link.getAttribute("href")))

@@ -1,38 +1,31 @@
-CHANGES MADE
-============
+LATEST IMPROVEMENTS
+===================
 
-1. Removed the embedded 2,000+ line CSS block and replaced it with one organised stylesheet.
-2. Removed duplicate selectors, repeated declarations, conflicting override sections and nested media-query errors.
-3. Removed the hidden BookMe block, unused BookMe styles/assets, unused green.jpg and the entire .git folder from the delivery ZIP.
-4. Cleaned the service-rate markup and standardised duration and price alignment.
-5. Fixed malformed booking-form labels and added proper label/input connections, names and autocomplete.
-6. Fixed mismatched closing div tags in the payment section.
-7. Added safe checks around JavaScript elements so missing optional elements do not crash the page.
-8. Improved WhatsApp form messages, date formatting, popup-blocker fallback and minimum booking date.
-9. Updated the live status wording so it does not incorrectly claim public-holiday availability.
-10. Rebuilt the gallery carousel with consistent image sizing and responsive controls.
-11. Consolidated the three legal pages onto one shared stylesheet.
-12. Fixed the broken legal-page favicon reference (logo2.png did not exist).
-13. Standardised emerald, gold, black and white colours, typography, spacing, cards, buttons and responsive breakpoints.
-14. Improved mobile navigation, keyboard navigation, focus styling, form accessibility and reduced-motion support.
-15. Added a smaller favicon and dynamic copyright year.
+1. Rebuilt the booking form with required primary date and time fields.
+2. Blocked Sunday and Monday bookings through form validation.
+3. Limited available start times to Tuesday–Friday 09:00–17:00 and Saturday 09:00–15:00.
+4. Adjusted the final start time automatically according to a 30- or 60-minute appointment duration.
+5. Removed the optional second preferred date and time fields for a simpler booking flow.
+6. Added selectable GFE and covered-oral add-ons with compatibility guidance.
+7. Added a live appointment-price calculator showing base price, add-ons, total, deposit and balance.
+8. Added new-client and returning-client selection so the R500 new-client deposit is shown correctly.
+9. Added a required Booking Terms agreement checkbox.
+10. Added the WhatsApp privacy notice beside the submission button.
+11. Updated availability wording to “Strictly by appointment.” across hours, live status and booking guidance.
+12. Combined Professional Care, Important Notes and Booking Notes into one concise Before You Book section.
+13. Added an eight-question FAQ section and matching structured FAQ data for search engines.
+14. Strengthened natural local wording for Melrose Arch, Johannesburg, Sandton and Rosebank.
+15. Simplified the navigation to the most useful sections.
+16. Added a sitemap.xml file and linked it from the page and robots.txt.
+17. Added a branded custom 404 page.
+18. Created separate desktop and mobile hero images for faster, better-framed loading.
+19. Resized and converted the large transparent PNG logo to an optimized WebP file.
+20. Removed the old oversized logo, old hero source, unused BookMe image and unused green.jpg file.
+21. Preserved the centred “Massage by Ash” watermarks on all gallery images.
+22. Kept the desktop and mobile navigation static as requested.
 
-RECOMMENDED NEXT IMPROVEMENTS
-=============================
-
-- Add a real appointment calendar or booking platform when ready.
-- Add a consent checkbox linking to the booking terms before the WhatsApp form can submit.
-- Replace the large logo.png with a professionally exported transparent WebP/SVG for faster loading.
-- Add a privacy-friendly analytics tool to measure visits and booking-button clicks.
-- Test the final deployed site on iPhone Safari and Android Chrome after publishing.
-
-LATEST REQUESTED UPDATES
-------------------------
-- Removed the WhatsApp booking buttons and links from all service-card rate rows.
-- Kept duration aligned left and price aligned right at every screen size.
-- Restored the desktop and mobile navigation to normal static page positioning.
-- Restored the gallery to a clean, full-bleed picture layout without the image overlay label.
-- Simplified the cards with neutral borders, clean solid backgrounds and softer shadows.
-- Removed coloured accent lines from service-card images, price rows and information lists.
-- Replaced price-row divider lines with tidy, softly shaded rows.
-- Removed the JavaScript that generated WhatsApp links for rate rows because it is no longer needed.
+LATEST REQUESTED EDITS
+======================
+- Removed the optional second preferred date and time fields and their WhatsApp message output.
+- Updated the location card and location FAQ with the BluBird Shopping Centre wording.
+- Replaced public-holiday confirmation wording with “Strictly by appointment.”

@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Massage by Ashleigh | Rates &amp; Services | Melrose Arch</title>
-  <meta name="description" content="Private massage services in Melrose Arch, Johannesburg. View treatments, prices, business hours and booking information.">
+  <title>Massage by Ashleigh | Private Massage Appointments in Melrose Arch</title>
+  <meta name="description" content="Private, appointment-only massage services in Melrose Arch, Johannesburg. View rates, secure parking information, business hours and booking details.">
   <meta name="author" content="Massage by Ashleigh">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#06452f">
   <link rel="canonical" href="https://massagebyash.co.za/">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preload" as="image" href="hero-desktop.webp" media="(min-width: 769px)" fetchpriority="high">
+  <link rel="preload" as="image" href="hero-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +21,8 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Massage by Ashleigh | Rates &amp; Services">
-  <meta property="og:description" content="Explore massage services, rates, booking information, business hours and a private Melrose Arch location.">
+  <meta property="og:title" content="Massage by Ashleigh | Private Appointments in Melrose Arch">
+  <meta property="og:description" content="Private massage appointments in Melrose Arch near Sandton and Rosebank, with secure parking and advance booking.">
   <meta property="og:url" content="https://massagebyash.co.za/">
   <meta property="og:site_name" content="Massage by Ashleigh">
   <meta property="og:image" content="https://massagebyash.co.za/social-preview.jpg">
@@ -30,44 +33,80 @@
   <meta property="og:image:alt" content="Massage by Ashleigh rates and services in Melrose Arch, Johannesburg">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Massage by Ashleigh | Rates &amp; Services">
-  <meta name="twitter:description" content="Explore massage services, rates, business hours and private appointment information in Melrose Arch.">
+  <meta name="twitter:title" content="Massage by Ashleigh | Private Appointments in Melrose Arch">
+  <meta name="twitter:description" content="View massage rates, secure parking information, business hours and booking details.">
   <meta name="twitter:image" content="https://massagebyash.co.za/social-preview.jpg">
   <meta name="twitter:image:alt" content="Massage by Ashleigh rates and services">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Massage by Ashleigh",
-    "url": "https://massagebyash.co.za/",
-    "image": "https://massagebyash.co.za/social-preview.jpg",
-    "logo": "https://massagebyash.co.za/logo.png",
-    "description": "Private, appointment-only massage services in Melrose Arch, Johannesburg.",
-    "telephone": "+27 79 556 7346",
-    "priceRange": "R1000-R1800",
-    "areaServed": {"@type": "City", "name": "Johannesburg"},
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Melrose Arch",
-      "addressRegion": "Gauteng",
-      "addressCountry": "ZA"
-    },
-    "openingHoursSpecification": [
+    "@graph": [
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "17:00"
+        "@type": "ProfessionalService",
+        "@id": "https://massagebyash.co.za/#business",
+        "name": "Massage by Ashleigh",
+        "url": "https://massagebyash.co.za/",
+        "image": "https://massagebyash.co.za/social-preview.jpg",
+        "logo": "https://massagebyash.co.za/logo.webp",
+        "description": "Private, appointment-only massage services in Melrose Arch, Johannesburg, near Sandton and Rosebank.",
+        "telephone": "+27 79 556 7346",
+        "priceRange": "R1000-R1800",
+        "areaServed": [
+          {"@type": "Place", "name": "Melrose Arch"},
+          {"@type": "Place", "name": "Sandton"},
+          {"@type": "Place", "name": "Rosebank"},
+          {"@type": "City", "name": "Johannesburg"}
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Melrose Arch",
+          "addressRegion": "Gauteng",
+          "addressCountry": "ZA"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "15:00"
+          }
+        ],
+        "sameAs": ["https://onlyfans.com/ashleighreignjhb"]
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "09:00",
-        "closes": "15:00"
+        "@type": "FAQPage",
+        "@id": "https://massagebyash.co.za/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I confirm an appointment?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Complete the booking request and send it through WhatsApp. An appointment is confirmed only after it has been accepted and any required deposit has cleared."}
+          },
+          {
+            "@type": "Question",
+            "name": "Is a deposit required?",
+            "acceptedAnswer": {"@type": "Answer", "text": "A non-refundable R500 deposit is required for all new clients. The balance is paid in person before the appointment begins."}
+          },
+          {
+            "@type": "Question",
+            "name": "Where is the location?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Private massage appointments in Melrose Arch, Johannesburg, conveniently located near the BluBird Shopping Centre."}
+          },
+          {
+            "@type": "Question",
+            "name": "Is parking available?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Yes. Secure private parking is available for confirmed appointments."}
+          }
+        ]
       }
-    ],
-    "sameAs": ["https://onlyfans.com/ashleighreignjhb"]
+    ]
   }
   </script>
   <script src="assets/js/main.js" defer></script>
@@ -82,7 +121,7 @@
   <div class="topbar" id="site-navigation">
     <div class="brand">
       <a href="#hero" aria-label="Go to the top of the Massage by Ashleigh website">
-        <img src="logo.png" width="1160" height="1183" alt="Massage by Ashleigh logo">
+        <img src="logo.webp" width="320" height="326" alt="Massage by Ashleigh logo">
       </a>
     </div>
 
@@ -93,14 +132,11 @@
     </button>
 
     <nav class="nav" id="mainNavigation" aria-label="Main navigation">
-      <a href="#philosophy">Philosophy</a>
       <a href="#rates-and-services">Rates</a>
-      <a href="#services-not-offered">Not Offered</a>
-      <a href="#important-notes">Important</a>
-      <a href="#location">Location</a>
-      <a href="#hours">Hours</a>
+      <a href="#before-you-book">Before You Book</a>
+      <a href="#hours">Location &amp; Hours</a>
+      <a href="#faq">FAQ</a>
       <a href="#gallery-showcase">Gallery</a>
-      <a href="#legal-links">Policies</a>
       <a class="nav-book" href="#booking">Book Now</a>
     </nav>
   </div>
@@ -122,10 +158,14 @@
   </div>
 
   <header class="hero" id="hero">
+    <picture class="hero-media" aria-hidden="true">
+      <source media="(max-width: 768px)" srcset="hero-mobile.webp">
+      <img src="hero-desktop.webp" width="1440" height="810" alt="" fetchpriority="high" decoding="async">
+    </picture>
     <div class="hero-inner">
-      <span class="eyebrow">Welcome</span>
+      <span class="eyebrow">Melrose Arch · Johannesburg</span>
       <h1>Massage by Ashleigh</h1>
-      <p>Pure relaxation · Professional service · Private appointments</p>
+      <p>Private massage appointments in Melrose Arch, conveniently located near the BluBird Shopping Centre, with secure parking for confirmed clients.</p>
       <div class="hero-actions">
         <a class="btn btn-outline" href="#rates-and-services">View Rates</a>
         <a class="btn btn-gold" href="#booking">Book on WhatsApp</a>
@@ -139,24 +179,8 @@
         <div class="philosophy-card card">
           <span class="eyebrow">My Philosophy</span>
           <h2 class="section-title">Relaxed, refreshed &amp; cared for</h2>
-          <p>At Massage by Ash, my goal is simple—to help every client leave feeling relaxed, refreshed and cared for. Everyone deserves time to unwind from the stresses of daily life, and I strive to create a calm, welcoming environment where you can truly relax.</p>
+          <p>Massage by Ashleigh offers private, appointment-only massage services in Johannesburg. Each visit is arranged to provide a calm, welcoming and discreet experience where you can step away from daily stress and leave feeling refreshed.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="section section-compact" id="professional-care">
-      <div class="container center section-heading-block">
-        <span class="eyebrow">Professional Care</span>
-        <h2 class="section-title">Privacy, comfort &amp; clear communication</h2>
-        <p class="section-intro">Every appointment is arranged with respect and discretion. The space is prepared to provide a clean, comfortable and private experience from arrival to departure.</p>
-      </div>
-      <div class="container trust-grid">
-        <article class="trust-card card"><h3>Private &amp; Discreet</h3><p>Your privacy is respected from booking to departure.</p></article>
-        <article class="trust-card card"><h3>Clean Environment</h3><p>The space is prepared with cleanliness, hygiene and comfort in mind.</p></article>
-        <article class="trust-card card"><h3>Clear Communication</h3><p>Appointment details, expectations and guidelines are shared before arrival.</p></article>
-        <article class="trust-card card"><h3>Respectful Boundaries</h3><p>Professional boundaries and mutual respect are maintained at all times.</p></article>
-        <article class="trust-card card"><h3>Secure Parking</h3><p>Private, secure parking is available for scheduled clients visiting the Melrose Arch location.</p></article>
-        <article class="trust-card card"><h3>Appointment Only</h3><p>All visits must be booked in advance to maintain privacy and avoid interruptions.</p></article>
       </div>
     </section>
 
@@ -164,7 +188,7 @@
       <div class="container center section-heading-block">
         <span class="eyebrow">Rates &amp; Services</span>
         <h2 class="section-title">Choose your appointment</h2>
-        <p class="section-intro">Choose the service and duration that suits your appointment.</p>
+        <p class="section-intro">Select the service and duration that best suits your appointment. Add-ons can be selected in the booking form below.</p>
       </div>
 
       <div class="container services-grid">
@@ -176,12 +200,8 @@
             <h3>Sensual Massage</h3>
             <span class="sub">With hand/foot release</span>
             <div class="price-list">
-              <div class="price-item">
-                <span class="price-duration">30 Mins</span><strong class="price-amount">R1000</strong>
-              </div>
-              <div class="price-item">
-                <span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong>
-              </div>
+              <div class="price-item"><span class="price-duration">30 Mins</span><strong class="price-amount">R1000</strong></div>
+              <div class="price-item"><span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong></div>
             </div>
             <p class="extra-note">Covered oral can be added for R100.</p>
           </div>
@@ -196,12 +216,8 @@
             <h3>Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
-              <div class="price-item">
-                <span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong>
-              </div>
-              <div class="price-item">
-                <span class="price-duration">1 Hour</span><strong class="price-amount">R1400</strong>
-              </div>
+              <div class="price-item"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong></div>
+              <div class="price-item"><span class="price-duration">1 Hour</span><strong class="price-amount">R1400</strong></div>
             </div>
           </div>
         </article>
@@ -214,12 +230,8 @@
             <h3>FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
-              <div class="price-item">
-                <span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong>
-              </div>
-              <div class="price-item">
-                <span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong>
-              </div>
+              <div class="price-item"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong></div>
+              <div class="price-item"><span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong></div>
             </div>
           </div>
         </article>
@@ -259,18 +271,19 @@
       </div>
     </section>
 
-    <section class="section" id="important-notes">
-      <div class="container">
-        <div class="info-card card">
-          <span class="eyebrow">Please Read</span>
-          <h2 class="section-title">Important Notes</h2>
-          <ul class="list">
-            <li class="danger">Appointments are accepted at my discretion and depend on service suitability, respectful communication, safety and availability.</li>
-            <li>This is a drug-free zone.</li>
-            <li>Please do not book if you are feeling unwell.</li>
-            <li class="danger">There is zero tolerance for harassment, abuse or disregard for stated boundaries.</li>
-          </ul>
-        </div>
+    <section class="section" id="before-you-book">
+      <div class="container center section-heading-block">
+        <span class="eyebrow">Before You Book</span>
+        <h2 class="section-title">Everything you need to know</h2>
+        <p class="section-intro">A clear summary of privacy, communication, health, parking and appointment expectations.</p>
+      </div>
+      <div class="container before-grid">
+        <article class="before-card card"><h3>Private &amp; Appointment Only</h3><p>All visits must be arranged in advance. The exact Melrose Arch address is shared only after the booking is confirmed.</p></article>
+        <article class="before-card card"><h3>Secure Parking</h3><p>Secure, private parking is available for scheduled clients visiting the Melrose Arch location.</p></article>
+        <article class="before-card card"><h3>WhatsApp Communication</h3><p>Bookings are handled through WhatsApp from a valid South African mobile number. Private, withheld and international numbers cannot be answered.</p></article>
+        <article class="before-card card"><h3>Health &amp; Hygiene</h3><p>The space is prepared with cleanliness and comfort in mind. Please do not attend if you are unwell, and note that this is a drug-free zone.</p></article>
+        <article class="before-card card"><h3>Respectful Boundaries</h3><p>Professional boundaries and mutual respect are required. Harassment, abuse or disregard for stated rules will end the appointment.</p></article>
+        <article class="before-card card"><h3>Clear Booking Details</h3><p>Rates, expectations, deposit requirements and appointment details are confirmed before arrival. Video and voice calls are not available.</p></article>
       </div>
     </section>
 
@@ -287,17 +300,17 @@
           <div class="hours-table">
             <div class="hours-row"><span>Tuesday – Friday</span><span class="hours-dots" aria-hidden="true"></span><span class="time">09:00 – 17:00</span></div>
             <div class="hours-row"><span>Saturday</span><span class="hours-dots" aria-hidden="true"></span><span class="time">09:00 – 15:00</span></div>
-            <div class="hours-row"><span>Public Holidays</span><span class="hours-dots" aria-hidden="true"></span><span class="time">09:00 – 15:00</span></div>
+            <div class="hours-row"><span>Public Holidays</span><span class="hours-dots" aria-hidden="true"></span><span class="time">Strictly by appointment</span></div>
             <div class="hours-row closed"><span>Sundays &amp; Mondays</span><span class="hours-dots" aria-hidden="true"></span><span class="time">Closed</span></div>
           </div>
-          <p class="center muted">Strictly by appointment only. Public-holiday availability must be confirmed.</p>
+          <p class="public-holiday-note">Strictly by appointment.</p>
         </article>
 
         <article class="info-card card" id="location">
           <span class="eyebrow">Melrose Arch</span>
           <h2 class="section-title">Location</h2>
-          <p class="center muted">Situated in <strong class="gold">Melrose Arch, Johannesburg</strong>, just minutes from BluBird Shopping Centre.</p>
-          <p class="center muted">Secure, private parking is provided for scheduled clients.</p>
+          <p class="center muted">Private massage appointments in <strong class="gold">Melrose Arch, Johannesburg</strong>, conveniently located near the BluBird Shopping Centre.</p>
+          <p class="center muted">Secure parking is provided for scheduled clients.</p>
           <p class="center"><strong>The exact address is shared only after a booking has been confirmed.</strong></p>
         </article>
       </div>
@@ -325,61 +338,120 @@
         <div class="booking-heading">
           <span class="eyebrow">Quick Booking Request</span>
           <h2 class="section-title">Arrange Your Appointment</h2>
-          <p class="section-intro">Complete the form and continue to WhatsApp. Your details will be placed into a ready-to-send message.</p>
+          <p class="section-intro">Choose an available day and time, review the calculated price, then continue to WhatsApp with a ready-to-send request.</p>
         </div>
 
-        <form class="form-card card" data-whatsapp-form>
+        <form class="form-card card" data-whatsapp-form novalidate>
+          <div class="deposit-banner" role="note">
+            <strong>New clients: R500 deposit required</strong>
+            <span>The non-refundable deposit secures the booking and is deducted from the appointment total.</span>
+          </div>
+
           <div class="form-grid">
             <div class="field">
-              <label for="name">Your name</label>
+              <label for="name">Your name <span aria-hidden="true">*</span></label>
               <input id="name" name="name" type="text" autocomplete="name" required>
             </div>
 
             <div class="field">
-              <label for="service">Service</label>
+              <label for="clientType">Client type <span aria-hidden="true">*</span></label>
+              <select id="clientType" name="clientType" required>
+                <option value="">Choose client type</option>
+                <option value="new">New client</option>
+                <option value="returning">Returning client</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="service">Service <span aria-hidden="true">*</span></label>
               <select id="service" name="service" required>
                 <option value="">Choose a service</option>
-                <option>Sensual Massage · 30 mins · R1000</option>
-                <option>Sensual Massage · 60 mins · R1200</option>
-                <option>Sensual Massage with FH · 30 mins · R1200</option>
-                <option>Sensual Massage with FH · 60 mins · R1400</option>
-                <option>FH Only · 30 mins · R1300</option>
-                <option>FH Only · 60 mins · R1500</option>
+                <option value="sensual-30" data-title="Sensual Massage" data-duration="30" data-price="1000" data-covered-addon="true">Sensual Massage · 30 mins · R1000</option>
+                <option value="sensual-60" data-title="Sensual Massage" data-duration="60" data-price="1200" data-covered-addon="true">Sensual Massage · 60 mins · R1200</option>
+                <option value="sensual-fh-30" data-title="Sensual Massage with FH" data-duration="30" data-price="1200">Sensual Massage with FH · 30 mins · R1200</option>
+                <option value="sensual-fh-60" data-title="Sensual Massage with FH" data-duration="60" data-price="1400">Sensual Massage with FH · 60 mins · R1400</option>
+                <option value="fh-30" data-title="FH Only" data-duration="30" data-price="1300">FH Only · 30 mins · R1300</option>
+                <option value="fh-60" data-title="FH Only" data-duration="60" data-price="1500">FH Only · 60 mins · R1500</option>
               </select>
             </div>
 
             <div class="field">
-              <label for="date">Preferred date</label>
-              <input id="date" name="date" type="date">
+              <label for="date">Preferred date <span aria-hidden="true">*</span></label>
+              <input id="date" name="date" type="date" required aria-describedby="dateHelp">
+              <small class="field-help" id="dateHelp">Tuesday to Saturday only. Strictly by appointment.</small>
             </div>
 
             <div class="field">
-              <label for="time">Preferred time</label>
-              <input id="time" name="time" type="time">
+              <label for="time">Preferred time <span aria-hidden="true">*</span></label>
+              <select id="time" name="time" required disabled aria-describedby="timeHelp">
+                <option value="">Choose a date and service first</option>
+              </select>
+              <small class="field-help" id="timeHelp">Available start times are based on the selected service duration and business hours.</small>
+            </div>
+
+
+            <fieldset class="field full add-on-fieldset">
+              <legend>Optional add-ons</legend>
+              <div class="addon-options">
+                <label class="check-option" for="gfeAddon">
+                  <input id="gfeAddon" name="gfeAddon" type="checkbox">
+                  <span><strong>GFE add-on</strong><small>+R300 for new clients · no charge for repeat clients</small></span>
+                </label>
+                <label class="check-option" for="coveredAddon" id="coveredAddonLabel">
+                  <input id="coveredAddon" name="coveredAddon" type="checkbox" disabled>
+                  <span><strong>Covered oral add-on</strong><small>+R100 · available with Sensual Massage only</small></span>
+                </label>
+              </div>
+              <p class="field-help" id="addonHelp">Select a Sensual Massage option to enable the covered-oral add-on.</p>
+            </fieldset>
+
+            <div class="field full">
+              <label for="message">Anything I should know? <span class="optional">(optional)</span></label>
+              <textarea id="message" name="message" rows="4" placeholder="Share any important booking information or questions…"></textarea>
             </div>
 
             <div class="field full">
-              <label for="message">Anything I should know?</label>
-              <textarea id="message" name="message" rows="5" placeholder="Add GFE +R300, add covered oral to massage +R100, special requests, or anything important…"></textarea>
+              <div class="price-summary" aria-live="polite" aria-labelledby="priceSummaryTitle">
+                <h3 id="priceSummaryTitle">Appointment price</h3>
+                <div class="summary-row"><span>Base service</span><strong id="basePrice">—</strong></div>
+                <div class="summary-row"><span>Add-ons</span><strong id="addonPrice">R0</strong></div>
+                <div class="summary-row summary-total"><span>Calculated total</span><strong id="totalPrice">—</strong></div>
+                <div class="summary-row"><span>Deposit to secure booking</span><strong id="depositPrice">Choose client type</strong></div>
+                <div class="summary-row"><span>Remaining balance</span><strong id="balancePrice">—</strong></div>
+              </div>
             </div>
 
             <div class="field full">
+              <label class="terms-check" for="termsAgreement">
+                <input id="termsAgreement" name="termsAgreement" type="checkbox" required>
+                <span>I have read and agree to the <a href="booking-terms.html" target="_blank" rel="noopener">Booking Terms</a>, including the deposit, cancellation and conduct rules. <span aria-hidden="true">*</span></span>
+              </label>
+            </div>
+
+            <div class="field full">
+              <p class="privacy-consent">By continuing to WhatsApp, you agree that your submitted booking information will be sent through WhatsApp and handled according to the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
               <button type="submit" class="btn btn-gold form-submit">Continue to WhatsApp</button>
             </div>
           </div>
         </form>
+      </div>
+    </section>
 
-        <aside class="booking-card card" aria-labelledby="bookingNotesTitle">
-          <h3 id="bookingNotesTitle">Booking Notes</h3>
-          <ul class="list contact-list">
-            <li>Bookings are arranged exclusively via WhatsApp.</li>
-            <li>Please contact me from a valid South African mobile number.</li>
-            <li>Private, withheld and international numbers cannot be answered.</li>
-            <li>Video and voice calls are not available.</li>
-          </ul>
-          <p class="closing-text">I look forward to hearing from you,</p>
-          <p class="signature">Ashleigh<br><span aria-hidden="true">💚</span></p>
-        </aside>
+    <section class="section" id="faq">
+      <div class="container center section-heading-block">
+        <span class="eyebrow">Frequently Asked Questions</span>
+        <h2 class="section-title">Helpful booking answers</h2>
+        <p class="section-intro">Quick answers to the most common questions before requesting an appointment.</p>
+      </div>
+      <div class="container faq-list">
+        <details class="faq-item card"><summary>How do I confirm an appointment?</summary><p>Complete the booking form and continue to WhatsApp. Your appointment is confirmed only after it has been accepted and any required deposit has cleared.</p></details>
+        <details class="faq-item card"><summary>Is a deposit required?</summary><p>Yes. A non-refundable R500 deposit is required for all new clients. It secures the appointment and is deducted from the calculated total. The remaining balance is paid in person.</p></details>
+        <details class="faq-item card"><summary>Where is the location?</summary><p>Private massage appointments in <strong>Melrose Arch, Johannesburg</strong>, conveniently located near the BluBird Shopping Centre.</p></details>
+        <details class="faq-item card"><summary>Is parking available?</summary><p>Yes. Secure private parking is available for clients with confirmed appointments.</p></details>
+        <details class="faq-item card"><summary>What happens if I arrive late?</summary><p>Late arrival may shorten your appointment so that later bookings are not delayed. Please send a WhatsApp message as soon as possible if you are running late.</p></details>
+        <details class="faq-item card"><summary>Can I reschedule?</summary><p>A cancelled booking may be moved to the next suitable available slot by prior arrangement. Deposits are non-refundable, and rescheduling remains subject to availability.</p></details>
+        <details class="faq-item card"><summary>What payment methods are accepted?</summary><p>Cash, instant EFT and PayShap are accepted. Payment is required before the appointment begins.</p></details>
+        <details class="faq-item card"><summary>When is the exact address provided?</summary><p>The exact address is shared only after your appointment has been accepted and confirmed.</p></details>
       </div>
     </section>
 
