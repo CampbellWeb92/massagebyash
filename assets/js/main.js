@@ -557,7 +557,7 @@
   // Static mobile navigation menu
   const menuToggle = byId("menuToggle");
   const mainNavigation = byId("mainNavigation");
-  const mobileMenuQuery = window.matchMedia("(max-width: 768px)");
+  const mobileMenuQuery = window.matchMedia("(max-width: 900px)");
 
   const setMobileMenuState = (isOpen, returnFocus = false) => {
     if (!menuToggle || !mainNavigation) return;

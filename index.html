@@ -17,7 +17,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Montserrat:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Montserrat:wght@400;500;600;700;800&amp;display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Montserrat:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Montserrat:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="assets/css/styles.css">
 
   <meta property="og:type" content="website">
@@ -121,7 +123,7 @@
   <div class="topbar" id="site-navigation">
     <div class="brand">
       <a href="#hero" aria-label="Go to the top of the Massage by Ashleigh website">
-        <img src="logo.webp" width="320" height="326" alt="Massage by Ashleigh logo">
+        <img src="logo.webp" width="240" height="245" alt="Massage by Ashleigh logo">
       </a>
     </div>
 
@@ -132,7 +134,6 @@
     </button>
 
     <nav class="nav" id="mainNavigation" aria-label="Main navigation">
-      <a href="#hero">Home</a>
       <a href="#philosophy">About</a>
       <a href="#rates-and-services">Rates</a>
       <a href="#services-not-offered">Not Offered</a>
@@ -199,7 +200,7 @@
       <div class="container services-grid">
         <article class="service-card card service-card-link" data-book-service="sensual-30" role="link" tabindex="0" aria-label="Choose Sensual Massage in the WhatsApp booking form">
           <div class="service-image">
-            <img src="table.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Prepared massage table in a private treatment room">
+            <img src="table.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Prepared massage table in a private treatment room">
           </div>
           <div class="service-content">
             <h3>Sensual Massage</h3>
@@ -214,7 +215,7 @@
 
         <article class="service-card card service-card-link" data-book-service="sensual-fh-30" role="link" tabindex="0" aria-label="Choose Sensual Massage with FH in the WhatsApp booking form">
           <div class="service-image">
-            <img src="msg.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Private massage service setting">
+            <img src="msg.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Private massage service setting">
             <span class="badge">Popular</span>
           </div>
           <div class="service-content">
@@ -229,7 +230,7 @@
 
         <article class="service-card card service-card-link" data-book-service="fh-30" role="link" tabindex="0" aria-label="Choose FH Only in the WhatsApp booking form">
           <div class="service-image">
-            <img src="bed.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Comfortable private appointment room">
+            <img src="bed.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Comfortable private appointment room">
           </div>
           <div class="service-content">
             <h3>FH Only</h3>
@@ -243,7 +244,7 @@
 
         <article class="service-card card service-card-link" data-book-addon="gfe" role="link" tabindex="0" aria-label="Choose the GFE add-on in the WhatsApp booking form">
           <div class="service-image">
-            <img src="green.webp" width="1402" height="1122" loading="lazy" decoding="async" alt="Green and gold private appointment setting">
+            <img src="green.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Green and gold private appointment setting">
           </div>
           <div class="service-content">
             <h3>GFE Add-On</h3>
@@ -464,20 +465,20 @@
       <div class="container center section-heading-block">
         <span class="eyebrow">Gallery</span>
         <h2 class="section-title" id="galleryTitle">A calm private setting</h2>
-        <p class="section-intro">Use the arrow buttons, dots or keyboard arrow keys to browse the gallery.</p>
+
       </div>
 
       <div class="gallery-shell" id="gallery" aria-roledescription="carousel" aria-label="Private appointment setting gallery" tabindex="0">
         <div class="gallery-viewport">
           <div class="gallery-track" id="galleryTrack">
-            <figure class="gallery-slide" aria-hidden="false"><img src="1.webp" width="1199" height="1600" loading="lazy" decoding="async" alt="Private massage room in Melrose Arch" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="2.webp" width="1470" height="1461" loading="lazy" decoding="async" alt="Prepared massage table with clean linens" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="3.webp" width="1537" height="1538" loading="lazy" decoding="async" alt="Clean private treatment setting with ambient lighting" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="4.webp" width="1080" height="795" loading="lazy" decoding="async" alt="Massage room details and relaxing décor" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="5.webp" width="1080" height="757" loading="lazy" decoding="async" alt="Private appointment room in Johannesburg" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="6.webp" width="1080" height="778" loading="lazy" decoding="async" alt="Comfortable private massage setting" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="7.webp" width="1080" height="1414" loading="lazy" decoding="async" alt="Green and gold massage-room décor" draggable="false"></figure>
-            <figure class="gallery-slide" aria-hidden="true"><img src="8.webp" width="1080" height="760" loading="lazy" decoding="async" alt="Prepared private treatment space" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="false"><img src="1.webp" width="1079" height="1440" loading="lazy" fetchpriority="low" decoding="async" alt="Private massage room in Melrose Arch" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="2.webp" width="1080" height="1073" loading="lazy" fetchpriority="low" decoding="async" alt="Prepared massage table with clean linens" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="3.webp" width="1080" height="1081" loading="lazy" fetchpriority="low" decoding="async" alt="Clean private treatment setting with ambient lighting" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="4.webp" width="1080" height="795" loading="lazy" fetchpriority="low" decoding="async" alt="Massage room details and relaxing décor" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="5.webp" width="1080" height="757" loading="lazy" fetchpriority="low" decoding="async" alt="Private appointment room in Johannesburg" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="6.webp" width="1080" height="778" loading="lazy" fetchpriority="low" decoding="async" alt="Comfortable private massage setting" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="7.webp" width="1080" height="1414" loading="lazy" fetchpriority="low" decoding="async" alt="Green and gold massage-room décor" draggable="false"></figure>
+            <figure class="gallery-slide" aria-hidden="true"><img src="8.webp" width="1080" height="760" loading="lazy" fetchpriority="low" decoding="async" alt="Prepared private treatment space" draggable="false"></figure>
           </div>
         </div>
 

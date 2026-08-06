@@ -26,3 +26,16 @@ BOOKING FORM RULES
 - Sunday and Monday: unavailable
 - Strictly by appointment
 - Available start times adjust to the selected appointment duration
+
+MOBILE SUPPORT
+--------------
+The responsive layout has been checked for narrow phones, standard phones, tablets and phone landscape view. The full navigation collapses below 900px, form controls remain touch-friendly, gallery images remain fully visible, and all legal pages use the same mobile-safe spacing.
+
+MOBILE AND SPEED UPDATE
+- Responsive navigation now switches to the mobile menu on tablets and phones.
+- Layouts, forms, gallery controls, footer links and legal pages were hardened for narrow screens and safe-area insets.
+- Oversized images were resized and recompressed without changing the visible layout.
+- Unused image assets were removed.
+- Google Fonts now load without blocking the first page render.
+- Lazy-loaded images use low fetch priority, while the correct hero image is preloaded for each screen size.
+
