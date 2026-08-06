@@ -1,0 +1,38 @@
+CHANGES MADE
+============
+
+1. Removed the embedded 2,000+ line CSS block and replaced it with one organised stylesheet.
+2. Removed duplicate selectors, repeated declarations, conflicting override sections and nested media-query errors.
+3. Removed the hidden BookMe block, unused BookMe styles/assets, unused green.jpg and the entire .git folder from the delivery ZIP.
+4. Cleaned the service-rate markup and standardised duration and price alignment.
+5. Fixed malformed booking-form labels and added proper label/input connections, names and autocomplete.
+6. Fixed mismatched closing div tags in the payment section.
+7. Added safe checks around JavaScript elements so missing optional elements do not crash the page.
+8. Improved WhatsApp form messages, date formatting, popup-blocker fallback and minimum booking date.
+9. Updated the live status wording so it does not incorrectly claim public-holiday availability.
+10. Rebuilt the gallery carousel with consistent image sizing and responsive controls.
+11. Consolidated the three legal pages onto one shared stylesheet.
+12. Fixed the broken legal-page favicon reference (logo2.png did not exist).
+13. Standardised emerald, gold, black and white colours, typography, spacing, cards, buttons and responsive breakpoints.
+14. Improved mobile navigation, keyboard navigation, focus styling, form accessibility and reduced-motion support.
+15. Added a smaller favicon and dynamic copyright year.
+
+RECOMMENDED NEXT IMPROVEMENTS
+=============================
+
+- Add a real appointment calendar or booking platform when ready.
+- Add a consent checkbox linking to the booking terms before the WhatsApp form can submit.
+- Replace the large logo.png with a professionally exported transparent WebP/SVG for faster loading.
+- Add a privacy-friendly analytics tool to measure visits and booking-button clicks.
+- Test the final deployed site on iPhone Safari and Android Chrome after publishing.
+
+LATEST REQUESTED UPDATES
+------------------------
+- Removed the WhatsApp booking buttons and links from all service-card rate rows.
+- Kept duration aligned left and price aligned right at every screen size.
+- Restored the desktop and mobile navigation to normal static page positioning.
+- Restored the gallery to a clean, full-bleed picture layout without the image overlay label.
+- Simplified the cards with neutral borders, clean solid backgrounds and softer shadows.
+- Removed coloured accent lines from service-card images, price rows and information lists.
+- Replaced price-row divider lines with tidy, softly shaded rows.
+- Removed the JavaScript that generated WhatsApp links for rate rows because it is no longer needed.
