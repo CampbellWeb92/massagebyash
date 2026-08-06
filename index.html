@@ -618,6 +618,15 @@ text-align: center;
         border-color 0.2s ease,
         background 0.2s ease,
         box-shadow 0.2s ease;
+          display: flex;
+  justify-content: space-between; /* pushes left & right */
+  align-items: center;
+
+  padding: 10px 0;
+  text-decoration: none;
+  color: inherit;
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .price-item:hover,
@@ -854,6 +863,81 @@ text-align: center;
       font-size: 1.95rem;
     }
 
+    /* DARK LUXURY CARD */
+.booking-card {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  border: 1px solid rgba(200, 169, 106, 0.4);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.4),
+    0 0 20px rgba(200,169,106,0.15);
+
+  text-align: center;
+}
+
+/* LIST */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.contact-list li {
+  margin-bottom: 10px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* GOLD BULLETS */
+.contact-list li::before {
+  content: "•";
+  color: #c8a96a;
+  margin-right: 8px;
+}
+
+/* TEXT */
+.closing-text {
+  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* SIGNATURE */
+.signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: #c8a96a;
+  margin-top: 5px;
+}
+
+.booking-card:hover {
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.6),
+    0 0 30px rgba(200,169,106,0.25);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+select {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  background: #ffffff;
+  color: #000;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Dropdown list items */
+select option {
+  color: #000;
+  background: #fff;
+}
     .gallery-shell {
       position: relative;
       width: min(980px, calc(100% - 44px));
@@ -1718,6 +1802,92 @@ text-align: center;
       }
     }
 
+.booking-section {
+  padding: 80px 20px;
+ background: radial-gradient(circle at top, #0b1f17 0, #070707 42%, #030303 100%);
+  color: #fff;
+  text-align: center;
+  
+}
+
+.booking-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.form-card {
+  max-width: 600px;
+  margin: auto;
+  background: rgba(255,255,255,0.05);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+
+input, select, textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #c8a96a;
+  box-shadow: 0 0 10px rgba(200,169,106,0.4);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #c8a96a, #a8843e);
+  border: none;
+  padding: 14px;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 5px 20px rgba(200,169,106,0.4);
+}
+
+.form-note {
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.contact-list {
+  margin-top: 30px;
+  text-align: left;
+  opacity: 0.85;
+}
 
     /* =========================================================
        RESTORED SUBTLE SPARKLES, SHIMMER & HOVER EFFECTS
@@ -1827,6 +1997,25 @@ text-align: center;
       color: #070707;
     }
 
+.contact-list {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.contact-list li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 0;
+}
+
+.contact-list li::before {
+  content: "•";
+  color: #c8a96a; /* gold accent */
+  margin-right: 8px;
+}
     /* Buttons remain clean, with a small polished hover response. */
     .btn:hover,
     .whatsapp:hover {
@@ -2097,7 +2286,7 @@ text-align: center;
       <a href="#hours">Hours</a>
       <a href="#legal-links">Policies</a>
       <a href="#gallery-showcase">Gallery</a>
-      <a class="nav-book" href="#contact">Book Now</a>
+      <a class="nav-book" href="#booking">Book Now</a>
     </nav>
   </div>
 
@@ -2172,8 +2361,8 @@ text-align: center;
             <h3>Sensual Massage</h3>
             <span class="sub">With hand/foot release</span>
             <div class="price-list">
-              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage" data-details="With hand/foot release" data-duration="30 minutes" data-price="R900"><span class="price-duration">30 Mins</span><strong class="price-amount">R900</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
-              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage" data-details="With hand/foot release" data-duration="1 hour" data-price="R1200"><span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item" href="#" data-service="Sensual Massage" data-details="With hand/foot release" data-duration="30 minutes" data-price="R900"><span class="price-duration">30 Mins</span><strong class="price-amount">R900</strong></a>
+              <a class="price-item" href="#" data-service="Sensual Massage" data-details="With hand/foot release" data-duration="1 hour" data-price="R1200"><span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong></a>
             </div>
             <p class="extra-note">+R100 extra for covered oral</p>
           </div>
@@ -2188,8 +2377,8 @@ text-align: center;
             <h3>Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
-              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage with FH" data-details="Covered oral included" data-duration="30 minutes" data-price="R1200"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
-              <a class="price-item whatsapp-booking" href="#" data-service="Sensual Massage with FH" data-details="Covered oral included" data-duration="1 hour" data-price="R1500"><span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item" href="#" data-service="Sensual Massage with FH" data-details="Covered oral included" data-duration="30 minutes" data-price="R1200"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong></a>
+              <a class="price-item" href="#" data-service="Sensual Massage with FH" data-details="Covered oral included" data-duration="1 hour" data-price="R1500"><span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong></a>
             </div>
           </div>
         </article>
@@ -2202,8 +2391,8 @@ text-align: center;
             <h3>FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
-              <a class="price-item whatsapp-booking" href="#" data-service="FH Only" data-details="No massage included" data-duration="30 minutes" data-price="R1300"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
-              <a class="price-item whatsapp-booking" href="#" data-service="FH Only" data-details="No massage included" data-duration="1 hour" data-price="R1600"><span class="price-duration">1 Hour</span><strong class="price-amount">R1600</strong><span class="price-book" aria-hidden="true">Book Now</span></a>
+              <a class="price-item" href="#" data-service="FH Only" data-details="No massage included" data-duration="30 minutes" data-price="R1300"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong></a>
+              <a class="price-item" href="#" data-service="FH Only" data-details="No massage included" data-duration="1 hour" data-price="R1600"><span class="price-duration">1 Hour</span><strong class="price-amount">R1600</strong></a>
             </div>
           </div>
         </article>
@@ -2308,25 +2497,67 @@ text-align: center;
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="info-card card center">
-          <h2>Ready to arrange your appointment?</h2>
-          <span class="small-badge">Chat on WhatsApp</span>
-          
-          <ul class="list contact-list">
-            <li>Include your preferred date, time, service and duration in your message.</li>
-            <li>Bookings are arranged exclusively via WhatsApp.</li>
-            <li>Please contact me from a valid South African mobile number.</li>
-            <li>Unfortunately, I cannot respond to private, withheld or international numbers.</li>
-            <li>Video and voice calls are not available.</li>
-          </ul>
-          <a class="btn btn-gold primary-whatsapp" aria-label="Book an appointment with Ashleigh on WhatsApp" href="https://wa.me/27795567346" target="_blank" rel="noopener noreferrer">Book on WhatsApp</a>
-          <p class="muted">I look forward to hearing from you,</p>
-          <p class="signature">Ashleigh<br>💚</p>
+    <section class="booking-section" id="booking">
+  <div class="container">
+    <p class="eyebrow">Quick booking request</p>
+    <h2>Arrange Your Appointment</h2>
+
+    <form class="form-card" data-whatsapp-form>
+      <div class="form-grid">
+        <div class="field">
+          <label>Your name</label>
+          <input id="name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label>Service</label>
+          <select id="service" required>
+            <option value="">Choose a service</option>
+            <option>Sensual Massage 30mins</option>
+            <option>Sensual Massage 60mins</option>
+            <option>Sensual Massage & FH 30mins</option>
+            <option>Sensual Massage & FH 60mins</option>
+            <option>FH Only 30mins</option>
+            <option>FH Only 60mins</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Preferred date</label>
+          <input id="date" type="date">
+        </div>
+
+        <div class="field">
+          <label>Preferred time</label>
+          <input id="time" type="time">
+        </div>
+
+        <div class="field full">
+  <label>Anything I should know?</label>
+  <textarea id="message" placeholder="Add GFE, special requests, or anything important..."></textarea>
+</div>
+
+        <div class="field full">
+          <button type="submit" class="btn-primary">Continue to WhatsApp</button>
         </div>
       </div>
-    </section>
+    </form>
+
+    <div class="booking-card">
+
+  <ul class="list contact-list">
+    <li>Bookings are arranged exclusively via WhatsApp.</li>
+    <li>Please contact me from a valid South African mobile number.</li>
+    <li>Unfortunately, I cannot respond to private, withheld or international numbers.</li>
+    <li>Video and voice calls are not available.</li>
+  </ul>
+
+  <p class="closing-text">I look forward to hearing from you,</p>
+  <p class="signature">Ashleigh 💚</p>
+
+</div>
+</section>
+
 
     <section class="section" id="gallery-showcase" aria-labelledby="galleryTitle">
       <div class="container center">
@@ -2822,6 +3053,48 @@ text-align: center;
         });
       });
     })();
+    document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("[data-whatsapp-form]");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const phoneNumber = "27795567346";
+
+    const name = document.getElementById("name").value;
+    const service = document.getElementById("service").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const message = document.getElementById("message").value;
+
+    let formattedDate = date;
+    if (date) {
+      const d = new Date(date);
+      formattedDate = d.toLocaleDateString("en-ZA", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+
+    const text = encodeURIComponent(
+`Hello Ashleigh,
+
+I'd like to make a booking:
+• Name: ${name}
+• Service: ${service}
+${date ? `• Date: ${formattedDate}` : ""}
+${time ? `• Time: ${time}` : ""}
+${message ? `• Notes: ${message}` : ""}
+
+Thank you 💚`
+    );
+
+    window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
+  });
+});
+
   </script>
 </body>
 </html>
