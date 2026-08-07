@@ -393,16 +393,19 @@
   updateAddonAvailability();
   updatePriceSummary();
 
-  // Service cards open the booking form and preselect the matching option.
-  const serviceCards = [...document.querySelectorAll("[data-book-service], [data-book-addon]")];
+  // Individual service price buttons open the booking form and preselect the exact option.
+  const serviceLinks = [...document.querySelectorAll("[data-book-service], [data-book-addon]")];
 
-  const openBookingFromCard = (card) => {
+  const openBookingFromService = (control) => {
     if (!bookingForm) return;
 
-    const requestedService = card.dataset.bookService;
-    const requestedAddon = card.dataset.bookAddon;
+    const requestedService = control.dataset.bookService;
+    const requestedAddon = control.dataset.bookAddon;
 
     if (requestedService && serviceSelect) {
+      const matchingOption = serviceSelect.querySelector(`option[value="${requestedService}"]`);
+      if (!matchingOption) return;
+
       serviceSelect.value = requestedService;
       serviceSelect.dispatchEvent(new Event("change", { bubbles: true }));
     }
@@ -415,17 +418,13 @@
     bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
 
     window.setTimeout(() => {
-      serviceSelect?.focus({ preventScroll: true });
+      if (requestedAddon === "gfe") gfeAddon?.focus({ preventScroll: true });
+      else serviceSelect?.focus({ preventScroll: true });
     }, 450);
   };
 
-  serviceCards.forEach((card) => {
-    card.addEventListener("click", () => openBookingFromCard(card));
-    card.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      openBookingFromCard(card);
-    });
+  serviceLinks.forEach((control) => {
+    control.addEventListener("click", () => openBookingFromService(control));
   });
 
   bookingForm?.addEventListener("submit", (event) => {

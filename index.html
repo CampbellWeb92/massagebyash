@@ -198,7 +198,7 @@
       </div>
 
       <div class="container services-grid">
-        <article class="service-card card service-card-link" data-book-service="sensual-30" role="link" tabindex="0" aria-label="Choose Sensual Massage in the WhatsApp booking form">
+        <article class="service-card card">
           <div class="service-image">
             <img src="table.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Prepared massage table in a private treatment room">
           </div>
@@ -206,14 +206,18 @@
             <h3>Sensual Massage</h3>
             <span class="sub">With hand/foot release</span>
             <div class="price-list">
-              <div class="price-item"><span class="price-duration">30 Mins</span><strong class="price-amount">R1000</strong></div>
-              <div class="price-item"><span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong></div>
+              <button type="button" class="price-item service-option-link" data-book-service="sensual-30" aria-label="Choose Sensual Massage for 30 minutes in the WhatsApp booking form">
+                <span class="price-duration">30 Mins</span><strong class="price-amount">R1000</strong><span class="book-cue" aria-hidden="true">Book →</span>
+              </button>
+              <button type="button" class="price-item service-option-link" data-book-service="sensual-60" aria-label="Choose Sensual Massage for 1 hour in the WhatsApp booking form">
+                <span class="price-duration">1 Hour</span><strong class="price-amount">R1200</strong><span class="book-cue" aria-hidden="true">Book →</span>
+              </button>
             </div>
             <p class="extra-note">Covered oral can be added for R100.</p>
           </div>
         </article>
 
-        <article class="service-card card service-card-link" data-book-service="sensual-fh-30" role="link" tabindex="0" aria-label="Choose Sensual Massage with FH in the WhatsApp booking form">
+        <article class="service-card card">
           <div class="service-image">
             <img src="msg.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Private massage service setting">
             <span class="badge">Popular</span>
@@ -222,13 +226,17 @@
             <h3>Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
-              <div class="price-item"><span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong></div>
-              <div class="price-item"><span class="price-duration">1 Hour</span><strong class="price-amount">R1400</strong></div>
+              <button type="button" class="price-item service-option-link" data-book-service="sensual-fh-30" aria-label="Choose Sensual Massage with FH for 30 minutes in the WhatsApp booking form">
+                <span class="price-duration">30 Mins</span><strong class="price-amount">R1200</strong><span class="book-cue" aria-hidden="true">Book →</span>
+              </button>
+              <button type="button" class="price-item service-option-link" data-book-service="sensual-fh-60" aria-label="Choose Sensual Massage with FH for 1 hour in the WhatsApp booking form">
+                <span class="price-duration">1 Hour</span><strong class="price-amount">R1400</strong><span class="book-cue" aria-hidden="true">Book →</span>
+              </button>
             </div>
           </div>
         </article>
 
-        <article class="service-card card service-card-link" data-book-service="fh-30" role="link" tabindex="0" aria-label="Choose FH Only in the WhatsApp booking form">
+        <article class="service-card card">
           <div class="service-image">
             <img src="bed.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Comfortable private appointment room">
           </div>
@@ -236,20 +244,26 @@
             <h3>FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
-              <div class="price-item"><span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong></div>
-              <div class="price-item"><span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong></div>
+              <button type="button" class="price-item service-option-link" data-book-service="fh-30" aria-label="Choose FH Only for 30 minutes in the WhatsApp booking form">
+                <span class="price-duration">30 Mins</span><strong class="price-amount">R1300</strong><span class="book-cue" aria-hidden="true">Book →</span>
+              </button>
+              <button type="button" class="price-item service-option-link" data-book-service="fh-60" aria-label="Choose FH Only for 1 hour in the WhatsApp booking form">
+                <span class="price-duration">1 Hour</span><strong class="price-amount">R1500</strong><span class="book-cue" aria-hidden="true">Book →</span>
+              </button>
             </div>
           </div>
         </article>
 
-        <article class="service-card card service-card-link" data-book-addon="gfe" role="link" tabindex="0" aria-label="Choose the GFE add-on in the WhatsApp booking form">
+        <article class="service-card card">
           <div class="service-image">
             <img src="green.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Green and gold private appointment setting">
           </div>
           <div class="service-content">
             <h3>GFE Add-On</h3>
             <span class="sub">Includes kissing and mutual oral. Safe and covered only.</span>
-            <div class="addon-row"><span>Add-on price</span><strong>+R300</strong></div>
+            <button type="button" class="addon-row service-option-link" data-book-addon="gfe" aria-label="Choose the GFE add-on in the WhatsApp booking form">
+              <span class="price-duration">Add-on price</span><strong class="price-amount">+R300</strong><span class="book-cue" aria-hidden="true">Add →</span>
+            </button>
           </div>
         </article>
       </div>
