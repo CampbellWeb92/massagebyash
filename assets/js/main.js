@@ -165,14 +165,14 @@
       businessStatus.dataset.state = isOpen ? "open" : "closed";
       statusText.textContent = isOpen ? "Open now" : "Closed now";
       statusDetail.textContent = isOpen
-        ? `Regular hours run until ${closingTime}. Strictly by appointment.`
-        : "Please check availability on WhatsApp.";
+        ? `Currently open until ${closingTime}. Strictly by appointment.`
+        : "Currently unavailable.";
     } catch {
       businessStatus.dataset.state = "unknown";
       statusText.textContent = "Confirm availability";
       statusDetail.textContent = "Strictly by appointment. Please check availability on WhatsApp.";
     }
-  };
+  }
 
   updateBusinessStatus();
   window.setInterval(updateBusinessStatus, 60000);

@@ -840,6 +840,14 @@ a {
   font-weight: 600;
 }
 
+.whatsapp-note{
+   display: block;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .optional {
   color: rgba(255, 255, 255, 0.58);
   font-size: 0.76rem;
