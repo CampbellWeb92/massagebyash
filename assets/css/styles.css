@@ -779,8 +779,23 @@ a {
   border: 0;
 }
 
+.booking-signoff {
+  margin-top: 10px;
+  padding: 20px;
+  text-align: center;
+}
 
+.booking-signoff p {
+  margin: 0 0 4px;
+  color: rgba(255, 255, 255, 0.8);
+}
 
+.booking-signoff strong {
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
 
 
 
