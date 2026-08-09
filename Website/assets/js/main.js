@@ -439,7 +439,25 @@
     const pending=await savePendingRequest(price);
     if(submit){submit.disabled=false;submit.textContent="Continue to WhatsApp";}
     const requestStatus=pending.saved?"A Pending request has been saved to the booking system.":"The live Pending save was unavailable, so please rely on this WhatsApp request.";
-    const message=["Hello Ashleigh","","I'd like to request an appointment:",`• Name: ${nameInput?.value.trim()||""}`,`• WhatsApp: ${phoneInput?.value.trim()||""}`,`• Client type: ${clientType?.selectedOptions?.[0]?.textContent||""}`,`• Service: ${price.service?.label||""}`,`• Add-ons: ${addOns.length?addOns.join(", "):"None"}`,`• Calculated appointment total: ${formatMoney(price.total)}`,clientType?.value==="new"?`• New-client deposit: ${formatMoney(price.deposit)} required to secure the booking`:"• Deposit: Not required for returning client",`• Remaining balance: ${formatMoney(price.balance)}`,`• First preference: ${formatDate(selectedDateKey)} at ${timeInput?.value||""}`,notesInput?.value.trim()?`• Notes: ${notesInput.value.trim()}`:"","I understand that this request remains Pending until accepted and confirmed.",requestStatus,"","Thank you 💚"].filter(Boolean).join("\n");
+    const message = [
+      "Hello Ashleigh",
+      "",
+      "I'd like to request the following appointment:",
+      "",
+      `• Name: ${nameInput?.value.trim() || ""}`,
+      `• WhatsApp: ${phoneInput?.value.trim() || ""}`,
+      `• Client type: ${clientType?.selectedOptions?.[0]?.textContent || ""}`,
+      `• Service: ${price.service?.label || ""}`,
+      `• Add-ons: ${addOns.length ? addOns.join(", ") : "None"}`,
+      `• Total: ${formatMoney(price.total)}`,
+      `• Deposit: ${formatMoney(price.deposit)}`,
+      `• Balance: ${formatMoney(price.balance)}`,
+      `• Preferred appointment: ${formatDate(selectedDateKey)} at ${timeInput?.value || ""}`,
+      "",
+      "Please confirm if this appointment is available.",
+      "",
+      "Thank you"
+    ].filter(Boolean).join("\n");
     const whatsappUrl=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     if(whatsappWindow) whatsappWindow.location.href=whatsappUrl; else window.location.href=whatsappUrl;
   });
