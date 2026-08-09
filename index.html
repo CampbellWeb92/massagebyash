@@ -111,6 +111,8 @@
     ]
   }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="assets/js/schedule-config.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -395,18 +397,44 @@
               </select>
             </div>
 
-            <div class="field">
-              <label for="date">Preferred date <span aria-hidden="true">*</span></label>
-              <input id="date" name="date" type="date" required aria-describedby="dateHelp">
-              <small class="field-help" id="dateHelp">Tuesday to Saturday only. Strictly by appointment.</small>
+            <div class="field full booking-date-field">
+              <label for="dateDisplay">Preferred date <span aria-hidden="true">*</span></label>
+              <input id="dateDisplay" class="calendar-date-value" type="text" readonly aria-describedby="dateHelp" placeholder="Choose a date from the calendar below">
+              <input id="date" name="date" type="hidden">
+              <small class="field-help" id="dateHelp">Live availability and client notices are synced with the schedule app.</small>
+
+              <div class="booking-calendar" id="bookingCalendar" aria-label="Live appointment availability calendar">
+                <div class="calendar-toolbar">
+                  <button class="calendar-nav" id="calendarPrev" type="button" aria-label="Previous month">‹</button>
+                  <div>
+                    <strong id="calendarMonthLabel">Loading calendar…</strong>
+                    <span class="calendar-sync" id="calendarSync" data-state="loading" role="status" aria-live="polite">Connecting to live schedule…</span>
+                  </div>
+                  <button class="calendar-nav" id="calendarNext" type="button" aria-label="Next month">›</button>
+                </div>
+
+                <div class="calendar-weekdays" aria-hidden="true">
+                  <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+                <div class="calendar-days" id="calendarDays" role="grid" aria-labelledby="calendarMonthLabel"></div>
+
+                <div class="calendar-legend" aria-label="Calendar availability legend">
+                  <span><i class="legend-dot available"></i>Available</span>
+                  <span><i class="legend-dot partial"></i>Limited</span>
+                  <span><i class="legend-dot blocked"></i>Unavailable</span>
+                  <span><i class="legend-dot closed"></i>Closed</span>
+                  <span><i class="legend-note-marker">!</i>Client notice</span>
+                </div>
+                <div class="calendar-public-notes" id="calendarPublicNotes" aria-live="polite" hidden></div>
+              </div>
             </div>
 
-            <div class="field">
+            <div class="field full">
               <label for="time">Preferred time <span aria-hidden="true">*</span></label>
               <select id="time" name="time" required disabled aria-describedby="timeHelp">
-                <option value="">Choose a date and service first</option>
+                <option value="">Choose a service and available date first</option>
               </select>
-              <small class="field-help" id="timeHelp">Available start times are based on the selected service duration and business hours.</small>
+              <small class="field-help" id="timeHelp">Unavailable or blocked start times are shown but cannot be selected. Public notes from the schedule app explain relevant availability changes.</small>
             </div>
 
 
