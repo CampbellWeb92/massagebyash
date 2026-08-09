@@ -399,9 +399,9 @@
 
             <div class="field full booking-date-field">
               <label for="dateDisplay">Preferred date <span aria-hidden="true">*</span></label>
-              <input id="dateDisplay" class="calendar-date-value" type="text" readonly aria-describedby="dateHelp" placeholder="Choose a date from the calendar below">
+
               <input id="date" name="date" type="hidden">
-              <small class="field-help" id="dateHelp">Live availability and client notices are synced with the schedule app.</small>
+              
 
               <div class="booking-calendar" id="bookingCalendar" aria-label="Live appointment availability calendar">
                 <div class="calendar-toolbar">
@@ -434,7 +434,6 @@
               <select id="time" name="time" required disabled aria-describedby="timeHelp">
                 <option value="">Choose a service and available date first</option>
               </select>
-              <small class="field-help" id="timeHelp">Unavailable or blocked start times are shown but cannot be selected. Public notes from the schedule app explain relevant availability changes.</small>
             </div>
 
 
