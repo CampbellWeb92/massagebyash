@@ -243,7 +243,7 @@
             <img src="bed.webp" width="900" height="720" loading="lazy" fetchpriority="low" decoding="async" alt="Comfortable private appointment room">
           </div>
           <div class="service-content">
-            <h3>FH</h3>
+            <h3>FH Only</h3>
             <span class="sub">No massage included</span>
             <div class="price-list">
               <button type="button" class="price-item service-option-link" data-book-service="fh-30" aria-label="Choose FH Only for 30 minutes in the WhatsApp booking form">
@@ -360,7 +360,7 @@
         <div class="booking-heading">
           <span class="eyebrow">Quick Booking Request</span>
           <h2 class="section-title">Arrange Your Appointment</h2>
-          <p class="section-intro">Choose an available day and time, review the calculated price, then continue to WhatsApp with a ready-to-send request.</p>
+          <p class="section-intro">Choose an available day and time, review the calculated price, then save a Pending request and continue to WhatsApp with a ready-to-send message.</p>
         </div>
 
         <form class="form-card card" data-whatsapp-form novalidate>
@@ -385,6 +385,12 @@
             </div>
 
             <div class="field full">
+              <label for="phone">WhatsApp number <span aria-hidden="true">*</span></label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 079 123 4567" required>
+              <small class="field-help">Used only to identify and manage your booking request. It is never shown on the public calendar.</small>
+            </div>
+
+            <div class="field full">
               <label for="service">Service <span aria-hidden="true">*</span></label>
               <select id="service" name="service" required>
                 <option value="">Choose a service</option>
@@ -392,16 +398,24 @@
                 <option value="sensual-60" data-title="Sensual Massage" data-duration="60" data-price="1200" data-covered-addon="true">Sensual Massage · 60 mins · R1200</option>
                 <option value="sensual-fh-30" data-title="Sensual Massage with FH" data-duration="30" data-price="1200">Sensual Massage with FH · 30 mins · R1200</option>
                 <option value="sensual-fh-60" data-title="Sensual Massage with FH" data-duration="60" data-price="1400">Sensual Massage with FH · 60 mins · R1400</option>
-                <option value="fh-30" data-title="FH" data-duration="30" data-price="1300">FH · 30 mins · R1300</option>
-                <option value="fh-60" data-title="FH" data-duration="60" data-price="1500">FH · 60 mins · R1500</option>
+                <option value="fh-30" data-title="FH Only" data-duration="30" data-price="1300">FH Only · 30 mins · R1300</option>
+                <option value="fh-60" data-title="FH Only" data-duration="60" data-price="1500">FH Only · 60 mins · R1500</option>
               </select>
+            </div>
+
+            <div class="field full next-available-card" id="nextAvailableCard" hidden>
+              <div>
+                <span class="next-available-label">Next available appointment</span>
+                <strong id="nextAvailableText">Choose a service to check availability</strong>
+              </div>
+              <button id="nextAvailableBtn" class="btn btn-outline" type="button">Choose This Time</button>
             </div>
 
             <div class="field full booking-date-field">
               <label for="dateDisplay">Preferred date <span aria-hidden="true">*</span></label>
-
+              <input id="dateDisplay" class="calendar-date-value" type="text" readonly aria-describedby="dateHelp" placeholder="Choose a date from the calendar below">
               <input id="date" name="date" type="hidden">
-              
+              <small class="field-help" id="dateHelp">Live availability and client notices are synced with the schedule app.</small>
 
               <div class="booking-calendar" id="bookingCalendar" aria-label="Live appointment availability calendar">
                 <div class="calendar-toolbar">
@@ -430,10 +444,12 @@
             </div>
 
             <div class="field full">
-              <label for="time">Preferred time <span aria-hidden="true">*</span></label>
-              <select id="time" name="time" required disabled aria-describedby="timeHelp">
-                <option value="">Choose a service and available date first</option>
-              </select>
+              <label>Preferred time <span aria-hidden="true">*</span></label>
+              <input id="time" name="time" type="hidden" value="">
+              <div id="timeButtons" class="time-button-grid" role="radiogroup" aria-describedby="timeHelp" aria-label="Available appointment times">
+                <p class="time-placeholder">Choose a service and available date first.</p>
+              </div>
+              <small class="field-help" id="timeHelp">Only valid start times are selectable. The full service duration, confirmed bookings, manual blocks and buffer periods are checked automatically.</small>
             </div>
 
 
@@ -476,9 +492,9 @@
             </div>
 
             <div class="field full">
-              <p class="privacy-consent">By continuing to WhatsApp, you agree that your submitted booking information will be sent through WhatsApp and handled according to the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+              <p class="privacy-consent">By continuing, you agree that your booking request will be saved securely as Pending in the booking system and then sent through WhatsApp, as explained in the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
               <button type="submit" class="btn btn-gold form-submit">Continue to WhatsApp</button>
-              <p class="whatsapp-note" id="whatsapp-note">No automatic booking is made — your appointment is only confirmed once I accept your request. </p>
+              <p class="whatsapp-note" id="whatsapp-note">Your request is saved as Pending and sent to WhatsApp. It only becomes a confirmed booking after I accept it.</p>
             </div>
           </div>
         </form>

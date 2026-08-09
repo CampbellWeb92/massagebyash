@@ -2337,3 +2337,48 @@ button,
     height: 5px;
   }
 }
+
+/* ===== Live booking manager upgrade ===== */
+.next-available-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.11), rgba(18, 68, 48, 0.18));
+}
+.next-available-card[hidden] { display: none; }
+.next-available-card > div { display: grid; gap: 4px; }
+.next-available-label { color: rgba(255,255,255,.62); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.next-available-card strong { color: var(--gold-bright); font-family: var(--heading); font-size: 1.22rem; }
+.next-available-card .btn { flex: 0 0 auto; padding: 10px 14px; }
+
+.time-button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 9px; min-height: 48px; }
+.time-choice {
+  min-height: 46px;
+  border: 1px solid rgba(212, 175, 55, .28);
+  border-radius: 11px;
+  background: rgba(255,255,255,.035);
+  color: rgba(255,255,255,.9);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.time-choice:hover,.time-choice:focus-visible { transform: translateY(-1px); border-color: var(--gold-bright); background: rgba(212,175,55,.1); }
+.time-choice.selected { border-color: var(--gold-bright); background: rgba(212,175,55,.22); color: #fff; box-shadow: 0 0 0 2px rgba(212,175,55,.1); }
+.time-placeholder { grid-column: 1/-1; margin: 0; padding: 13px; border: 1px dashed rgba(255,255,255,.14); border-radius: 10px; color: rgba(255,255,255,.55); font-size: .82rem; text-align: center; }
+
+.calendar-day.future { color: rgba(255,255,255,.3); cursor: not-allowed; }
+.calendar-day.future .calendar-day-status { background: rgba(255,255,255,.17); }
+.calendar-day[aria-disabled="true"] { cursor: help; }
+.calendar-day[aria-disabled="true"].has-note { color: rgba(255,255,255,.55); }
+.calendar-day[aria-disabled="true"]:hover { transform: translateY(-1px); border-color: rgba(242,218,122,.5); }
+
+@media (max-width: 600px) {
+  .next-available-card { align-items: stretch; flex-direction: column; }
+  .next-available-card .btn { width: 100%; }
+  .time-button-grid { grid-template-columns: repeat(3, 1fr); }
+}
