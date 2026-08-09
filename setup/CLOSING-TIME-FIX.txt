@@ -1,0 +1,22 @@
+CLOSING-TIME / DURATION FIX
+===========================
+
+This correction removes the accidental fixed 60-minute admin default and prevents client appointments from running past closing time.
+
+Changes:
+- Admin confirmed-booking duration now defaults to 30 minutes instead of 60 minutes.
+- 60, 90 and 120 minute durations are still available when they are actually needed.
+- Public website availability is calculated from the selected service duration (30 or 60 minutes).
+- A client appointment is only offered when the SERVICE itself finishes on or before closing time.
+- The private buffer still reserves time after an appointment, but it does not give the client extra appointment time and may extend after closing.
+- Admin confirmation also refuses any client appointment whose actual end time is after closing.
+- Manual time-block end now defaults to 30 minutes after the chosen start rather than 60 minutes.
+- Schedule App cache bumped to v7 so installed PWAs refresh the corrected JavaScript.
+
+Examples with a 17:00 closing time:
+- 30-minute service at 16:30 -> allowed (finishes 17:00).
+- 60-minute service at 16:00 -> allowed (finishes 17:00).
+- 30-minute service at 16:45 -> not offered by the current slot pattern.
+- 60-minute service at 16:15 -> NOT allowed (would finish 17:15).
+
+No new Supabase SQL migration is required for this correction.

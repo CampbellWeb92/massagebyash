@@ -1,0 +1,49 @@
+LIVE SCHEDULE + BOOKING MANAGER SETUP
+=====================================
+
+This website is built for the upgraded Massage by Ash Schedule App.
+
+1. RUN THE DATABASE MIGRATION FIRST
+-----------------------------------
+Run SUPABASE-UPGRADE.sql from the full package in Supabase SQL Editor.
+
+2. PUBLIC WEBSITE DATA
+----------------------
+The website reads only sanitised public availability:
+- public_schedule_days
+- public_schedule_blocks
+- holiday_overrides
+- schedule_settings
+
+It cannot read client names, phone numbers, private booking notes or the therapist's full appointments table.
+
+3. PENDING BOOKING REQUESTS
+---------------------------
+When a customer submits the form:
+- availability is rechecked live;
+- the request is saved to `appointments` as Pending;
+- the customer continues to WhatsApp;
+- the request appears in the Schedule App;
+- only after you Confirm it does the occupied range + default buffer become unavailable publicly.
+
+4. LIVE CALENDAR FEATURES
+-------------------------
+- Available / Limited / Unavailable / Closed days
+- Client-notice markers
+- Blocked dates remain tappable to explain why they are unavailable
+- Custom opening hours
+- Editable holiday overrides
+- Service-duration-aware availability
+- Appointment-buffer-aware availability
+- Minimum booking notice
+- Maximum booking horizon
+- Next available appointment shortcut
+- Tappable time buttons
+- Realtime updates
+
+5. CONNECTION
+-------------
+The existing publishable Supabase project connection is in:
+assets/js/schedule-config.js
+
+Never place a service_role / secret key in this browser file.
