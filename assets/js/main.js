@@ -383,6 +383,10 @@
   };
 
   const loadLiveSchedule = async () => {
+    // Preserve the client's selected time while we do the final live refresh.
+    // If that slot is still available after syncing, renderTimeButtons() re-selects it.
+    // If another booking has taken it, it stays cleared and validation asks for a new time.
+    const previouslySelectedTime=timeInput?.value||"";
     if(!scheduleDb)return false;setCalendarSync("Syncing live availability…","loading");
     let [days,blocks,holidays,settingsRes]=await Promise.all([
       scheduleDb.from("public_schedule_days").select("day,whole_day,blocked_slots,custom_slots,public_note"),
@@ -398,7 +402,7 @@
     }
     applyScheduleRows(days.data);applyBlockRows(blocks.data||[]);applyHolidayRows(holidays.data||[]);if(settingsRes.data)liveSettings={defaultBufferMinutes:settingsRes.data.default_buffer_minutes,minNoticeMinutes:settingsRes.data.min_notice_minutes,maxAdvanceDays:settingsRes.data.max_advance_days};scheduleReady=true;if(!calendarSync?.dataset.state?.includes("error"))setCalendarSync("Live schedule connected","live");
     if(selectedDateKey&&!["available","holiday","partial"].includes(statusForDay(selectedDateKey))){selectedDateKey="";if(dateInput)dateInput.value="";if(dateDisplay)dateDisplay.value="";if(timeInput)timeInput.value="";}
-    renderBookingCalendar();renderTimeButtons(selectedDateKey);findNextAvailable();updateBusinessStatus();return true;
+    renderBookingCalendar();renderTimeButtons(selectedDateKey,previouslySelectedTime);findNextAvailable();updateBusinessStatus();return true;
   };
   const connectLiveSchedule = () => {
     const url=window.SCHEDULE_SUPABASE_URL,key=window.SCHEDULE_SUPABASE_PUBLISHABLE_KEY;if(!window.supabase?.createClient||!url||!key){setCalendarSync("Live sync unavailable — please confirm by WhatsApp","error");renderBookingCalendar();return;}
