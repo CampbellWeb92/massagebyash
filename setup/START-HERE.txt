@@ -1,0 +1,92 @@
+IMPORTANT CORRECTION — CLOSING TIMES
+------------------------------------
+This package includes the closing-time/duration correction. Admin bookings now default to 30 minutes (not 60), and public times are only offered when the selected service itself finishes by closing time. The private buffer may extend after closing. No additional SQL is required if you already ran SUPABASE-UPGRADE.sql.
+
+MASSAGE BY ASH - FULL LIVE BOOKING UPGRADE
+==========================================
+
+IMPORTANT INSTALL ORDER
+-----------------------
+1. Open your Supabase project.
+2. Go to SQL Editor -> New query.
+3. Paste and run the entire SUPABASE-UPGRADE.sql file in this package.
+4. Upload/replace the files from Booking-Schedule/ wherever your Schedule App is hosted.
+5. Upload/replace the files from Website/ wherever massagebyash.co.za is hosted.
+6. If the installed Schedule App still shows an older version, close/reopen it or clear the PWA/site cache once. The service-worker cache has been bumped to v6.
+
+DO NOT put a Supabase service_role / secret key in either website.
+The included browser config uses only your existing publishable key.
+
+WHAT WAS ADDED
+--------------
+- Real appointment ranges instead of individual clock-point bookings.
+- Confirmed booking creation in the Schedule App.
+- Automatic 0/15/30-minute appointment buffers (default configurable).
+- Public client notices on unavailable dates/time blocks.
+- Custom opening hours for individual dates, including normally closed days.
+- "Next available appointment" shortcut on the public website.
+- Tappable time buttons instead of the long time dropdown.
+- Minimum booking notice and maximum advance-booking rules.
+- Website requests are stored as Pending and appear in the Schedule App.
+- Pending -> Confirmed / Cancelled workflow.
+- Confirmed bookings immediately remove their occupied range + buffer from public availability.
+- public_note replaces the misleading private_note name while retaining backward compatibility.
+- Sanitised public_schedule_days and public_schedule_blocks tables keep client information private.
+- schedule_admins table replaces database policies tied directly to one hard-coded email.
+- Activity history plus Undo Last Change for the selected schedule date.
+- Leave/date-range blocking now accepts one public reason for all affected dates.
+- Editable public-holiday overrides.
+- Database-level protection against overlapping confirmed booking ranges.
+- Website business status now follows live custom/closed-day schedule data after sync.
+
+PUBLIC VS PRIVATE DATA
+----------------------
+Public website can read only:
+- public_schedule_days
+- public_schedule_blocks
+- holiday_overrides
+- schedule_settings
+
+The public block table contains occupied times only. It does NOT contain client names,
+phone numbers, client notes or service details.
+
+Private therapist dashboard can read/manage:
+- schedule_days
+- appointments
+- schedule_audit
+- schedule_admins (subject to admin policies)
+
+PENDING REQUEST BEHAVIOUR
+-------------------------
+A website request is inserted as Pending, then the customer continues to WhatsApp.
+A Pending request does NOT block availability yet.
+When you tap Confirm in the Schedule App, the default buffer is added and Supabase checks
+that the full range does not overlap another confirmed range. Once confirmed, public availability
+updates automatically through Realtime.
+
+DEFAULT BOOKING RULES
+---------------------
+- Appointment buffer: 15 minutes
+- Minimum booking notice: 2 hours
+- Maximum advance booking: 60 days
+
+Change these under Schedule App -> Sign In -> Settings.
+
+PUBLIC NOTES
+------------
+- "Public Client Notice" on a date appears on the website calendar.
+- A public reason on a manual time-range block is also surfaced as a client notice for that date.
+- Client names, phone numbers and private booking notes are never shown publicly.
+
+BACKWARD COMPATIBILITY
+----------------------
+The migration copies existing private_note values into public_note and temporarily keeps the old
+private_note column in sync. Older deployed builds will therefore continue to work while you replace
+them. Once every old build is retired, the final optional DROP COLUMN command is documented at the
+bottom of SUPABASE-UPGRADE.sql.
+
+FILES
+-----
+SUPABASE-UPGRADE.sql     Run first in Supabase SQL Editor.
+Booking-Schedule/        Upgraded private/public Schedule App.
+Website/                 Upgraded Massage by Ash website.
