@@ -2436,7 +2436,14 @@ button,
 .booking-step-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.08); }
 .booking-step-actions-end { justify-content: flex-end; }
 .booking-step-actions .btn { min-width: 150px; }
-.booking-final-actions .form-submit { width: auto; flex: 1 1 260px; }
+.booking-final-actions .form-submit {
+  width: auto;
+  max-width: 260px;
+  min-height: 44px;
+  flex: 0 0 auto;
+  padding: 11px 20px;
+  font-size: .76rem;
+}
 
 .selected-date-notice { display: grid; gap: 3px; padding: 12px 14px; border: 1px solid rgba(242,218,122,.25); border-radius: 11px; background: rgba(242,218,122,.06); }
 .selected-date-notice[hidden] { display: none; }
@@ -2468,7 +2475,13 @@ button,
   .booking-service-choice { min-height: 72px; }
   .booking-step-actions { align-items: stretch; flex-direction: column-reverse; }
   .booking-step-actions-end { flex-direction: column; }
-  .booking-step-actions .btn, .booking-final-actions .form-submit { width: 100%; min-width: 0; }
+  .booking-step-actions .btn { width: 100%; min-width: 0; }
+  .booking-final-actions .form-submit {
+    width: min(100%, 260px);
+    max-width: 260px;
+    min-width: 0;
+    align-self: center;
+  }
   .booking-final-actions { flex-direction: column-reverse; }
   .price-summary { padding: 17px; }
 }

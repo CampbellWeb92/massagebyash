@@ -813,8 +813,13 @@ a {
 }
 
 .form-submit {
-  width: 100%;
+  width: auto;
+  max-width: 260px;
+  min-height: 44px;
+  padding: 11px 20px;
   border: 0;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
 }
 
 .booking-signoff {
@@ -2335,5 +2340,17 @@ button,
     bottom: 5px;
     width: 5px;
     height: 5px;
+  }
+}
+
+
+/* Step 4: keep the final Request Appointment action compact */
+@media (max-width: 600px) {
+  .booking-final-actions .form-submit {
+    width: auto;
+    max-width: min(260px, 100%);
+    min-height: 44px;
+    padding: 11px 18px;
+    font-size: 0.76rem;
   }
 }
