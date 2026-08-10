@@ -113,7 +113,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="assets/js/schedule-config.js" defer></script>
-  <script src="assets/js/main.js?v=20260809-time-selection-fix" defer></script>
+  <script src="assets/js/main.js?v=20260810-professional-booking-form" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -358,71 +358,138 @@
     <section class="section booking-section" id="booking">
       <div class="container booking-layout">
         <div class="booking-heading">
-          <span class="eyebrow">Quick Booking Request</span>
-          <h2 class="section-title">Arrange Your Appointment</h2>
-          <p class="section-intro">Please fill in the fields below, then click the "Continue to WhatsApp" button.</p>
+          <span class="eyebrow">Book an Appointment</span>
+          <h2 class="section-title">Choose Your Appointment</h2>
+          <p class="section-intro">Four simple steps. Choose your service and an available time, then send your request on WhatsApp for confirmation.</p>
         </div>
 
-        <form class="form-card card" data-whatsapp-form novalidate>
-          <div class="deposit-banner" role="note">
-            <strong>New clients: R500 deposit required</strong>
-            <span>The non-refundable deposit secures the booking and is deducted from the appointment total.</span>
-          </div>
+        <form class="form-card card booking-wizard" data-whatsapp-form novalidate>
+          <ol class="booking-progress" aria-label="Booking progress">
+            <li data-progress-step="1" data-state="current"><span>1</span><b>Details</b></li>
+            <li data-progress-step="2"><span>2</span><b>Service</b></li>
+            <li data-progress-step="3"><span>3</span><b>Appointment</b></li>
+            <li data-progress-step="4"><span>4</span><b>Confirm</b></li>
+          </ol>
 
-          <div class="form-grid">
-            <div class="field">
-              <label for="name">Your name <span aria-hidden="true">*</span></label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
+          <section class="booking-step-panel" data-booking-step="1" aria-labelledby="bookingStep1Title">
+            <div class="booking-step-heading">
+              <span class="booking-step-kicker">Step 1 of 4</span>
+              <h3 id="bookingStep1Title">About you</h3>
+              <p>Enter your contact details so I know who the appointment request is from.</p>
             </div>
 
-            <div class="field">
-              <label for="clientType">Client type <span aria-hidden="true">*</span></label>
-              <select id="clientType" name="clientType" required>
-                <option value="">Choose client type</option>
-                <option value="new">New client</option>
-                <option value="returning">Returning client</option>
-              </select>
+            <div class="step-grid">
+              <div class="field">
+                <label for="name">Your name <span aria-hidden="true">*</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+                <small class="field-help" id="nameHelp">Please use the name you would like me to recognise your booking by.</small>
+              </div>
+
+              <div class="field">
+                <label for="phone">WhatsApp number <span aria-hidden="true">*</span></label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 079 123 4567" required>
+                <small class="field-help" id="phoneHelp">Used only for your booking request and confirmation.</small>
+              </div>
+
+              <div class="field full">
+                <span class="field-label">Have you booked with me before? <span aria-hidden="true">*</span></span>
+                <select id="clientType" name="clientType" class="form-hidden-select" tabindex="-1" aria-hidden="true">
+                  <option value="">Choose client type</option>
+                  <option value="new">New client</option>
+                  <option value="returning">Returning client</option>
+                </select>
+                <div class="choice-pill-group" role="radiogroup" aria-label="Have you booked with me before?">
+                  <button type="button" class="choice-pill" data-client-type="new" role="radio" aria-checked="false">New client</button>
+                  <button type="button" class="choice-pill" data-client-type="returning" role="radio" aria-checked="false">Returning client</button>
+                </div>
+                <small class="field-help" id="clientTypeHelp">New clients require a R500 deposit. Returning clients do not require a deposit.</small>
+              </div>
             </div>
 
-            <div class="field full">
-              <label for="phone">WhatsApp number <span aria-hidden="true">*</span></label>
-              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 079 123 4567" required>
-              <small class="field-help">Used only to identify and manage your booking request. It is never shown on the public calendar.</small>
+            <div class="booking-step-actions booking-step-actions-end">
+              <button type="button" class="btn btn-gold" data-next-step="2">Continue to Services</button>
+            </div>
+          </section>
+
+          <section class="booking-step-panel" data-booking-step="2" aria-labelledby="bookingStep2Title" hidden>
+            <div class="booking-step-heading">
+              <span class="booking-step-kicker">Step 2 of 4</span>
+              <h3 id="bookingStep2Title">Choose your service</h3>
+              <p>Select the appointment length and price that suits you.</p>
             </div>
 
-            <div class="field full">
-              <label for="service">Service <span aria-hidden="true">*</span></label>
-              <select id="service" name="service" required>
-                <option value="">Choose a service</option>
-                <option value="sensual-30" data-title="Sensual Massage" data-duration="30" data-price="1000" data-covered-addon="true">Sensual Massage · 30 mins · R1000</option>
-                <option value="sensual-60" data-title="Sensual Massage" data-duration="60" data-price="1200" data-covered-addon="true">Sensual Massage · 60 mins · R1200</option>
-                <option value="sensual-fh-30" data-title="Sensual Massage with FH" data-duration="30" data-price="1200">Sensual Massage with FH · 30 mins · R1200</option>
-                <option value="sensual-fh-60" data-title="Sensual Massage with FH" data-duration="60" data-price="1400">Sensual Massage with FH · 60 mins · R1400</option>
-                <option value="fh-30" data-title="FH Only" data-duration="30" data-price="1300">FH Only · 30 mins · R1300</option>
-                <option value="fh-60" data-title="FH Only" data-duration="60" data-price="1500">FH Only · 60 mins · R1500</option>
-              </select>
+            <select id="service" name="service" class="form-hidden-select" tabindex="-1" aria-hidden="true">
+              <option value="">Choose a service</option>
+              <option value="sensual-30" data-title="Sensual Massage" data-duration="30" data-price="1000" data-covered-addon="true">Sensual Massage · 30 mins · R1000</option>
+              <option value="sensual-60" data-title="Sensual Massage" data-duration="60" data-price="1200" data-covered-addon="true">Sensual Massage · 60 mins · R1200</option>
+              <option value="sensual-fh-30" data-title="Sensual Massage with FH" data-duration="30" data-price="1200">Sensual Massage with FH · 30 mins · R1200</option>
+              <option value="sensual-fh-60" data-title="Sensual Massage with FH" data-duration="60" data-price="1400">Sensual Massage with FH · 60 mins · R1400</option>
+              <option value="fh-30" data-title="FH Only" data-duration="30" data-price="1300">FH Only · 30 mins · R1300</option>
+              <option value="fh-60" data-title="FH Only" data-duration="60" data-price="1500">FH Only · 60 mins · R1500</option>
+            </select>
+
+            <div class="service-choice-grid" role="radiogroup" aria-label="Choose a service">
+              <button type="button" class="booking-service-choice" data-service-value="sensual-30" role="radio" aria-checked="false"><span>Sensual Massage</span><small>30 minutes</small><strong>R1 000</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="sensual-60" role="radio" aria-checked="false"><span>Sensual Massage</span><small>60 minutes</small><strong>R1 200</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="sensual-fh-30" role="radio" aria-checked="false"><span>Sensual Massage with FH</span><small>30 minutes</small><strong>R1 200</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="sensual-fh-60" role="radio" aria-checked="false"><span>Sensual Massage with FH</span><small>60 minutes</small><strong>R1 400</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="fh-30" role="radio" aria-checked="false"><span>FH Only</span><small>30 minutes</small><strong>R1 300</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="fh-60" role="radio" aria-checked="false"><span>FH Only</span><small>60 minutes</small><strong>R1 500</strong></button>
+            </div>
+            <small class="field-help booking-choice-help" id="serviceHelp">Choose one service to continue.</small>
+
+            <fieldset class="field add-on-fieldset booking-addons" id="addOnFieldset" hidden>
+              <legend>Optional add-ons</legend>
+              <div class="addon-options">
+                <label class="check-option" for="gfeAddon">
+                  <input id="gfeAddon" name="gfeAddon" type="checkbox">
+                  <span><strong>GFE add-on</strong><small id="gfeAddonPriceText">+R300 for new clients · included for returning clients</small></span>
+                </label>
+                <label class="check-option" for="coveredAddon" id="coveredAddonLabel" hidden>
+                  <input id="coveredAddon" name="coveredAddon" type="checkbox" disabled>
+                  <span><strong>Covered oral add-on</strong><small>+R100 · available with Sensual Massage only</small></span>
+                </label>
+              </div>
+              <p class="field-help" id="addonHelp" hidden></p>
+            </fieldset>
+
+            <div class="booking-step-actions">
+              <button type="button" class="btn btn-outline" data-back-step="1">Back</button>
+              <button type="button" class="btn btn-gold" data-next-step="3">Choose Date &amp; Time</button>
+            </div>
+          </section>
+
+          <section class="booking-step-panel" data-booking-step="3" aria-labelledby="bookingStep3Title" hidden>
+            <div class="booking-step-heading">
+              <span class="booking-step-kicker">Step 3 of 4</span>
+              <h3 id="bookingStep3Title">Choose your appointment</h3>
+              <p>Only start times that fit your selected service before closing are shown.</p>
             </div>
 
-            <div class="field full next-available-card" id="nextAvailableCard" hidden>
+            <div class="field next-available-card" id="nextAvailableCard" hidden>
               <div>
-                <span class="next-available-label">Next available appointment</span>
-                <strong id="nextAvailableText">Choose a service to check availability</strong>
+                <span class="next-available-label">Next available</span>
+                <strong id="nextAvailableText">Checking availability…</strong>
               </div>
               <button id="nextAvailableBtn" class="btn btn-outline" type="button">Choose This Time</button>
             </div>
 
-            <div class="field full booking-date-field">
-              <label for="dateDisplay">Preferred date <span aria-hidden="true">*</span></label>
+            <div class="field booking-date-field">
+              <label for="dateDisplay">Appointment date <span aria-hidden="true">*</span></label>
               <input id="dateDisplay" class="calendar-date-value" type="text" readonly aria-describedby="dateHelp" placeholder="Choose a date from the calendar below">
               <input id="date" name="date" type="hidden">
-              <small class="field-help" id="dateHelp">Live availability and client notices are synced with the schedule app.</small>
+              <small class="field-help" id="dateHelp">Choose a highlighted date. Any important availability notice will appear here.</small>
+              <div class="selected-date-notice" id="selectedDateNotice" role="status" aria-live="polite" hidden>
+                <strong id="selectedDateNoticeTitle"></strong>
+                <span id="selectedDateNoticeText"></span>
+              </div>
 
-              <div class="booking-calendar" id="bookingCalendar" aria-label="Live appointment availability calendar">
+              <div class="booking-calendar" id="bookingCalendar" aria-label="Appointment availability calendar">
                 <div class="calendar-toolbar">
                   <button class="calendar-nav" id="calendarPrev" type="button" aria-label="Previous month">‹</button>
                   <div>
                     <strong id="calendarMonthLabel">Loading calendar…</strong>
-                    <span class="calendar-sync" id="calendarSync" data-state="loading" role="status" aria-live="polite">Connecting to live schedule…</span>
+                    <span class="calendar-sync" id="calendarSync" data-state="loading" role="status" aria-live="polite">Checking availability…</span>
                   </div>
                   <button class="calendar-nav" id="calendarNext" type="button" aria-label="Next month">›</button>
                 </div>
@@ -436,73 +503,73 @@
                   <span><i class="legend-dot available"></i>Available</span>
                   <span><i class="legend-dot partial"></i>Limited</span>
                   <span><i class="legend-dot blocked"></i>Unavailable</span>
-                  <span><i class="legend-dot closed"></i>Closed</span>
-                  <span><i class="legend-note-marker">!</i>Client notice</span>
+                  <span><i class="legend-note-marker">!</i>Notice</span>
                 </div>
-                <div class="calendar-public-notes" id="calendarPublicNotes" aria-live="polite" hidden></div>
               </div>
             </div>
 
-            <div class="field full">
-              <label>Preferred time <span aria-hidden="true">*</span></label>
+            <div class="field">
+              <label>Appointment time <span aria-hidden="true">*</span></label>
               <input id="time" name="time" type="hidden" value="">
               <div id="timeButtons" class="time-button-grid" role="radiogroup" aria-describedby="timeHelp" aria-label="Available appointment times">
-                <p class="time-placeholder">Choose a service and available date first.</p>
+                <p class="time-placeholder">Choose an available date first.</p>
               </div>
+              <small class="field-help" id="timeHelp">Choose one of the available start times above.</small>
             </div>
 
+            <div class="booking-step-actions">
+              <button type="button" class="btn btn-outline" data-back-step="2">Back</button>
+              <button type="button" class="btn btn-gold" data-next-step="4">Review Booking</button>
+            </div>
+          </section>
 
-            <fieldset class="field full add-on-fieldset">
-              <legend>Optional add-ons</legend>
-              <div class="addon-options">
-                <label class="check-option" for="gfeAddon">
-                  <input id="gfeAddon" name="gfeAddon" type="checkbox">
-                  <span><strong>GFE add-on</strong><small>+R300 for new clients · no charge for repeat clients</small></span>
-                </label>
-                <label class="check-option" for="coveredAddon" id="coveredAddonLabel">
-                  <input id="coveredAddon" name="coveredAddon" type="checkbox" disabled>
-                  <span><strong>Covered oral add-on</strong><small>+R100 · available with Sensual Massage only</small></span>
-                </label>
+          <section class="booking-step-panel" data-booking-step="4" aria-labelledby="bookingStep4Title" hidden>
+            <div class="booking-step-heading">
+              <span class="booking-step-kicker">Step 4 of 4</span>
+              <h3 id="bookingStep4Title">Review your booking</h3>
+              <p>Check the details below, then send your appointment request.</p>
+            </div>
+
+            <div class="price-summary booking-review" aria-live="polite" aria-labelledby="priceSummaryTitle">
+              <div class="booking-review-heading">
+                <span>Selected appointment</span>
+                <h3 id="priceSummaryTitle"><span id="summaryServiceTitle">Choose a service</span></h3>
+                <p id="summaryAppointment">Choose a date and time</p>
               </div>
-              <p class="field-help" id="addonHelp">Select a Sensual Massage option to enable the covered-oral add-on.</p>
-            </fieldset>
+              <div class="summary-row"><span>Service</span><strong id="basePrice">—</strong></div>
+              <div class="summary-row"><span>Add-ons</span><strong id="addonPrice">R0</strong></div>
+              <div class="summary-row summary-total"><span>Total</span><strong id="totalPrice">—</strong></div>
+              <div class="summary-row"><span>Deposit</span><strong id="depositPrice">—</strong></div>
+              <div class="summary-row"><span>Balance</span><strong id="balancePrice">—</strong></div>
+            </div>
 
-            <div class="field full">
+            <div class="field booking-notes-field">
               <label for="message">Anything I should know? <span class="optional">(optional)</span></label>
-              <textarea id="message" name="message" rows="4" placeholder="Share any important booking information or questions…"></textarea>
+              <textarea id="message" name="message" rows="3" placeholder="Add a short note or question if needed…"></textarea>
             </div>
 
-            <div class="field full">
-              <div class="price-summary" aria-live="polite" aria-labelledby="priceSummaryTitle">
-                <h3 id="priceSummaryTitle">Appointment price</h3>
-                <div class="summary-row"><span>Base service</span><strong id="basePrice">—</strong></div>
-                <div class="summary-row"><span>Add-ons</span><strong id="addonPrice">R0</strong></div>
-                <div class="summary-row summary-total"><span>Calculated total</span><strong id="totalPrice">—</strong></div>
-                <div class="summary-row"><span>Deposit to secure booking</span><strong id="depositPrice">Choose client type</strong></div>
-                <div class="summary-row"><span>Remaining balance</span><strong id="balancePrice">—</strong></div>
-              </div>
-            </div>
-
-            <div class="field full">
+            <div class="field">
               <label class="terms-check" for="termsAgreement">
-                <input id="termsAgreement" name="termsAgreement" type="checkbox" required>
+                <input id="termsAgreement" name="termsAgreement" type="checkbox">
                 <span>I have read and agree to the <a href="booking-terms.html" target="_blank" rel="noopener">Booking Terms</a>, including the deposit, cancellation and conduct rules. <span aria-hidden="true">*</span></span>
               </label>
+              <small class="field-help" id="termsHelp">Please agree to the booking terms before sending your request.</small>
             </div>
 
-            <div class="field full">
-              <p class="privacy-consent">By continuing, you agree that your booking request will be saved securely as Pending in Ashleigh's booking system and then sent through WhatsApp, as explained in the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
-              <button type="submit" class="btn btn-gold form-submit">Continue to WhatsApp</button>
+            <p class="privacy-consent">Your request is sent securely and then opened in WhatsApp. Your appointment is confirmed with you on WhatsApp. See the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+
+            <div class="booking-step-actions booking-final-actions">
+              <button type="button" class="btn btn-outline" data-back-step="3">Back</button>
+              <button type="submit" class="btn btn-gold form-submit">Request Appointment</button>
             </div>
-          </div>
+            <p class="whatsapp-note" id="whatsapp-note">You’ll continue to WhatsApp to send the request.</p>
+          </section>
         </form>
 
         <div class="booking-signoff">
           <p>I look forward to hearing from you,<br>
           <strong>Ashleigh</strong><br>💚</p>
         </div>
-
-      </div>
       </div>
     </section>
 
@@ -515,11 +582,11 @@
       <div class="container faq-list">
         <details class="faq-item card"><summary>How do I confirm an appointment?</summary><p>Complete the booking form and continue to WhatsApp. Your appointment is confirmed only after it has been accepted and any required deposit has cleared.</p></details>
         <details class="faq-item card"><summary>Is a deposit required?</summary><p>Yes. A non-refundable R500 deposit is required for all new clients. It secures the appointment and is deducted from the calculated total. The remaining balance is paid in person.</p></details>
-        <details class="faq-item card"><summary>Where is the location?</summary><p><strong>Melrose Arch, Johannesburg</strong>, conveniently located near the BluBird Shopping Centre.</p></details>
+        <details class="faq-item card"><summary>Where is the location?</summary><p>Private massage appointments in <strong>Melrose Arch, Johannesburg</strong>, conveniently located near the BluBird Shopping Centre.</p></details>
         <details class="faq-item card"><summary>Is parking available?</summary><p>Yes. Secure private parking is available for clients with confirmed appointments.</p></details>
         <details class="faq-item card"><summary>What happens if I arrive late?</summary><p>Late arrival may shorten your appointment so that later bookings are not delayed. Please send a WhatsApp message as soon as possible if you are running late.</p></details>
         <details class="faq-item card"><summary>Can I reschedule?</summary><p>A cancelled booking may be moved to the next suitable available slot by prior arrangement. Deposits are non-refundable, and rescheduling remains subject to availability.</p></details>
-        <details class="faq-item card"><summary>What payment methods are accepted?</summary><p>Cash, instant EFT and PayShap are accepted. Deposits are payable by instant EFT or payshap only. Payment is required before the appointment begins.</p></details>
+        <details class="faq-item card"><summary>What payment methods are accepted?</summary><p>Cash, instant EFT and PayShap are accepted. Payment is required before the appointment begins.</p></details>
         <details class="faq-item card"><summary>When is the exact address provided?</summary><p>The exact address is shared only after your appointment has been accepted and confirmed.</p></details>
       </div>
     </section>

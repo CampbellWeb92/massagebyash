@@ -1,0 +1,17 @@
+Professional Booking Form update — 10 August 2026
+
+Implemented:
+- Four-step booking flow: Details, Service, Appointment, Confirm
+- New/Returning client pill buttons
+- Service selection cards instead of a long dropdown
+- Add-ons only shown after a service is selected; covered add-on only appears when compatible
+- Next available appointment retained
+- Live calendar retained with simplified client-facing status text
+- Public availability notes only appear when a relevant date is tapped
+- Tappable time buttons retained
+- Cleaner booking review with service, appointment, total, deposit and balance
+- Inline validation for booking steps
+- One primary Request Appointment action
+- Existing Supabase pending-booking save, Realtime availability and WhatsApp message retained
+
+No Supabase SQL changes are required for this UI update.

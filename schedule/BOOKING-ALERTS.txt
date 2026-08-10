@@ -1,0 +1,28 @@
+MASSAGE BY ASH - PENDING BOOKING ALERTS
+=======================================
+
+WHAT WAS ADDED
+- Live Supabase alert when a NEW appointment is inserted with status "pending".
+- Branded in-app popup with View Booking and Dismiss buttons.
+- Custom notification.wav booking chime.
+- Optional browser/device notification when permission is granted.
+- Vibration on supported mobile devices.
+- Notification click opens/focuses the app and takes you to Pending Website Requests.
+- Alert settings are remembered on each device/browser.
+- PWA cache upgraded to v9.
+
+HOW TO TURN ALERTS ON
+1. Open the Schedule App over HTTPS (GitHub Pages/custom domain is suitable).
+2. Sign in as the administrator.
+3. Open Settings.
+4. Under Pending Booking Alerts, press "Enable Booking Alerts".
+5. Allow notifications if your browser asks.
+6. Press "Test Alert" to check the popup, chime, and device notification.
+7. Use "Mute Sound" / "Unmute Sound" whenever needed.
+
+IMPORTANT
+- No new Supabase SQL is required for this alert update.
+- The alert listens to the existing appointments table and only alerts for NEW pending rows.
+- These Realtime alerts work while the Schedule App/PWA is open/running and signed in.
+- This update does NOT add a remote Web Push server that can wake a completely closed app.
+  True closed-app push would require a push subscription + server/Edge Function integration.

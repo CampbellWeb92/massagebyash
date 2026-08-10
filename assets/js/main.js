@@ -214,6 +214,19 @@
   const totalPriceOutput = byId("totalPrice");
   const depositPriceOutput = byId("depositPrice");
   const balancePriceOutput = byId("balancePrice");
+  const clientTypeButtons = [...document.querySelectorAll("[data-client-type]")];
+  const serviceChoiceButtons = [...document.querySelectorAll("[data-service-value]")];
+  const addOnFieldset = byId("addOnFieldset");
+  const gfeAddonPriceText = byId("gfeAddonPriceText");
+  const selectedDateNotice = byId("selectedDateNotice");
+  const selectedDateNoticeTitle = byId("selectedDateNoticeTitle");
+  const selectedDateNoticeText = byId("selectedDateNoticeText");
+  const summaryServiceTitle = byId("summaryServiceTitle");
+  const summaryAppointment = byId("summaryAppointment");
+  const termsAgreement = byId("termsAgreement");
+  const bookingStepPanels = [...document.querySelectorAll("[data-booking-step]")];
+  const bookingProgressItems = [...document.querySelectorAll("[data-progress-step]")];
+  let currentBookingStep = 1;
 
   const formatMoney = (amount) => {
     if (!Number.isFinite(amount)) return "—";
@@ -234,6 +247,23 @@
     if (!option?.value) return null;
     return { value:option.value,title:option.dataset.title||option.textContent.trim(),duration:Number(option.dataset.duration)||30,price:Number(option.dataset.price)||0,coveredAddonAllowed:option.dataset.coveredAddon==="true",label:option.textContent.trim() };
   };
+  const setHelpMessage = (id,message,isError=false) => { const helper=byId(id); if(!helper)return; helper.textContent=message; helper.classList.toggle("field-error",isError); };
+  const syncClientTypeButtons = () => clientTypeButtons.forEach(btn=>{ const selected=btn.dataset.clientType===clientType?.value; btn.classList.toggle("selected",selected); btn.setAttribute("aria-checked",String(selected)); });
+  const syncServiceChoiceButtons = () => serviceChoiceButtons.forEach(btn=>{ const selected=btn.dataset.serviceValue===serviceSelect?.value; btn.classList.toggle("selected",selected); btn.setAttribute("aria-checked",String(selected)); });
+  const updateProgress = () => bookingProgressItems.forEach(item=>{ const step=Number(item.dataset.progressStep); item.dataset.state=step===currentBookingStep?"current":step<currentBookingStep?"complete":"future"; });
+  const goToBookingStep = (step,scroll=true) => { currentBookingStep=Math.min(4,Math.max(1,Number(step)||1)); bookingStepPanels.forEach(panel=>panel.hidden=Number(panel.dataset.bookingStep)!==currentBookingStep); updateProgress(); if(scroll) bookingForm?.scrollIntoView({behavior:"smooth",block:"start"}); };
+  const validateStepOne = () => {
+    let valid=true;
+    const name=nameInput?.value.trim()||"", phone=phoneInput?.value.trim()||"";
+    if(!name){setHelpMessage("nameHelp","Please enter your name.",true);valid=false;}else setHelpMessage("nameHelp","Please use the name you would like me to recognise your booking by.");
+    if(!phone){setHelpMessage("phoneHelp","Please enter your WhatsApp number.",true);valid=false;}else if(phone.replace(/\D/g,"").length<9){setHelpMessage("phoneHelp","Please enter a valid WhatsApp number.",true);valid=false;}else setHelpMessage("phoneHelp","Used only for your booking request and confirmation.");
+    if(!clientType?.value){setHelpMessage("clientTypeHelp","Please choose New client or Returning client.",true);valid=false;}else setHelpMessage("clientTypeHelp",clientType.value==="new"?"A R500 deposit applies to new-client bookings.":"No deposit is required for returning clients.");
+    return valid;
+  };
+  const validateStepTwo = () => { const valid=Boolean(getSelectedService()); setHelpMessage("serviceHelp",valid?"Service selected. You can continue to choose your appointment.":"Please choose one service to continue.",!valid); return valid; };
+  const validateTerms = () => { const valid=Boolean(termsAgreement?.checked); setHelpMessage("termsHelp",valid?"Booking terms accepted.":"Please agree to the booking terms before sending your request.",!valid); return valid; };
+  const updateReviewAppointment = () => { const service=getSelectedService(); if(summaryServiceTitle)summaryServiceTitle.textContent=service?`${service.title} · ${service.duration} min`:"Choose a service"; if(summaryAppointment)summaryAppointment.textContent=selectedDateKey&&timeInput?.value?`${formatDate(selectedDateKey)} at ${timeInput.value}`:"Choose a date and time"; };
+  const setSelectedDateNotice = (key,message="",warning=false) => { if(!selectedDateNotice)return; const note=key?publicNoteForDay(key):""; const text=[message,note?`Client notice: ${note}`:""].filter(Boolean).join(" "); if(!text){selectedDateNotice.hidden=true;selectedDateNotice.classList.remove("is-warning");return;} selectedDateNotice.hidden=false;selectedDateNotice.classList.toggle("is-warning",warning); if(selectedDateNoticeTitle)selectedDateNoticeTitle.textContent=key?formatDate(key):"Availability notice"; if(selectedDateNoticeText)selectedDateNoticeText.textContent=text; };
   const setDateHelp = (input,message,isError=false) => {
     const helperId=input?.getAttribute("aria-describedby"),helper=helperId?byId(helperId):null;
     if (!helper) return; helper.textContent=message; helper.classList.toggle("field-error",isError);
@@ -328,15 +358,15 @@
   const monthDates = (monthDate) => {const first=startOfMonth(monthDate),start=new Date(first);start.setDate(first.getDate()-((first.getDay()+6)%7));return Array.from({length:42},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);return d;});};
 
   const showUnavailableDateNotice = (key) => {
-    const note=publicNoteForDay(key),base=baseAvailabilityForDay(key),status=statusForDay(key);
+    const base=baseAvailabilityForDay(key),status=statusForDay(key);
     let reason=status==="closed"?"Closed on this date.":status==="future"?`Bookings are available up to ${liveSettings.maxAdvanceDays} days ahead.`:"No appointment start times are available for the selected service.";
     if(base.holidayName)reason=`${base.holidayName}. ${reason}`;
-    setDateHelp(dateDisplay,`${formatDate(key)} — ${reason}${note?` Client notice: ${note}`:""}`,true);
+    setDateHelp(dateDisplay,`${formatDate(key)} — ${reason}`,true);setSelectedDateNotice(key,reason,true);
   };
   const selectBookingDate = (key) => {
     if(!["available","holiday","partial"].includes(statusForDay(key))){showUnavailableDateNotice(key);return false;}
     selectedDateKey=key;if(dateInput)dateInput.value=key;if(dateDisplay){dateDisplay.value=formatDate(key);dateDisplay.removeAttribute("aria-invalid");}
-    const note=publicNoteForDay(key);setDateHelp(dateDisplay,`${formatDate(key)} selected.${note?` Client notice: ${note}`:""}`);renderBookingCalendar();renderTimeButtons(key);return true;
+    setDateHelp(dateDisplay,`${formatDate(key)} selected.`);setSelectedDateNotice(key,baseAvailabilityForDay(key).holidayName?baseAvailabilityForDay(key).holidayName:"");renderBookingCalendar();renderTimeButtons(key);updateReviewAppointment();return true;
   };
   const renderBookingCalendar = () => {
     if(!calendarDays||!calendarMonthLabel)return;
@@ -352,14 +382,13 @@
       btn.innerHTML=`<span class="calendar-day-number">${date.getDate()}</span><span class="calendar-day-status" aria-hidden="true"></span>${note?'<span class="calendar-day-note-badge" aria-hidden="true">!</span>':""}`;
       if(!btn.disabled)btn.addEventListener("click",()=>selectable?selectBookingDate(key):showUnavailableDateNotice(key));calendarDays.appendChild(btn);
     });
-    const publicNotes=byId("calendarPublicNotes");if(publicNotes){publicNotes.innerHTML="";const notes=Object.keys({...liveSchedule,...holidayOverrides}).filter(day=>{const d=parseLocalDate(day);return d&&d.getFullYear()===cy&&d.getMonth()===cm&&publicNoteForDay(day);}).sort();if(notes.length){const h=document.createElement("strong");h.className="calendar-public-notes-title";h.textContent="Client availability notices";publicNotes.appendChild(h);const list=document.createElement("div");list.className="calendar-public-notes-list";notes.forEach(day=>{const p=document.createElement("p"),b=document.createElement("b");b.textContent=`${formatDate(day)}: `;p.append(b,document.createTextNode(publicNoteForDay(day)));list.appendChild(p);});publicNotes.appendChild(list);publicNotes.hidden=false;}else publicNotes.hidden=true;}
     if(calendarPrev)calendarPrev.disabled=calendarViewDate<=startOfMonth(parseLocalDate(today));
   };
   const renderTimeButtons = (key,preferred="") => {
     if(!timeButtons||!timeInput)return;timeButtons.innerHTML="";timeInput.value="";const service=getSelectedService();if(!key||!service){timeButtons.innerHTML='<p class="time-placeholder">Choose a service and available date first.</p>';return;}
     const available=availableStartSlots(key,service);if(!available.length){timeButtons.innerHTML='<p class="time-placeholder">No available times for this service on this date.</p>';setTimeHelp("Please choose another date.",true);return;}
     setTimeHelp(`Only times where your selected ${service.duration}-minute appointment finishes by closing time are shown.`);
-    available.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="time-choice";b.setAttribute("role","radio");b.setAttribute("aria-checked","false");b.dataset.time=t;b.textContent=t;b.addEventListener("click",()=>{timeButtons.querySelectorAll(".time-choice").forEach(x=>{x.classList.remove("selected");x.setAttribute("aria-checked","false");});b.classList.add("selected");b.setAttribute("aria-checked","true");timeInput.value=t;setTimeHelp(`${t} selected. Your request will remain Pending until accepted.`);});timeButtons.appendChild(b);if(t===preferred)b.click();});
+    available.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="time-choice";b.setAttribute("role","radio");b.setAttribute("aria-checked","false");b.dataset.time=t;b.textContent=t;b.addEventListener("click",()=>{timeButtons.querySelectorAll(".time-choice").forEach(x=>{x.classList.remove("selected");x.setAttribute("aria-checked","false");});b.classList.add("selected");b.setAttribute("aria-checked","true");timeInput.value=t;setTimeHelp(`${t} selected.`);updateReviewAppointment();});timeButtons.appendChild(b);if(t===preferred)b.click();});
   };
   const validateDateAndTime = () => {
     const service=getSelectedService();if(!service){serviceSelect?.focus();return false;}if(!selectedDateKey||!["available","holiday","partial"].includes(statusForDay(selectedDateKey))){dateDisplay?.setAttribute("aria-invalid","true");setDateHelp(dateDisplay,"Please choose an available date.",true);return false;}if(!timeInput?.value||!availableStartSlots(selectedDateKey,service).includes(timeInput.value)){setTimeHelp("Please choose one of the available appointment times.",true);timeButtons?.scrollIntoView({behavior:"smooth",block:"center"});return false;}return true;
@@ -387,7 +416,7 @@
     // If that slot is still available after syncing, renderTimeButtons() re-selects it.
     // If another booking has taken it, it stays cleared and validation asks for a new time.
     const previouslySelectedTime=timeInput?.value||"";
-    if(!scheduleDb)return false;setCalendarSync("Syncing live availability…","loading");
+    if(!scheduleDb)return false;setCalendarSync("Updating availability…","loading");
     let [days,blocks,holidays,settingsRes]=await Promise.all([
       scheduleDb.from("public_schedule_days").select("day,whole_day,blocked_slots,custom_slots,public_note"),
       scheduleDb.from("public_schedule_blocks").select("appointment_id,day,start_time,end_time,kind,public_note"),
@@ -396,32 +425,40 @@
     ]);
     if(days.error){
       const legacy=await scheduleDb.from("schedule_days").select("day,whole_day,blocked_slots,custom_slots,private_note");
-      if(legacy.error){console.error("Schedule sync error:",days.error,legacy.error);scheduleReady=false;setCalendarSync("Live sync unavailable — please confirm by WhatsApp","error");renderBookingCalendar();return false;}
+      if(legacy.error){console.error("Schedule sync error:",days.error,legacy.error);scheduleReady=false;setCalendarSync("Availability temporarily unavailable — please confirm on WhatsApp","error");renderBookingCalendar();return false;}
       days={data:legacy.data,error:null};blocks={data:[],error:null};holidays={data:[],error:null};settingsRes={data:null,error:null};
-      setCalendarSync("Legacy schedule connected — run upgrade SQL","error");
+      setCalendarSync("Availability connected","live");
     }
-    applyScheduleRows(days.data);applyBlockRows(blocks.data||[]);applyHolidayRows(holidays.data||[]);if(settingsRes.data)liveSettings={defaultBufferMinutes:settingsRes.data.default_buffer_minutes,minNoticeMinutes:settingsRes.data.min_notice_minutes,maxAdvanceDays:settingsRes.data.max_advance_days};scheduleReady=true;if(!calendarSync?.dataset.state?.includes("error"))setCalendarSync("Live schedule connected","live");
+    applyScheduleRows(days.data);applyBlockRows(blocks.data||[]);applyHolidayRows(holidays.data||[]);if(settingsRes.data)liveSettings={defaultBufferMinutes:settingsRes.data.default_buffer_minutes,minNoticeMinutes:settingsRes.data.min_notice_minutes,maxAdvanceDays:settingsRes.data.max_advance_days};scheduleReady=true;if(!calendarSync?.dataset.state?.includes("error"))setCalendarSync("Availability up to date","live");
     if(selectedDateKey&&!["available","holiday","partial"].includes(statusForDay(selectedDateKey))){selectedDateKey="";if(dateInput)dateInput.value="";if(dateDisplay)dateDisplay.value="";if(timeInput)timeInput.value="";}
     renderBookingCalendar();renderTimeButtons(selectedDateKey,previouslySelectedTime);findNextAvailable();updateBusinessStatus();return true;
   };
   const connectLiveSchedule = () => {
-    const url=window.SCHEDULE_SUPABASE_URL,key=window.SCHEDULE_SUPABASE_PUBLISHABLE_KEY;if(!window.supabase?.createClient||!url||!key){setCalendarSync("Live sync unavailable — please confirm by WhatsApp","error");renderBookingCalendar();return;}
+    const url=window.SCHEDULE_SUPABASE_URL,key=window.SCHEDULE_SUPABASE_PUBLISHABLE_KEY;if(!window.supabase?.createClient||!url||!key){setCalendarSync("Availability temporarily unavailable — please confirm on WhatsApp","error");renderBookingCalendar();return;}
     scheduleDb=window.supabase.createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});loadLiveSchedule();
     ["public_schedule_days","public_schedule_blocks","holiday_overrides","schedule_settings"].forEach(table=>{const ch=scheduleDb.channel(`website-${table}`).on("postgres_changes",{event:"*",schema:"public",table},()=>loadLiveSchedule()).subscribe();scheduleChannels.push(ch);});
   };
   calendarPrev?.addEventListener("click",()=>{calendarViewDate=new Date(calendarViewDate.getFullYear(),calendarViewDate.getMonth()-1,1);renderBookingCalendar();});
   calendarNext?.addEventListener("click",()=>{calendarViewDate=new Date(calendarViewDate.getFullYear(),calendarViewDate.getMonth()+1,1);renderBookingCalendar();});
 
-  const updateAddonAvailability = () => {const service=getSelectedService(),allowed=Boolean(service?.coveredAddonAllowed);if(coveredAddon){coveredAddon.disabled=!allowed;if(!allowed)coveredAddon.checked=false;}coveredAddonLabel?.classList.toggle("is-disabled",!allowed);if(addonHelp)addonHelp.textContent=allowed?"Covered oral is available for the selected Sensual Massage appointment.":"Select a Sensual Massage option to enable the covered-oral add-on.";};
+  const updateAddonAvailability = () => {const service=getSelectedService(),allowed=Boolean(service?.coveredAddonAllowed);if(addOnFieldset)addOnFieldset.hidden=!service;if(coveredAddon){coveredAddon.disabled=!allowed;if(!allowed)coveredAddon.checked=false;}if(coveredAddonLabel){coveredAddonLabel.hidden=!allowed;coveredAddonLabel.classList.toggle("is-disabled",!allowed);}if(addonHelp){addonHelp.hidden=true;}if(gfeAddonPriceText)gfeAddonPriceText.textContent=clientType?.value==="returning"?"Included for returning clients":"+R300 for new clients · included for returning clients";};
   const getPriceBreakdown = () => {const service=getSelectedService(),base=service?.price||0,isReturning=clientType?.value==="returning",gfePrice=gfeAddon?.checked?(isReturning?0:300):0,coveredPrice=coveredAddon?.checked?100:0,addons=gfePrice+coveredPrice,total=base+addons,deposit=clientType?.value==="new"&&total?Math.min(500,total):0,balance=total?total-deposit:0;return{service,base,gfePrice,coveredPrice,addons,total,deposit,balance};};
-  const updatePriceSummary = () => {const p=getPriceBreakdown();if(basePriceOutput)basePriceOutput.textContent=p.service?formatMoney(p.base):"—";if(addonPriceOutput)addonPriceOutput.textContent=formatMoney(p.addons);if(totalPriceOutput)totalPriceOutput.textContent=p.service?formatMoney(p.total):"—";if(depositPriceOutput){if(!clientType?.value)depositPriceOutput.textContent="Choose client type";else if(clientType.value==="new")depositPriceOutput.textContent=formatMoney(p.deposit||500);else depositPriceOutput.textContent="Not required";}if(balancePriceOutput)balancePriceOutput.textContent=p.service?formatMoney(p.balance):"—";};
-  serviceSelect?.addEventListener("change",()=>{updateAddonAvailability();if(timeInput)timeInput.value="";renderBookingCalendar();renderTimeButtons(selectedDateKey);findNextAvailable();updatePriceSummary();});
-  clientType?.addEventListener("change",updatePriceSummary);gfeAddon?.addEventListener("change",updatePriceSummary);coveredAddon?.addEventListener("change",updatePriceSummary);
+  const updatePriceSummary = () => {const p=getPriceBreakdown();if(basePriceOutput)basePriceOutput.textContent=p.service?formatMoney(p.base):"—";if(addonPriceOutput)addonPriceOutput.textContent=p.addons?formatMoney(p.addons):"None";if(totalPriceOutput)totalPriceOutput.textContent=p.service?formatMoney(p.total):"—";if(depositPriceOutput){if(!clientType?.value)depositPriceOutput.textContent="—";else if(clientType.value==="new")depositPriceOutput.textContent=formatMoney(p.deposit||500);else depositPriceOutput.textContent="Not required";}if(balancePriceOutput)balancePriceOutput.textContent=p.service?formatMoney(p.balance):"—";updateReviewAppointment();};
+  serviceSelect?.addEventListener("change",()=>{syncServiceChoiceButtons();updateAddonAvailability();if(timeInput)timeInput.value="";renderBookingCalendar();renderTimeButtons(selectedDateKey);findNextAvailable();updatePriceSummary();});
+  clientType?.addEventListener("change",()=>{syncClientTypeButtons();updateAddonAvailability();updatePriceSummary();});gfeAddon?.addEventListener("change",updatePriceSummary);coveredAddon?.addEventListener("change",updatePriceSummary);
 
-  updateAddonAvailability();updatePriceSummary();renderBookingCalendar();connectLiveSchedule();
+  clientTypeButtons.forEach(btn=>btn.addEventListener("click",()=>{if(!clientType)return;clientType.value=btn.dataset.clientType||"";clientType.dispatchEvent(new Event("change",{bubbles:true}));}));
+  serviceChoiceButtons.forEach(btn=>btn.addEventListener("click",()=>{if(!serviceSelect)return;serviceSelect.value=btn.dataset.serviceValue||"";serviceSelect.dispatchEvent(new Event("change",{bubbles:true}));setHelpMessage("serviceHelp","Service selected. You can continue to choose your appointment.");}));
+  document.querySelectorAll("[data-next-step]").forEach(btn=>btn.addEventListener("click",()=>{const next=Number(btn.dataset.nextStep);if(next===2&&!validateStepOne())return;if(next===3&&!validateStepTwo())return;if(next===4&&!validateDateAndTime())return;updatePriceSummary();goToBookingStep(next);}));
+  document.querySelectorAll("[data-back-step]").forEach(btn=>btn.addEventListener("click",()=>goToBookingStep(Number(btn.dataset.backStep))));
+  termsAgreement?.addEventListener("change",validateTerms);
+  nameInput?.addEventListener("input",()=>{if(nameInput.value.trim())setHelpMessage("nameHelp","Please use the name you would like me to recognise your booking by.");});
+  phoneInput?.addEventListener("input",()=>{if(phoneInput.value.trim())setHelpMessage("phoneHelp","Used only for your booking request and confirmation.");});
+
+  syncClientTypeButtons();syncServiceChoiceButtons();updateAddonAvailability();updatePriceSummary();updateProgress();renderBookingCalendar();connectLiveSchedule();
 
   const serviceLinks=[...document.querySelectorAll("[data-book-service], [data-book-addon]")];
-  const openBookingFromService=(control)=>{if(!bookingForm)return;const requestedService=control.dataset.bookService,requestedAddon=control.dataset.bookAddon;if(requestedService&&serviceSelect){const option=serviceSelect.querySelector(`option[value="${requestedService}"]`);if(!option)return;serviceSelect.value=requestedService;serviceSelect.dispatchEvent(new Event("change",{bubbles:true}));}if(requestedAddon==="gfe"&&gfeAddon){gfeAddon.checked=true;gfeAddon.dispatchEvent(new Event("change",{bubbles:true}));}bookingForm.scrollIntoView({behavior:"smooth",block:"start"});window.setTimeout(()=>requestedAddon==="gfe"?gfeAddon?.focus({preventScroll:true}):serviceSelect?.focus({preventScroll:true}),450);};
+  const openBookingFromService=(control)=>{if(!bookingForm)return;const requestedService=control.dataset.bookService,requestedAddon=control.dataset.bookAddon;if(requestedService&&serviceSelect){const option=serviceSelect.querySelector(`option[value="${requestedService}"]`);if(!option)return;serviceSelect.value=requestedService;serviceSelect.dispatchEvent(new Event("change",{bubbles:true}));}if(requestedAddon==="gfe"&&gfeAddon){gfeAddon.checked=true;gfeAddon.dispatchEvent(new Event("change",{bubbles:true}));}goToBookingStep(2,false);bookingForm.scrollIntoView({behavior:"smooth",block:"start"});window.setTimeout(()=>{const selected=document.querySelector(".booking-service-choice.selected");(requestedAddon==="gfe"?gfeAddon:selected)?.focus({preventScroll:true});},450);};
   serviceLinks.forEach(control=>control.addEventListener("click",()=>openBookingFromService(control)));
 
   const savePendingRequest = async (price) => {
@@ -432,16 +469,18 @@
   };
   bookingForm?.addEventListener("submit",async(event)=>{
     event.preventDefault();
-    if(!bookingForm.checkValidity()){bookingForm.reportValidity();return;}
-    if(!validateDateAndTime())return;
+    if(!validateStepOne()){goToBookingStep(1);return;}
+    if(!validateStepTwo()){goToBookingStep(2);return;}
+    if(!validateDateAndTime()){goToBookingStep(3);return;}
+    if(!validateTerms()){goToBookingStep(4);return;}
     const whatsappWindow=window.open("about:blank","_blank");
     if(whatsappWindow) whatsappWindow.opener=null;
     await loadLiveSchedule();
-    if(!validateDateAndTime()){whatsappWindow?.close();return;}
+    if(!validateDateAndTime()){whatsappWindow?.close();goToBookingStep(3);return;}
     const price=getPriceBreakdown(),addOns=[];if(gfeAddon?.checked)addOns.push(price.gfePrice===0?"GFE add-on (repeat-client rate: R0)":"GFE add-on (+R300)");if(coveredAddon?.checked)addOns.push("Covered oral add-on (+R100)");
-    const submit=bookingForm.querySelector("button[type=submit]");if(submit){submit.disabled=true;submit.textContent="Saving request…";}
+    const submit=bookingForm.querySelector("button[type=submit]");if(submit){submit.disabled=true;submit.textContent="Preparing request…";}
     const pending=await savePendingRequest(price);
-    if(submit){submit.disabled=false;submit.textContent="Continue to WhatsApp";}
+    if(submit){submit.disabled=false;submit.textContent="Request Appointment";}
     const requestStatus=pending.saved?"A Pending request has been saved to the booking system.":"The live Pending save was unavailable, so please rely on this WhatsApp request.";
     const message = [
       "Hello Ashleigh",

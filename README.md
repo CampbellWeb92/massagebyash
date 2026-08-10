@@ -1,28 +1,24 @@
-# Massage by Ash Schedule - Full Booking Manager
+# Massage by Ashleigh — Website + Schedule App
 
-This build shares one Supabase schedule with the public Massage by Ash website.
+GitHub Pages-ready package.
 
-## First setup
+## Public website
+`index.html` is at the repository root. Publish GitHub Pages from `main` → `/ (root)`.
 
-Run `supabase-setup.sql` in the Supabase SQL Editor before deploying this build. It is the same migration as `SUPABASE-UPGRADE.sql` in the full package.
+The booking form uses a four-step flow:
+1. Details
+2. Service
+3. Appointment
+4. Confirm
 
-## Admin features
+It retains live Supabase availability, service-duration closing-time protection, pending request saving, and WhatsApp handoff.
 
-- Confirmed appointments with start/end ranges
-- Configurable appointment buffer
-- Manual time-range blocks
-- Whole-day and individual-time blocks
-- Custom hours for any individual date
-- Public client notices
-- Public holiday overrides
-- Pending website request queue
-- Confirm / cancel / complete workflow
-- Booking-rule settings
-- Activity history and day-level undo
-- Leave/date-range blocking with one public reason
+## Schedule app
+The latest synced admin Schedule App is in `/schedule/` and includes pending-booking alerts and sound controls.
 
-## Security
+Open it at `/schedule/` on the same domain.
 
-The browser uses only a Supabase publishable key. Client names, phone numbers and booking notes are stored in `appointments`, protected by RLS. The public calendar reads sanitised availability from `public_schedule_days` and `public_schedule_blocks` only.
+## Database
+No new SQL changes are required for the professional booking-form interface. If the full booking-system Supabase upgrade has already been run, do not run it again just for this UI update.
 
-The first authorised administrator is `infocampbellweb@gmail.com`. Database policies now use `schedule_admins`, so another authorised account can be added without rewriting all RLS policies.
+See `/setup/` and `/schedule/` for the existing database/setup documentation.
