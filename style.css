@@ -1845,7 +1845,7 @@ button,
   }
 
   .sparkles {
-    display: none;
+    opacity: 0.42;
   }
 }
 
