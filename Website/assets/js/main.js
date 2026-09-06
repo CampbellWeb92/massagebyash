@@ -545,16 +545,24 @@
 
   goToSlide(0);
 
-  // Static mobile navigation menu
+  // Premium mobile navigation menu
   const menuToggle = byId("menuToggle");
   const mainNavigation = byId("mainNavigation");
   const mobileMenuQuery = window.matchMedia("(max-width: 900px)");
 
   const setMobileMenuState = (isOpen, returnFocus = false) => {
     if (!menuToggle || !mainNavigation) return;
+
     mainNavigation.classList.toggle("is-open", isOpen);
+    document.body.classList.toggle("mobile-menu-open", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+
+    if (isOpen) {
+      // Keep the page anchored while the full-screen menu is open.
+      mainNavigation.scrollTop = 0;
+    }
+
     if (returnFocus) menuToggle.focus();
   };
 
@@ -570,6 +578,7 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
+      event.preventDefault();
       setMobileMenuState(false, true);
     }
   });
