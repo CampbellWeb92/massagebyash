@@ -2485,3 +2485,59 @@ button,
   .booking-final-actions { flex-direction: column-reverse; }
   .price-summary { padding: 17px; }
 }
+
+/* ============================================================
+   Gallery showcase + subtle card tint
+   Added without changing the rest of the site layout or content.
+   ============================================================ */
+
+/* Same softly tinted card surface used in the updated version. */
+.card {
+  border-color: rgba(212, 175, 55, 0.16);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    #0d0f0e;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.07), transparent 38%);
+}
+
+/* Larger gallery showcase format from the updated version. */
+.gallery-shell {
+  width: min(1180px, calc(100% - 48px));
+  border-radius: 28px;
+}
+
+.gallery-slide {
+  min-height: clamp(480px, 65vw, 720px);
+}
+
+.gallery-slide img {
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .gallery-shell {
+    width: min(100% - 32px, 760px);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-slide {
+    min-height: clamp(430px, 120vw, 620px);
+  }
+}
+
+@media (max-width: 430px) {
+  .gallery-shell {
+    width: min(100% - 22px, 420px);
+  }
+}
+
