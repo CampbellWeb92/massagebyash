@@ -2,7 +2,7 @@
   "use strict";
 
   const WHATSAPP_NUMBER = "27795567346";
-  const AGE_GATE_KEY = "massageByAshleighAgeVerifiedSessionV4";
+  const AGE_GATE_KEY = "massageByAshAgeVerifiedSessionV4";
 
   const byId = (id) => document.getElementById(id);
 
@@ -489,7 +489,7 @@
     if(submit){submit.disabled=false;submit.textContent="Request Appointment";}
     const requestStatus=pending.saved?"A Pending request has been saved to the booking system.":"The live Pending save was unavailable, so please rely on this WhatsApp request.";
     const message = [
-      "Hello Ashleigh",
+      "Hello Ash",
       "",
       "I'd like to request the following appointment:",
       "",
@@ -594,24 +594,16 @@
 
   goToSlide(0);
 
-  // Premium mobile navigation menu
+  // Static mobile navigation menu
   const menuToggle = byId("menuToggle");
   const mainNavigation = byId("mainNavigation");
   const mobileMenuQuery = window.matchMedia("(max-width: 900px)");
 
   const setMobileMenuState = (isOpen, returnFocus = false) => {
     if (!menuToggle || !mainNavigation) return;
-
     mainNavigation.classList.toggle("is-open", isOpen);
-    document.body.classList.toggle("mobile-menu-open", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
-
-    if (isOpen) {
-      // Keep the page anchored while the full-screen menu is open.
-      mainNavigation.scrollTop = 0;
-    }
-
     if (returnFocus) menuToggle.focus();
   };
 
@@ -627,7 +619,6 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
-      event.preventDefault();
       setMobileMenuState(false, true);
     }
   });

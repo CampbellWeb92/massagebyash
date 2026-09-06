@@ -1,4 +1,4 @@
-# Massage by Ashleigh — Website + Schedule App
+# Massage by Ash — Website + Schedule App
 
 GitHub Pages-ready package.
 

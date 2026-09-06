@@ -1,4 +1,4 @@
-const CACHE_NAME = "massage-by-ash-schedule-v9";
+const CACHE_NAME = "massage-by-ash-schedule-v10";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
@@ -7,8 +7,8 @@ const STATIC_ASSETS = [
   "./supabase-config.js",
   "./manifest.webmanifest",
   "./notification.wav",
-  "./images/logo-clean.png",
-  "./images/background.png"
+  "./images/logo-app.png",
+  "./images/background-lotus.png"
 ];
 
 self.addEventListener("install", event => {

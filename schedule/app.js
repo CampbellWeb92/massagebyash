@@ -148,10 +148,23 @@ function statusForDay(key) {
   if (available.length<slots.length) return 'partial';
   return base.holiday ? 'holiday' : 'available';
 }
+const NOTE_STICKER_RE = /^\\s*\\[\\[sticker:([^\\]]+)\\]\\]\\s*/;
+function parseDayNote(value) {
+  const raw=String(value||'');
+  const match=raw.match(NOTE_STICKER_RE);
+  return {sticker:match?match[1]:'', text:raw.replace(NOTE_STICKER_RE,'').trim()};
+}
+function noteForStorage(text, sticker) {
+  const clean=String(text||'').trim();
+  return sticker ? `[[sticker:${sticker}]] ${clean}`.trim() : clean;
+}
+function publicStickerForDay(key) {
+  return parseDayNote(getDayData(key).note||'').sticker;
+}
 function publicNoteForDay(key) {
-  const dayNote=(getDayData(key).note||'').trim();
-  const holidayNote=(holidayOverrides[key]?.publicNote||'').trim();
-  const blockNotes=getBlocks(key).map(b=>(b.publicNote||'').trim()).filter(Boolean);
+  const dayNote=parseDayNote(getDayData(key).note||'').text;
+  const holidayNote=parseDayNote(holidayOverrides[key]?.publicNote||'').text;
+  const blockNotes=getBlocks(key).map(b=>parseDayNote(b.publicNote||'').text).filter(Boolean);
   return [...new Set([dayNote,holidayNote,...blockNotes].filter(Boolean))].join(' ');
 }
 function calendarDates(monthDate) {
@@ -210,7 +223,12 @@ function renderPublic() {
   $('selectedDateLabel').textContent=prettyDate(selectedDate);
   const wrap=$('publicSlots'); wrap.innerHTML='';
   const base=baseAvailabilityForDay(selectedDate), day=getDayData(selectedDate), note=publicNoteForDay(selectedDate), noteBox=$('publicNote');
-  if (note) { noteBox.innerHTML=`<strong>Client Notice</strong><p></p>`; noteBox.querySelector('p').textContent=note; noteBox.classList.remove('hidden'); }
+  if (note || publicStickerForDay(selectedDate)) {
+    const sticker=publicStickerForDay(selectedDate);
+    noteBox.innerHTML=`<strong>Client Notice</strong>${sticker?`<span class="public-note-sticker" aria-hidden="true">${escapeHtml(sticker)}</span>`:''}<p></p>`;
+    noteBox.querySelector('p').textContent=note;
+    noteBox.classList.remove('hidden');
+  }
   else { noteBox.innerHTML=''; noteBox.classList.add('hidden'); }
   if (base.holiday) { const n=document.createElement('div'); n.className='holiday-notice'; n.innerHTML=`<strong>${base.holidayName}</strong><span>${base.closed?'Closed for this holiday':base.label}</span>`; wrap.appendChild(n); }
   if (base.closed) { wrap.insertAdjacentHTML('beforeend','<div class="empty-state"><strong>Closed</strong><br>No appointment times are available on this date.</div>'); return; }
@@ -322,8 +340,8 @@ async function showDeviceBookingNotification(appointment, isTest=false) {
     : `${appointment.client_name||'Client'} · ${prettyDate(appointment.day)} at ${formatSlot(start)}${appointment.service?` · ${appointment.service}`:''}`;
   const options={
     body,
-    icon:'./images/logo-clean.png',
-    badge:'./images/logo-clean.png',
+    icon:'./images/logo-app.png',
+    badge:'./images/logo-app.png',
     tag:isTest?'mba-booking-alert-test':`mba-booking-${appointment.id}`,
     renotify:true,
     requireInteraction:!isTest,
@@ -445,7 +463,7 @@ function renderAdmin() {
   $('adminSelectedDateLabel').textContent=prettyDate(adminSelectedDate);
   $('autoHoursInfo').innerHTML=autoInfoText(adminSelectedDate);
   $('blockWholeDay').checked=adminDraft.wholeDay;
-  $('dayNote').value=adminDraft.note||'';
+  $('dayNote').value=parseDayNote(adminDraft.note||'').text; $('daySticker').value=parseDayNote(adminDraft.note||'').sticker; updateStickerPicker();
   const custom=adminDraft.customSlots||[];
   $('useCustomHours').checked=custom.length>0;
   if(custom.length){$('customOpen').value=custom[0];$('customClose').value=custom.at(-1);}
@@ -502,7 +520,7 @@ function renderSettings(){if(!$('settingBuffer'))return;$('settingBuffer').value
 function renderHistory(){const w=$('historyList');if(!w)return;w.innerHTML='';if(!historyRows.length){w.innerHTML='<div class="empty-state compact">No activity recorded yet.</div>';return;}historyRows.forEach(r=>{const el=document.createElement('article');el.className='history-item';const when=new Date(r.changed_at).toLocaleString('en-ZA',{dateStyle:'medium',timeStyle:'short'});el.innerHTML=`<strong>${escapeHtml(r.action)} · ${escapeHtml(r.table_name)}</strong><span>${escapeHtml(r.record_key)} · ${when}</span><small>${escapeHtml(r.actor_email||'system')}</small>`;w.appendChild(el);});}
 
 $('blockWholeDay')?.addEventListener('change',e=>{adminDraft.wholeDay=e.target.checked;renderAdminSlotsOnly();});
-$('dayNote')?.addEventListener('input',e=>adminDraft.note=e.target.value);
+$('dayNote')?.addEventListener('input',e=>adminDraft.note=noteForStorage(e.target.value,$('daySticker')?.value||''));
 function blockTimes(predicate){const s=new Set(adminDraft.blockedSlots||[]);editableSlotsForDraft().filter(predicate).forEach(t=>s.add(t));adminDraft.blockedSlots=[...s].sort();renderAdminSlotsOnly();renderAdminBookingOptions();}
 $('blockMorningBtn')?.addEventListener('click',()=>blockTimes(t=>timeToMinutes(t)<12*60));
 $('blockAfternoonBtn')?.addEventListener('click',()=>blockTimes(t=>timeToMinutes(t)>=12*60));
@@ -512,10 +530,10 @@ $('applyCustomHoursBtn')?.addEventListener('click',()=>{if(!$('useCustomHours').
 
 async function saveHolidayOverride(){const mode=$('holidayMode').value,name=$('holidayName').value.trim();if(mode==='automatic'){const {error}=await db.from('holiday_overrides').delete().eq('day',adminSelectedDate);if(error)throw error;return;}const {error}=await db.from('holiday_overrides').upsert({day:adminSelectedDate,mode,name,custom_slots:[],public_note:'',updated_at:new Date().toISOString()},{onConflict:'day'});if(error)throw error;}
 $('saveDayBtn')?.addEventListener('click',async()=>{
-  try{$('saveDayBtn').disabled=true;message('Saving…');const payload={day:adminSelectedDate,whole_day:adminDraft.wholeDay,blocked_slots:[...new Set(adminDraft.blockedSlots)].sort(),custom_slots:[...new Set(adminDraft.customSlots||[])].sort(),public_note:(adminDraft.note||'').trim(),private_note:(adminDraft.note||'').trim(),updated_at:new Date().toISOString()};const {error}=await db.from('schedule_days').upsert(payload,{onConflict:'day'});if(error)throw error;await saveHolidayOverride();await loadPublicData();await loadAdminDraft();renderAdmin();message('Day changes saved.');setTimeout(()=>message(''),1800);}catch(e){console.error(e);message('Could not save. Run the upgrade SQL and check admin access.',true);}finally{$('saveDayBtn').disabled=false;}
+  try{$('saveDayBtn').disabled=true;message('Saving…');const payload={day:adminSelectedDate,whole_day:adminDraft.wholeDay,blocked_slots:[...new Set(adminDraft.blockedSlots)].sort(),custom_slots:[...new Set(adminDraft.customSlots||[])].sort(),public_note:noteForStorage(parseDayNote(adminDraft.note||'').text,$('daySticker')?.value||parseDayNote(adminDraft.note||'').sticker),private_note:noteForStorage(parseDayNote(adminDraft.note||'').text,$('daySticker')?.value||parseDayNote(adminDraft.note||'').sticker),updated_at:new Date().toISOString()};const {error}=await db.from('schedule_days').upsert(payload,{onConflict:'day'});if(error)throw error;await saveHolidayOverride();await loadPublicData();await loadAdminDraft();renderAdmin();message('Day changes saved.');setTimeout(()=>message(''),1800);}catch(e){console.error(e);message('Could not save. Run the upgrade SQL and check admin access.',true);}finally{$('saveDayBtn').disabled=false;}
 });
 $('clearDayBtn')?.addEventListener('click',async()=>{const [a,b]=await Promise.all([db.from('schedule_days').delete().eq('day',adminSelectedDate),db.from('holiday_overrides').delete().eq('day',adminSelectedDate)]);if(a.error||b.error){message('Could not clear this date.',true);return;}await loadPublicData();await loadAdminDraft();renderAdmin();message('Manual day settings cleared. Appointments were kept.');});
-$('copyDayBtn')?.addEventListener('click',async()=>{const target=$('copyTargetDate').value;if(!target){message('Choose the date you want to copy to.',true);return;}const {error}=await db.from('schedule_days').upsert({day:target,whole_day:adminDraft.wholeDay,blocked_slots:[...adminDraft.blockedSlots],custom_slots:[...(adminDraft.customSlots||[])],public_note:(adminDraft.note||'').trim(),private_note:(adminDraft.note||'').trim(),updated_at:new Date().toISOString()},{onConflict:'day'});if(error){message('Could not copy this date.',true);return;}await loadPublicData();message(`Copied to ${prettyDate(target)}.`);});
+$('copyDayBtn')?.addEventListener('click',async()=>{const target=$('copyTargetDate').value;if(!target){message('Choose the date you want to copy to.',true);return;}const {error}=await db.from('schedule_days').upsert({day:target,whole_day:adminDraft.wholeDay,blocked_slots:[...adminDraft.blockedSlots],custom_slots:[...(adminDraft.customSlots||[])],public_note:noteForStorage(parseDayNote(adminDraft.note||'').text,$('daySticker')?.value||parseDayNote(adminDraft.note||'').sticker),private_note:noteForStorage(parseDayNote(adminDraft.note||'').text,$('daySticker')?.value||parseDayNote(adminDraft.note||'').sticker),updated_at:new Date().toISOString()},{onConflict:'day'});if(error){message('Could not copy this date.',true);return;}await loadPublicData();message(`Copied to ${prettyDate(target)}.`);});
 $('blockRangeBtn')?.addEventListener('click',async()=>{const s=$('rangeStart').value,e=$('rangeEnd').value,n=$('rangeNote').value.trim();if(!s||!e){message('Choose both From and To dates.',true);return;}if(parseISODate(s)>parseISODate(e)){message('The From date must be before the To date.',true);return;}const rows=[];for(let d=parseISODate(s);d<=parseISODate(e);d=addDays(d,1)){rows.push({day:isoDate(d),whole_day:true,blocked_slots:[],custom_slots:[],public_note:n,private_note:n,updated_at:new Date().toISOString()});}const {error}=await db.from('schedule_days').upsert(rows,{onConflict:'day'});if(error){message('Could not block the date range.',true);return;}await loadPublicData();message(`Blocked ${rows.length} date${rows.length===1?'':'s'} with the public notice.`);});
 
 function getDayCloseMinutes(key){const slots=allSlotsForDay(key);return slots.length?timeToMinutes(slots.at(-1)):0;}
@@ -532,6 +550,25 @@ async function updateAppointmentStatus(id,status){const {error}=await db.from('a
 $('saveSettingsBtn')?.addEventListener('click',async()=>{const payload={default_buffer_minutes:Number($('settingBuffer').value),min_notice_minutes:Number($('settingNotice').value),max_advance_days:Number($('settingAdvance').value)};const {error}=await db.from('schedule_settings').update(payload).eq('id',1);if(error){message('Could not save booking rules.',true);return;}settings={defaultBufferMinutes:payload.default_buffer_minutes,minNoticeMinutes:payload.min_notice_minutes,maxAdvanceDays:payload.max_advance_days};renderSettings();message('Booking rules saved and published to the website.');});
 $('undoDayBtn')?.addEventListener('click',async()=>{const {data,error}=await db.rpc('undo_last_schedule_day_change',{p_day:adminSelectedDate});if(error){message('Could not undo the last day change.',true);return;}await loadPublicData();await loadHistory();await loadAdminDraft();renderAdmin();renderHistory();message(data||'Previous state restored.');});
 
+function updateStickerPicker() {
+  const selected=$('daySticker')?.value||'';
+  qsa('.sticker-choice').forEach(btn=>btn.classList.toggle('active',(btn.dataset.sticker||'')===selected));
+}
+qsa('.sticker-choice').forEach(btn=>btn.addEventListener('click',()=>{
+  if(!$('daySticker')) return;
+  $('daySticker').value=btn.dataset.sticker||'';
+  adminDraft.note=noteForStorage($('dayNote')?.value||'', $('daySticker').value);
+  updateStickerPicker();
+}));
+$('viewHistoryBtn')?.addEventListener('click',()=>{
+  qsa('[data-admin-tab]').forEach(b=>b.classList.toggle('active',b.dataset.adminTab==='history'));
+  qsa('[data-admin-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.adminPanel!=='history'));
+  renderHistory();
+});
+$('backToSettingsBtn')?.addEventListener('click',()=>{
+  qsa('[data-admin-tab]').forEach(b=>b.classList.toggle('active',b.dataset.adminTab==='settings'));
+  qsa('[data-admin-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.adminPanel!=='settings'));
+});
 qsa('[data-admin-tab]').forEach(btn=>btn.addEventListener('click',()=>{qsa('[data-admin-tab]').forEach(b=>b.classList.toggle('active',b===btn));qsa('[data-admin-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.adminPanel!==btn.dataset.adminTab));if(btn.dataset.adminTab==='history')renderHistory();if(btn.dataset.adminTab==='bookings')renderBookingsPanels();}));
 
 $('prevMonth')?.addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1);renderPublic();});

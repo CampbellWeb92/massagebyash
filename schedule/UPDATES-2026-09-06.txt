@@ -1,0 +1,21 @@
+Massage by Ash Schedule App — 6 September 2026 update
+
+Navigation
+- Simplified therapist navigation to Schedule, Bookings and More.
+- History is now tucked inside More so it no longer adds clutter to the main navigation.
+- Navigation stays visible while scrolling on the therapist dashboard.
+- Added clear icons to the three main sections.
+
+Special-day Notes
+- Added a cute sticker picker to Public Client Notice.
+- Available stickers include birthday cake, star, gift, heart, Easter egg, flower, sparkles, candle, celebration and lotus.
+- The selected sticker is saved together with the existing public note, so no database column change is required.
+- Public clients see the sticker above the note.
+
+Background
+- Added images/background-lotus.png based on the supplied luxury emerald/gold design, replacing the rose decorations with lotus flowers.
+
+Logo
+- Added images/logo-app.png as a clean standalone transparent app logo.
+- Updated the schedule page, PWA manifest, service worker and notification icon/badge to use the new logo.
+- Kept logo-transparent.png as a fallback.

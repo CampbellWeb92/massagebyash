@@ -37,7 +37,7 @@
 
   <main class="page-shell">
     <section id="schedule" class="brand-hero">
-      <img src="images/logo-clean.png" alt="Massage by Ash" class="hero-logo">
+      <img src="images/logo-app.png" alt="Massage by Ash" class="hero-logo" onerror="this.onerror=null;this.src='images/logo-transparent.png'">
     </section>
 
     <section class="schedule-grid">
@@ -215,10 +215,10 @@
           <div id="autoHoursInfo" class="auto-hours-info"></div>
 
           <div class="dashboard-tabs" role="tablist" aria-label="Schedule management">
-            <button class="dashboard-tab active" type="button" data-admin-tab="day">Day</button>
-            <button class="dashboard-tab" type="button" data-admin-tab="bookings">Bookings <span id="pendingCount" class="count-badge">0</span></button>
-            <button class="dashboard-tab" type="button" data-admin-tab="settings">Settings</button>
-            <button class="dashboard-tab" type="button" data-admin-tab="history">History</button>
+            <button class="dashboard-tab active" type="button" data-admin-tab="day"><span class="tab-icon">📅</span> Schedule</button>
+            <button class="dashboard-tab" type="button" data-admin-tab="bookings"><span class="tab-icon">💌</span> Bookings <span id="pendingCount" class="count-badge">0</span></button>
+            <button class="dashboard-tab" type="button" data-admin-tab="settings"><span class="tab-icon">⚙️</span> More</button>
+            <button class="dashboard-tab history-tab" type="button" data-admin-tab="history">History</button>
           </div>
 
           <div class="admin-tab-panel" data-admin-panel="day">
@@ -250,9 +250,24 @@
             <div id="adminSlots" class="admin-slots"></div>
 
             <div class="admin-divider"></div>
-            <label>Public Client Notice
+            <div class="note-editor">
+              <div class="manage-heading"><strong>Public Client Notice</strong><small>Add an optional cute sticker for birthdays, gifts, holidays or special days.</small></div>
+              <div class="sticker-picker" id="stickerPicker" aria-label="Choose a note sticker">
+                <button type="button" class="sticker-choice active" data-sticker="" aria-label="No sticker">✕</button>
+                <button type="button" class="sticker-choice" data-sticker="🎂" aria-label="Birthday cake">🎂</button>
+                <button type="button" class="sticker-choice" data-sticker="⭐" aria-label="Star">⭐</button>
+                <button type="button" class="sticker-choice" data-sticker="🎁" aria-label="Gift">🎁</button>
+                <button type="button" class="sticker-choice" data-sticker="💗" aria-label="Heart">💗</button>
+                <button type="button" class="sticker-choice" data-sticker="🥚" aria-label="Easter egg">🥚</button>
+                <button type="button" class="sticker-choice" data-sticker="🌸" aria-label="Flower">🌸</button>
+                <button type="button" class="sticker-choice" data-sticker="✨" aria-label="Sparkles">✨</button>
+                <button type="button" class="sticker-choice" data-sticker="🕯️" aria-label="Candle">🕯️</button>
+                <button type="button" class="sticker-choice" data-sticker="🎉" aria-label="Celebration">🎉</button>
+                <button type="button" class="sticker-choice" data-sticker="🪷" aria-label="Lotus">🪷</button>
+              </div>
+              <input id="daySticker" type="hidden" value="">
               <textarea id="dayNote" rows="3" placeholder="Example: Away today, appointments resume tomorrow."></textarea>
-            </label>
+            </div>
 
             <div class="admin-divider"></div>
             <div class="manage-heading"><strong>Public Holiday Override</strong><small>Edit automatic holidays or create a once-off holiday.</small></div>
@@ -350,11 +365,15 @@
 
             <div class="admin-divider"></div>
             <div class="manage-heading"><strong>Administrator Access</strong><small>Database permissions now use the schedule_admins table, so additional authorised accounts can be added later without rewriting policies.</small></div>
-            <p class="admin-help">The initial administrator remains <strong>infocampbellweb@gmail.com</strong>. Add another account in Supabase Authentication first, then add its email to <code>schedule_admins</code>.</p>
+            <p class="admin-help">The initial administrator remains <strong>infocampbellweb@gmail.com</strong>. Add another account in Supabase Authentication first, then add its email to <code>schedule_admins</code>.</p><div class="admin-divider"></div>
+            <div class="manage-heading"><strong>Activity History</strong><small>See recent schedule and booking changes without adding another main navigation tab.</small></div>
+            <button id="viewHistoryBtn" class="admin-outline full-button" type="button">View Activity History</button>
           </div>
 
           <div class="admin-tab-panel hidden" data-admin-panel="history">
             <div class="manage-heading"><strong>Activity History</strong><small>Recent schedule, booking, holiday and settings changes.</small></div>
+            <button id="backToSettingsBtn" class="admin-outline full-button" type="button">← Back to More</button>
+            <div class="admin-divider"></div>
             <button id="undoDayBtn" class="admin-outline full-button" type="button">Undo Last Change for Selected Date</button>
             <div id="historyList" class="history-list"></div>
           </div>

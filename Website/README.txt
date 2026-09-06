@@ -1,4 +1,4 @@
-MASSAGE BY ASHLEIGH WEBSITE
+MASSAGE BY Ash WEBSITE
 ===========================
 
 Open index.html to preview the website locally.

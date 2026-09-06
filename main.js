@@ -2,7 +2,7 @@
   "use strict";
 
   const WHATSAPP_NUMBER = "27795567346";
-  const AGE_GATE_KEY = "massageByAshleighAgeVerifiedSessionV4";
+  const AGE_GATE_KEY = "massageByAshAgeVerifiedSessionV4";
 
   const byId = (id) => document.getElementById(id);
 
@@ -489,7 +489,7 @@
     if(submit){submit.disabled=false;submit.textContent="Request Appointment";}
     const requestStatus=pending.saved?"A Pending request has been saved to the booking system.":"The live Pending save was unavailable, so please rely on this WhatsApp request.";
     const message = [
-      "Hello Ashleigh",
+      "Hello Ash",
       "",
       "I'd like to request the following appointment:",
       "",
