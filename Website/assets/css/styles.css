@@ -2438,3 +2438,76 @@ button,
   }
 }
 
+
+/* Mobile navigation layout: logo left, menu control right, full-screen navigation */
+@media (max-width: 900px) {
+  .topbar {
+    position: relative;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 76px;
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-bottom: 12px;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  .brand img {
+    width: min(100px, 28vw);
+  }
+
+  .menu-toggle {
+    position: relative;
+    z-index: 10002;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+  }
+
+  .nav {
+    position: fixed;
+    z-index: 10001;
+    inset: 0;
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    margin: 0;
+    padding: max(88px, calc(env(safe-area-inset-top) + 76px)) max(22px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 8px;
+    border: 0;
+    border-radius: 0;
+    background: #070707;
+    box-shadow: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .nav a {
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 48px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  body:has(.nav.is-open) {
+    overflow: hidden;
+  }
+}
