@@ -1,15 +1,15 @@
 :root {
   --emerald: #06452f;
   --emerald-light: #0b6623;
-  --gold: #d4af37;
-  --gold-bright: #f2da7a;
-  --gold-dark: #9d7615;
+  --gold: #c9a227;
+  --gold-bright: #d4af37;
+  --gold-dark: #a8841f;
   --black: #050505;
   --surface: #101010;
   --surface-raised: #171717;
   --white: #ffffff;
   --muted: rgba(255, 255, 255, 0.74);
-  --line: rgba(212, 175, 55, 0.28);
+  --line: rgba(201, 162, 39, 0.28);
   --line-soft: rgba(255, 255, 255, 0.11);
   --danger: #ef7b72;
   --success: #5ad98e;
@@ -273,7 +273,7 @@ a {
 
 .nav .nav-book {
   border-color: transparent;
-  background: linear-gradient(135deg, var(--gold), var(--gold-bright), var(--gold-dark));
+  background: var(--gold);
   color: #070707;
 }
 
@@ -331,11 +331,7 @@ a {
   font-weight: 600;
   line-height: 0.95;
   text-wrap: balance;
-  background: linear-gradient(90deg, var(--gold), #fff6c8, var(--gold-dark), #ffffff, var(--gold));
-  background-size: 220% auto;
-  background-clip: text;
-  color: transparent;
-  animation: shine 7s linear infinite;
+  color: var(--gold);
 }
 
 .hero p {
@@ -379,14 +375,14 @@ a {
 
 .btn-gold {
   border: 1px solid rgba(255, 255, 255, 0.26);
-  background: linear-gradient(135deg, #9f7614 0%, var(--gold) 38%, #f7e696 62%, #b88918 100%);
+  background: var(--gold);
   color: #080808;
-  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 28px rgba(201, 162, 39, 0.18);
 }
 
 .btn-gold:hover {
-  background: #e3c85e;
-  box-shadow: 0 14px 30px rgba(212, 175, 55, 0.28);
+  background: var(--gold-bright);
+  box-shadow: 0 14px 30px rgba(201, 162, 39, 0.22);
 }
 
 .btn-outline {
@@ -1320,11 +1316,26 @@ a {
   transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
 }
 
-#backToTop.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
+#backToTop {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 900;
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: var(--gold);
+  color: #070707;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  font-weight: 900;
+  text-decoration: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
 }
 
 footer {
@@ -1510,15 +1521,15 @@ footer p {
     box-shadow: none;
   }
 
-  .nav .nav-book,
-  .nav .nav-book:hover,
-  .nav .nav-book[aria-current="location"] {
-    margin-top: 4px;
-    border-color: transparent;
-    border-radius: 999px;
-    background: var(--gold);
-    color: #070707;
-  }
+.nav .nav-book,
+.nav .nav-book:hover,
+.nav .nav-book[aria-current="location"] {
+  margin-top: 4px;
+  border-color: transparent;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #070707;
+}
 
   .hero {
     min-height: 72svh;
@@ -2354,3 +2365,4 @@ button,
     font-size: 0.76rem;
   }
 }
+
