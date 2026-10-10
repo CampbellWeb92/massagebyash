@@ -114,6 +114,24 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
   <script src="assets/js/schedule-config.js" defer></script>
   <script src="assets/js/main.js?v=20260810-professional-booking-form" defer></script>
+  <style>
+    /* Repeat-client GFE highlight under the Rates & Services cards */
+    .repeat-client-highlight {
+      width: min(100% - 32px, 620px);
+      margin: 24px auto 0;
+      padding: 14px 22px;
+      border: 1px solid #a8841f;
+      border-radius: 12px;
+      background: #c9a227;
+      color: #070707;
+      text-align: center;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      font-weight: 800;
+      line-height: 1.5;
+      box-shadow: 0 8px 22px rgba(201, 162, 39, 0.14);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -270,7 +288,8 @@
         </article>
       </div>
 
-      
+      <p class="repeat-client-highlight">Repeat clients don't pay for GFE.</p>
+
     </section>
 
     <section class="section" id="services-not-offered">
@@ -435,8 +454,8 @@
               <button type="button" class="booking-service-choice" data-service-value="sensual-60" role="radio" aria-checked="false"><span>Sensual Massage</span><small>60 minutes</small><strong>R1 200</strong></button>
               <button type="button" class="booking-service-choice" data-service-value="sensual-fh-30" role="radio" aria-checked="false"><span>Sensual Massage with FH</span><small>30 minutes</small><strong>R1 200</strong></button>
               <button type="button" class="booking-service-choice" data-service-value="sensual-fh-60" role="radio" aria-checked="false"><span>Sensual Massage with FH</span><small>60 minutes</small><strong>R1 400</strong></button>
-              <button type="button" class="booking-service-choice" data-service-value="fh-30" role="radio" aria-checked="false"><span>FH</span><small>30 minutes</small><strong>R1 300</strong></button>
-              <button type="button" class="booking-service-choice" data-service-value="fh-60" role="radio" aria-checked="false"><span>FH</span><small>60 minutes</small><strong>R1 500</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="fh-30" role="radio" aria-checked="false"><span>FH</span><small>30 minutes</small><strong>R1 400</strong></button>
+              <button type="button" class="booking-service-choice" data-service-value="fh-60" role="radio" aria-checked="false"><span>FH</span><small>60 minutes</small><strong>R1 600</strong></button>
             </div>
             <small class="field-help booking-choice-help" id="serviceHelp">Choose one service to continue.</small>
 
@@ -569,8 +588,11 @@
         </form>
 
         <div class="booking-signoff">
-          <p>I look forward to hearing from you,<br>
-          <strong>Ash</strong><br>💚</p>
+        <p class="closing-message">
+         I look forward to hearing from you,<br>
+        <strong>Ash</strong><br>
+        💚
+        </p>
         </div>
       </div>
     </section>
