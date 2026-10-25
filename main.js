@@ -165,7 +165,7 @@
 
      
 if (day === "Mon") {
-  isOpen = minutes >= 600 && minutes < 960;
+  isOpen = minutes >= 600 && minutes < 1020;
   closingTime = "17:00";
 } else if (["Tue", "Wed", "Thu", "Fri"].includes(day)) {
   isOpen = minutes >= 540 && minutes < 1020;
