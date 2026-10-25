@@ -92,7 +92,7 @@
             <span><i class="legend-dot available"></i>Available</span>
             <span><i class="legend-dot limited"></i>Limited</span>
           </div>
-          <p>Sundays &amp; Mondays: Closed</p>
+          <p>Monday: 10h00–17h00 (Parkmore only) · Sunday: Closed</p>
         </div>
       </aside>
     </section>
@@ -105,11 +105,7 @@
           <p>Click a day above to view availability</p>
         </div>
       </div>
-      
-      <div class="hours-item">
-        <strong>Mon</strong>
-        <span>10h00 – 17h00</span>
-      </div>
+
       <div class="hours-item">
         <strong>Tue – Fri</strong>
         <span>09h00 – 17h00</span>
@@ -121,6 +117,10 @@
       <div class="hours-item">
         <strong>Sunday</strong>
         <span>Closed</span>
+      </div>
+      <div class="hours-item">
+        <strong>Monday (Parkmore only)</strong>
+        <span>10h00 – 17h00</span>
       </div>
       <div class="hours-item holiday-hours">
         <strong>Public Holidays <em>★</em></strong>
@@ -217,7 +217,6 @@
           <div class="dashboard-tabs" role="tablist" aria-label="Schedule management">
             <button class="dashboard-tab active" type="button" data-admin-tab="day"><span class="tab-icon">📅</span> Schedule</button>
             <button class="dashboard-tab" type="button" data-admin-tab="bookings"><span class="tab-icon">💌</span> Bookings <span id="pendingCount" class="count-badge">0</span></button>
-            <button class="dashboard-tab" type="button" data-admin-tab="location"><span class="tab-icon">📍</span> Daily Location</button>
             <button class="dashboard-tab" type="button" data-admin-tab="settings"><span class="tab-icon">⚙️</span> More</button>
             <button class="dashboard-tab history-tab" type="button" data-admin-tab="history">History</button>
           </div>
@@ -341,20 +340,7 @@
             <div id="upcomingAppointments" class="appointment-list"></div>
           </div>
 
-          <div class="admin-tab-panel hidden" data-admin-panel="location">
-            <div class="manage-heading"><strong>Daily Location</strong><small>Choose the location for every appointment on the selected date. Only an authorised administrator can change this.</small></div>
-            <div class="range-grid">
-              <label for="dailyLocationChoice">Location for <span id="dailyLocationDateLabel">selected date</span>
-                <select id="dailyLocationChoice"><option value="">Not set</option><option value="Parkmore, Sandton">Parkmore, Sandton</option><option value="Melrose Arch">Melrose Arch</option><option value="__other__">Other location…</option></select>
-              </label>
-              <label id="dailyLocationOtherWrap" class="hidden" for="dailyLocationOther">Enter location<input id="dailyLocationOther" type="text" maxlength="160" placeholder="Enter location"></label>
-            </div>
-            <button id="saveDailyLocationBtn" class="admin-primary full-button" type="button">Save Daily Location</button>
-            <p id="dailyLocationStatus" class="admin-help" role="status">Select a date on the Schedule tab to set its location.</p>
-          </div>
-
           <div class="admin-tab-panel hidden" data-admin-panel="settings">
-            <div class="admin-divider"></div>
             <div class="manage-heading"><strong>Booking Rules</strong><small>These rules are applied to the public website automatically.</small></div>
             <div class="range-grid">
               <label>Default buffer<select id="settingBuffer"><option value="0">0 min</option><option value="15">15 min</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">60 min</option></select></label>

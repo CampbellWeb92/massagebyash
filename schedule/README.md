@@ -7,7 +7,7 @@ This version is connected to Supabase and includes the complete usability upgrad
 - Tuesday–Friday: 09h00–17h00
 - Saturday: 09h00–15h00
 - Sunday: Closed
-- Monday: Closed
+- Monday: 10:00–17:00 (Parkmore, Sandton only)
 - South African public holidays: 09h00–15h00
 
 Available time choices use the requested pattern:

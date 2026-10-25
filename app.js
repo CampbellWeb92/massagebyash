@@ -96,23 +96,27 @@ function holidayInfoFor(key) {
 }
 function baseAvailabilityForDay(key) {
   const date=parseISODate(key);
+  if (!date) return { closed:true, holiday:false, holidayName:'', label:'Closed', slots:[] };
   const dayData=getDayData(key);
   const holiday=holidayInfoFor(key);
   let closed=false, slots=[], label='', holidayName='';
 
+  // Public holiday hours take priority over ordinary weekday hours.
   if (holiday?.closed) {
     closed=true; label='Closed for public holiday'; holidayName=holiday.name;
   } else if (holiday) {
     closed=false; label='Public holiday hours'; holidayName=holiday.name;
-    slots=(holiday.customSlots?.length ? holiday.customSlots : makeBusinessSlots(9,15));
+    slots=makeBusinessSlots(9,15);
   } else {
     const weekday=date.getDay();
-    if (weekday===0 || weekday===1) { closed=true; label='Closed'; slots=[]; }
+    if (weekday===0) { closed=true; label='Closed'; slots=[]; }
+    else if (weekday===1) { slots=makeBusinessSlots(10,17); label='Monday hours (Parkmore only)'; }
     else if (weekday===6) { slots=makeBusinessSlots(9,15); label='Saturday hours'; }
     else { slots=makeBusinessSlots(9,17); label='Business hours'; }
   }
 
-  if (dayData.customSlots?.length) {
+  // Custom daily slots may adjust ordinary days, but never override public holiday hours.
+  if (!holiday && dayData.customSlots?.length) {
     closed=false; slots=[...dayData.customSlots].sort(); label='Custom hours';
   }
   return { closed, holiday:!!holiday, holidayName, label, slots };
@@ -268,7 +272,7 @@ function autoInfoText(key) {
   if (override?.mode==='normal') return `<strong>Holiday override: normal day</strong><span>${base.label}</span>`;
   if (base.holiday) return `<strong>${base.holidayName}</strong><span>${base.closed?'Closed by holiday override':base.label}</span>`;
   if (adminDraft?.customSlots?.length) return `<strong>Custom hours</strong><span>${formatSlot(adminDraft.customSlots[0])} – ${formatSlot(adminDraft.customSlots.at(-1))}</span>`;
-  if (base.closed) return '<strong>Automatic off day</strong><span>Closed on Sundays and Mondays unless custom hours are set.</span>';
+  if (base.closed) return '<strong>Automatic off day</strong><span>Closed on Sundays. Mondays are open 10:00–17:00 at Parkmore, Sandton only.</span>';
   return `<strong>${base.label}</strong><span>${formatSlot(base.slots[0])} – ${formatSlot(base.slots.at(-1))}</span>`;
 }
 function renderAdmin() {

@@ -315,12 +315,22 @@
   const getBlocks = (key) => liveBlocks[key]||[];
   const publicNoteForDay = (key) => [...new Set([getScheduleDay(key).publicNote,holidayOverrides[key]?.publicNote,...getBlocks(key).map(b=>b.publicNote)].map(v=>String(v||"").trim()).filter(Boolean))].join(" ");
   const baseAvailabilityForDay = (key) => {
-    const date=parseLocalDate(key); if(!date)return{closed:true,holiday:false,holidayName:"",slots:[]};
-    const dayData=getScheduleDay(key),holiday=holidayInfoFor(key); let closed=false,slots=[],holidayName="";
+    const date=parseLocalDate(key);
+    if(!date)return{closed:true,holiday:false,holidayName:"",slots:[]};
+    const dayData=getScheduleDay(key),holiday=holidayInfoFor(key);
+    let closed=false,slots=[],holidayName="";
+    // Public holiday hours take priority over ordinary weekday hours.
     if(holiday?.closed){closed=true;holidayName=holiday.name;}
-    else if(holiday){holidayName=holiday.name;slots=holiday.customSlots?.length?holiday.customSlots:makeBusinessSlots(9,15);}
-    else {const wd=date.getDay();if(wd===0||wd===1)closed=true;else if(wd===6)slots=makeBusinessSlots(9,15);else slots=makeBusinessSlots(9,17);}
-    if(dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();}
+    else if(holiday){holidayName=holiday.name;slots=makeBusinessSlots(9,15);}
+    else {
+      const wd=date.getDay();
+      if(wd===0){closed=true;}
+      else if(wd===1){slots=makeBusinessSlots(10,17);}
+      else if(wd===6){slots=makeBusinessSlots(9,15);}
+      else {slots=makeBusinessSlots(9,17);}
+    }
+    // Do not let custom weekday slots override the fixed public-holiday hours.
+    if(!holiday && dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();}
     return {closed,holiday:!!holiday,holidayName,slots};
   };
   const johannesburgParts = () => Object.fromEntries(new Intl.DateTimeFormat("en-ZA",{timeZone:"Africa/Johannesburg",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(({type,value})=>[type,value]));
