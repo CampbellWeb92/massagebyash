@@ -163,13 +163,18 @@
       let isOpen = false;
       let closingTime = "";
 
-      if (["Tue", "Wed", "Thu", "Fri"].includes(day)) {
-        isOpen = minutes >= 540 && minutes < 1020;
-        closingTime = "17:00";
-      } else if (day === "Sat") {
-        isOpen = minutes >= 540 && minutes < 900;
-        closingTime = "15:00";
-      }
+     
+if (day === "Mon") {
+  isOpen = minutes >= 600 && minutes < 960;
+  closingTime = "16:00";
+} else if (["Tue", "Wed", "Thu", "Fri"].includes(day)) {
+  isOpen = minutes >= 540 && minutes < 1020;
+  closingTime = "17:00";
+} else if (day === "Sat") {
+  isOpen = minutes >= 540 && minutes < 900;
+  closingTime = "15:00";
+}
+
 
       businessStatus.dataset.state = isOpen ? "open" : "closed";
       statusText.textContent = isOpen ? "Open now" : "Closed now";
@@ -319,7 +324,26 @@
     const dayData=getScheduleDay(key),holiday=holidayInfoFor(key); let closed=false,slots=[],holidayName="";
     if(holiday?.closed){closed=true;holidayName=holiday.name;}
     else if(holiday){holidayName=holiday.name;slots=holiday.customSlots?.length?holiday.customSlots:makeBusinessSlots(9,15);}
-    else {const wd=date.getDay();if(wd===0||wd===1)closed=true;else if(wd===6)slots=makeBusinessSlots(9,15);else slots=makeBusinessSlots(9,17);}
+
+else {
+  const wd = date.getDay();
+
+  if (wd === 0) {
+    // Sunday: closed
+    closed = true;
+} else if (wd === 1) {
+  // Monday: Parkmore, Sandton only, 10:00–16:00
+  slots = makeBusinessSlots(10, 16);
+}
+  } else if (wd === 6) {
+    // Saturday: 09:00–15:00
+    slots = makeBusinessSlots(9, 15);
+  } else {
+    // Tuesday–Friday: 09:00–17:00
+    slots = makeBusinessSlots(9, 17);
+  }
+}
+
     if(dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();}
     return {closed,holiday:!!holiday,holidayName,slots};
   };
