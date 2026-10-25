@@ -4,6 +4,7 @@
 
 let db = null;
 let schedule = {};
+let dailyLocations = {};
 let publicBlocks = {};
 let holidayOverrides = {};
 let settings = { defaultBufferMinutes: 15, minNoticeMinutes: 120, maxAdvanceDays: 60 };
@@ -105,17 +106,15 @@ function holidayInfoFor(key) {
 }
 function baseAvailabilityForDay(key) {
   const date=parseISODate(key);
-  if (!date) return { closed:true, holiday:false, holidayName:'', label:'Closed', slots:[] };
   const dayData=getDayData(key);
   const holiday=holidayInfoFor(key);
   let closed=false, slots=[], label='', holidayName='';
 
-  // Public holiday hours take priority over ordinary weekday hours.
   if (holiday?.closed) {
     closed=true; label='Closed for public holiday'; holidayName=holiday.name;
   } else if (holiday) {
     closed=false; label='Public holiday hours'; holidayName=holiday.name;
-    slots=makeBusinessSlots(9,15);
+    slots=(holiday.customSlots?.length ? holiday.customSlots : makeBusinessSlots(9,15));
   } else {
     const weekday=date.getDay();
     if (weekday===0) { closed=true; label='Closed'; slots=[]; }
@@ -124,7 +123,6 @@ function baseAvailabilityForDay(key) {
     else { slots=makeBusinessSlots(9,17); label='Business hours'; }
   }
 
-  // Custom daily slots may adjust ordinary days, but never override public holiday hours.
   if (!holiday && dayData.customSlots?.length) {
     closed=false; slots=[...dayData.customSlots].sort(); label='Custom hours';
   }
@@ -180,13 +178,14 @@ function calendarDates(monthDate) {
 async function loadPublicData() {
   if (!db) return;
   setSync('Syncing…');
-  const [daysRes,blocksRes,holidaysRes,settingsRes]=await Promise.all([
+  const [daysRes,blocksRes,holidaysRes,settingsRes,locationsRes]=await Promise.all([
     db.from('public_schedule_days').select('day,whole_day,blocked_slots,custom_slots,public_note'),
     db.from('public_schedule_blocks').select('appointment_id,day,start_time,end_time,kind,public_note'),
     db.from('holiday_overrides').select('day,name,mode,custom_slots,public_note'),
-    db.from('schedule_settings').select('default_buffer_minutes,min_notice_minutes,max_advance_days').eq('id',1).maybeSingle()
+    db.from('schedule_settings').select('default_buffer_minutes,min_notice_minutes,max_advance_days').eq('id',1).maybeSingle(),
+    db.from('daily_locations').select('day,location,updated_at,updated_by')
   ]);
-  const firstError=[daysRes.error,blocksRes.error,holidaysRes.error,settingsRes.error].find(Boolean);
+  const firstError=[daysRes.error,blocksRes.error,holidaysRes.error,settingsRes.error,locationsRes.error].find(Boolean);
   if (firstError) { console.error(firstError); setSync('Upgrade SQL required',true); return; }
 
   schedule={};
@@ -196,13 +195,14 @@ async function loadPublicData() {
   holidayOverrides={};
   (holidaysRes.data||[]).forEach(r=>holidayOverrides[r.day]={name:r.name||'',mode:r.mode,customSlots:r.custom_slots||[],publicNote:r.public_note||''});
   if (settingsRes.data) settings={defaultBufferMinutes:settingsRes.data.default_buffer_minutes,minNoticeMinutes:settingsRes.data.min_notice_minutes,maxAdvanceDays:settingsRes.data.max_advance_days};
+  dailyLocations={}; (locationsRes.data||[]).forEach(r=>dailyLocations[r.day]=r.location);
   setSync('Live');
   renderPublic();
   if ($('adminModal') && !$('adminModal').classList.contains('hidden')) { await refreshAdminData(false); }
 }
 function subscribeRealtime() {
   if (!db) return;
-  ['public_schedule_days','public_schedule_blocks','holiday_overrides','schedule_settings'].forEach(table=>{
+  ['public_schedule_days','public_schedule_blocks','holiday_overrides','schedule_settings','daily_locations'].forEach(table=>{
     const ch=db.channel(`live-${table}`).on('postgres_changes',{event:'*',schema:'public',table},()=>loadPublicData()).subscribe();
     realtimeChannels.push(ch);
   });
@@ -459,12 +459,14 @@ function autoInfoText(key) {
   if (override?.mode==='normal') return `<strong>Holiday override: normal day</strong><span>${base.label}</span>`;
   if (base.holiday) return `<strong>${base.holidayName}</strong><span>${base.closed?'Closed by holiday override':base.label}</span>`;
   if (adminDraft?.customSlots?.length) return `<strong>Custom hours</strong><span>${formatSlot(adminDraft.customSlots[0])} – ${formatSlot(adminDraft.customSlots.at(-1))}</span>`;
-  if (base.closed) return '<strong>Automatic off day</strong><span>Closed on Sundays. Mondays are open 10:00–17:00 at Parkmore, Sandton only.</span>';
+  if (base.closed) return '<strong>Automatic off day</strong><span>Closed on Sundays. Mondays are open 10:00–17:00 at Parkmore, Sandton only.</span>'; 
   return `<strong>${base.label}</strong><span>${formatSlot(base.slots[0])} – ${formatSlot(base.slots.at(-1))}</span>`;
 }
 function renderAdmin() {
   renderCalendar('adminCalendarGrid','adminMonthLabel',adminViewDate,adminSelectedDate,async key=>{adminSelectedDate=key;adminViewDate=startOfMonth(parseISODate(key));await loadAdminDraft();renderAdmin();renderBookingsPanels();});
   $('adminSelectedDateLabel').textContent=prettyDate(adminSelectedDate);
+  if($('dailyLocationDateLabel')) $('dailyLocationDateLabel').textContent=prettyDate(adminSelectedDate);
+  if($('dailyLocationChoice')) { const saved=dailyLocations[adminSelectedDate]||''; const known=['Parkmore, Sandton','Melrose Arch']; $('dailyLocationChoice').value=known.includes(saved)?saved:(saved?'__other__':''); $('dailyLocationOtherWrap')?.classList.toggle('hidden',!saved||known.includes(saved)); if($('dailyLocationOther')) $('dailyLocationOther').value=saved&&!known.includes(saved)?saved:''; if($('dailyLocationStatus')) $('dailyLocationStatus').textContent=saved?`Saved location: ${saved}`:'No location has been set for this date.'; }
   $('autoHoursInfo').innerHTML=autoInfoText(adminSelectedDate);
   $('blockWholeDay').checked=adminDraft.wholeDay;
   $('dayNote').value=parseDayNote(adminDraft.note||'').text; $('daySticker').value=parseDayNote(adminDraft.note||'').sticker; updateStickerPicker();
@@ -551,6 +553,18 @@ $('manualBlockStart')?.addEventListener('change',()=>{if(!$('manualBlockStart').
 async function confirmAppointment(a){const buffer=settings.defaultBufferMinutes,endM=timeToMinutes(String(a.end_time).slice(0,5)),blockedUntil=minutesToTime(endM+buffer),close=getDayCloseMinutes(a.day);if(endM>close){message('This client appointment would finish after closing time and cannot be confirmed.',true);return;}const start=String(a.start_time).slice(0,5);if(rangeConflicts(a.day,start,blockedUntil)){message('Cannot confirm: that time now overlaps a confirmed booking or block.',true);return;}const {error}=await db.from('appointments').update({status:'confirmed',buffer_minutes:buffer,blocked_until_time:blockedUntil}).eq('id',a.id);if(error){console.error(error);message('Could not confirm this request.',true);return;}await loadPublicData();await loadAppointments();renderBookingsPanels();message('Booking confirmed. The website availability changed immediately.');}
 async function updateAppointmentStatus(id,status){const {error}=await db.from('appointments').update({status}).eq('id',id);if(error){message('Could not update appointment.',true);return;}await loadPublicData();await loadAppointments();renderBookingsPanels();message(`Appointment marked ${status}.`);}
 
+$('dailyLocationChoice')?.addEventListener('change',()=>{ $('dailyLocationOtherWrap')?.classList.toggle('hidden',$('dailyLocationChoice').value!=='__other__'); });
+$('saveDailyLocationBtn')?.addEventListener('click',async()=>{
+  if(!db) return;
+  const choice=$('dailyLocationChoice').value;
+  const location=choice==='__other__'?$('dailyLocationOther').value.trim():choice;
+  if(!location){const {error}=await db.from('daily_locations').delete().eq('day',adminSelectedDate);if(error){$('dailyLocationStatus').textContent='Could not clear location. Check database setup and admin access.';return;}delete dailyLocations[adminSelectedDate];$('dailyLocationStatus').textContent='Location cleared for '+prettyDate(adminSelectedDate)+'.';return;}
+  if(location.length>160){$('dailyLocationStatus').textContent='Location must be 160 characters or fewer.';return;}
+  const user=await currentUser();
+  const {error}=await db.from('daily_locations').upsert({day:adminSelectedDate,location,updated_at:new Date().toISOString(),updated_by:user?.email||null},{onConflict:'day'});
+  if(error){console.error(error);$('dailyLocationStatus').textContent='Could not save. Run the updated Supabase SQL and confirm your admin account is authorised.';return;}
+  dailyLocations[adminSelectedDate]=location;$('dailyLocationStatus').textContent='Saved for '+prettyDate(adminSelectedDate)+': '+location+'. All appointments on this date will use this location.';
+});
 $('saveSettingsBtn')?.addEventListener('click',async()=>{const payload={default_buffer_minutes:Number($('settingBuffer').value),min_notice_minutes:Number($('settingNotice').value),max_advance_days:Number($('settingAdvance').value)};const {error}=await db.from('schedule_settings').update(payload).eq('id',1);if(error){message('Could not save booking rules.',true);return;}settings={defaultBufferMinutes:payload.default_buffer_minutes,minNoticeMinutes:payload.min_notice_minutes,maxAdvanceDays:payload.max_advance_days};renderSettings();message('Booking rules saved and published to the website.');});
 $('undoDayBtn')?.addEventListener('click',async()=>{const {data,error}=await db.rpc('undo_last_schedule_day_change',{p_day:adminSelectedDate});if(error){message('Could not undo the last day change.',true);return;}await loadPublicData();await loadHistory();await loadAdminDraft();renderAdmin();renderHistory();message(data||'Previous state restored.');});
 

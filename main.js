@@ -283,6 +283,7 @@ if (day === "Mon") {
   let liveBlocks={};
   let holidayOverrides={};
   let liveSettings={defaultBufferMinutes:15,minNoticeMinutes:120,maxAdvanceDays:60};
+  let dailyLocations={};
   let calendarViewDate=startOfMonth(new Date());
   let selectedDateKey="";
   let nextAvailableChoice=null;
@@ -320,22 +321,18 @@ if (day === "Mon") {
   const getBlocks = (key) => liveBlocks[key]||[];
   const publicNoteForDay = (key) => [...new Set([getScheduleDay(key).publicNote,holidayOverrides[key]?.publicNote,...getBlocks(key).map(b=>b.publicNote)].map(v=>String(v||"").trim()).filter(Boolean))].join(" ");
   const baseAvailabilityForDay = (key) => {
-    const date=parseLocalDate(key);
-    if(!date)return{closed:true,holiday:false,holidayName:"",slots:[]};
-    const dayData=getScheduleDay(key),holiday=holidayInfoFor(key);
-    let closed=false,slots=[],holidayName="";
-    // Public holiday hours take priority over ordinary weekday hours.
+    const date=parseLocalDate(key); if(!date)return{closed:true,holiday:false,holidayName:"",slots:[]};
+    const dayData=getScheduleDay(key),holiday=holidayInfoFor(key); let closed=false,slots=[],holidayName="";
     if(holiday?.closed){closed=true;holidayName=holiday.name;}
-    else if(holiday){holidayName=holiday.name;slots=makeBusinessSlots(9,15);}
+    else if(holiday){holidayName=holiday.name;slots=holiday.customSlots?.length?holiday.customSlots:makeBusinessSlots(9,15);}
     else {
       const wd=date.getDay();
-      if(wd===0){closed=true;}
-      else if(wd===1){slots=makeBusinessSlots(10,17);}
-      else if(wd===6){slots=makeBusinessSlots(9,15);}
-      else {slots=makeBusinessSlots(9,17);}
+      if(wd===0) closed=true;
+      else if(wd===1) slots=makeBusinessSlots(10,17);
+      else if(wd===6) slots=makeBusinessSlots(9,15);
+      else slots=makeBusinessSlots(9,17);
     }
-    // Do not let custom weekday slots override the fixed public-holiday hours.
-    if(!holiday && dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();}
+    if(dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();}
     return {closed,holiday:!!holiday,holidayName,slots};
   };
   const johannesburgParts = () => Object.fromEntries(new Intl.DateTimeFormat("en-ZA",{timeZone:"Africa/Johannesburg",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(({type,value})=>[type,value]));
@@ -386,6 +383,7 @@ if (day === "Mon") {
   };
   const renderBookingCalendar = () => {
     if(!calendarDays||!calendarMonthLabel)return;
+    const locationNotice=byId("dailyLocationNotice"); if(locationNotice){const loc=selectedDateKey?dailyLocations[selectedDateKey]:"";locationNotice.hidden=!loc;locationNotice.innerHTML=loc?"<strong>Appointment location</strong><span></span>":"";if(loc)locationNotice.querySelector("span").textContent=loc;} 
     calendarMonthLabel.textContent=new Intl.DateTimeFormat("en-ZA",{month:"long",year:"numeric"}).format(calendarViewDate);calendarDays.innerHTML="";
     const cm=calendarViewDate.getMonth(),cy=calendarViewDate.getFullYear(),today=todayKey();
     monthDates(calendarViewDate).forEach(date=>{
@@ -445,14 +443,17 @@ if (day === "Mon") {
       days={data:legacy.data,error:null};blocks={data:[],error:null};holidays={data:[],error:null};settingsRes={data:null,error:null};
       setCalendarSync("Availability connected","live");
     }
-    applyScheduleRows(days.data);applyBlockRows(blocks.data||[]);applyHolidayRows(holidays.data||[]);if(settingsRes.data)liveSettings={defaultBufferMinutes:settingsRes.data.default_buffer_minutes,minNoticeMinutes:settingsRes.data.min_notice_minutes,maxAdvanceDays:settingsRes.data.max_advance_days};scheduleReady=true;if(!calendarSync?.dataset.state?.includes("error"))setCalendarSync("Availability up to date","live");
+    applyScheduleRows(days.data);applyBlockRows(blocks.data||[]);applyHolidayRows(holidays.data||[]);
+    const locationRes=await scheduleDb.from("daily_locations").select("day,location");
+    if(!locationRes.error){dailyLocations={};(locationRes.data||[]).forEach(row=>dailyLocations[row.day]=row.location);}
+    if(settingsRes.data)liveSettings={defaultBufferMinutes:settingsRes.data.default_buffer_minutes,minNoticeMinutes:settingsRes.data.min_notice_minutes,maxAdvanceDays:settingsRes.data.max_advance_days};scheduleReady=true;if(!calendarSync?.dataset.state?.includes("error"))setCalendarSync("Availability up to date","live");
     if(selectedDateKey&&!["available","holiday","partial"].includes(statusForDay(selectedDateKey))){selectedDateKey="";if(dateInput)dateInput.value="";if(dateDisplay)dateDisplay.value="";if(timeInput)timeInput.value="";}
     renderBookingCalendar();renderTimeButtons(selectedDateKey,previouslySelectedTime);findNextAvailable();updateBusinessStatus();return true;
   };
   const connectLiveSchedule = () => {
     const url=window.SCHEDULE_SUPABASE_URL,key=window.SCHEDULE_SUPABASE_PUBLISHABLE_KEY;if(!window.supabase?.createClient||!url||!key){setCalendarSync("Availability temporarily unavailable — please confirm on WhatsApp","error");renderBookingCalendar();return;}
     scheduleDb=window.supabase.createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});loadLiveSchedule();
-    ["public_schedule_days","public_schedule_blocks","holiday_overrides","schedule_settings"].forEach(table=>{const ch=scheduleDb.channel(`website-${table}`).on("postgres_changes",{event:"*",schema:"public",table},()=>loadLiveSchedule()).subscribe();scheduleChannels.push(ch);});
+    ["public_schedule_days","public_schedule_blocks","holiday_overrides","schedule_settings","daily_locations"].forEach(table=>{const ch=scheduleDb.channel(`website-${table}`).on("postgres_changes",{event:"*",schema:"public",table},()=>loadLiveSchedule()).subscribe();scheduleChannels.push(ch);});
   };
   calendarPrev?.addEventListener("click",()=>{calendarViewDate=new Date(calendarViewDate.getFullYear(),calendarViewDate.getMonth()-1,1);renderBookingCalendar();});
   calendarNext?.addEventListener("click",()=>{calendarViewDate=new Date(calendarViewDate.getFullYear(),calendarViewDate.getMonth()+1,1);renderBookingCalendar();});
