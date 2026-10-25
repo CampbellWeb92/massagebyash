@@ -217,6 +217,7 @@
           <div class="dashboard-tabs" role="tablist" aria-label="Schedule management">
             <button class="dashboard-tab active" type="button" data-admin-tab="day"><span class="tab-icon">📅</span> Schedule</button>
             <button class="dashboard-tab" type="button" data-admin-tab="bookings"><span class="tab-icon">💌</span> Bookings <span id="pendingCount" class="count-badge">0</span></button>
+            <button class="dashboard-tab" type="button" data-admin-tab="location"><span class="tab-icon">📍</span> Daily Location</button>
             <button class="dashboard-tab" type="button" data-admin-tab="settings"><span class="tab-icon">⚙️</span> More</button>
             <button class="dashboard-tab history-tab" type="button" data-admin-tab="history">History</button>
           </div>
@@ -340,7 +341,7 @@
             <div id="upcomingAppointments" class="appointment-list"></div>
           </div>
 
-          <div class="admin-tab-panel hidden" data-admin-panel="settings">
+          <div class="admin-tab-panel hidden" data-admin-panel="location">
             <div class="manage-heading"><strong>Daily Location</strong><small>Choose the location for every appointment on the selected date. Only an authorised administrator can change this.</small></div>
             <div class="range-grid">
               <label for="dailyLocationChoice">Location for <span id="dailyLocationDateLabel">selected date</span>
@@ -350,6 +351,9 @@
             </div>
             <button id="saveDailyLocationBtn" class="admin-primary full-button" type="button">Save Daily Location</button>
             <p id="dailyLocationStatus" class="admin-help" role="status">Select a date on the Schedule tab to set its location.</p>
+          </div>
+
+          <div class="admin-tab-panel hidden" data-admin-panel="settings">
             <div class="admin-divider"></div>
             <div class="manage-heading"><strong>Booking Rules</strong><small>These rules are applied to the public website automatically.</small></div>
             <div class="range-grid">
