@@ -530,3 +530,25 @@ commit;
 
 -- Optional cleanup after ALL old website/app versions are retired:
 -- alter table public.schedule_days drop column private_note;
+
+
+-- Daily public location: admins set one location for all appointments on a date.
+create table if not exists public.daily_locations (
+  day date primary key,
+  location text not null check (length(trim(location)) between 1 and 160),
+  updated_at timestamptz not null default now(),
+  updated_by text
+);
+alter table public.daily_locations enable row level security;
+drop policy if exists "Anyone can view daily locations" on public.daily_locations;
+create policy "Anyone can view daily locations" on public.daily_locations for select to anon, authenticated using (true);
+drop policy if exists "Admins manage daily locations" on public.daily_locations;
+create policy "Admins manage daily locations" on public.daily_locations for all to authenticated
+  using (public.is_schedule_admin()) with check (public.is_schedule_admin());
+grant select on public.daily_locations to anon, authenticated;
+grant insert, update, delete on public.daily_locations to authenticated;
+DO $$ BEGIN
+  IF EXISTS (SELECT 1 FROM pg_publication WHERE pubname='supabase_realtime') AND NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname='supabase_realtime' AND schemaname='public' AND tablename='daily_locations') THEN
+    ALTER PUBLICATION supabase_realtime ADD TABLE public.daily_locations;
+  END IF;
+END $$;
