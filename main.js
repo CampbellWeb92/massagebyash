@@ -179,7 +179,7 @@ if (day === "Mon") {
       businessStatus.dataset.state = isOpen ? "open" : "closed";
       statusText.textContent = isOpen ? "Open now" : "Closed now";
       statusDetail.textContent = isOpen
-        ? `Currently open until ${closingTime}. See business hours.`
+        ? `Currently open until ${closingTime}. Strictly by appointment.`
         : "Currently unavailable.";
     } catch {
       businessStatus.dataset.state = "unknown";
