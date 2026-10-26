@@ -563,7 +563,7 @@ $('saveDailyLocationBtn')?.addEventListener('click',async()=>{
   const user=await currentUser();
   const {error}=await db.from('daily_locations').upsert({day:adminSelectedDate,location,updated_at:new Date().toISOString(),updated_by:user?.email||null},{onConflict:'day'});
   if(error){console.error(error);$('dailyLocationStatus').textContent='Could not save. Run the updated Supabase SQL and confirm your admin account is authorised.';return;}
-  dailyLocations[adminSelectedDate]=location;$('dailyLocationStatus').textContent='Saved for '+prettyDate(adminSelectedDate)+': '+location+'. All appointments on this date will use this location.';
+  dailyLocations[adminSelectedDate]=location;$('dailyLocationStatus').textContent='Saved for '+prettyDate(adminSelectedDate)+': '+location+'. All appointments on this date will use this location.';renderPublic();
 });
 $('saveSettingsBtn')?.addEventListener('click',async()=>{const payload={default_buffer_minutes:Number($('settingBuffer').value),min_notice_minutes:Number($('settingNotice').value),max_advance_days:Number($('settingAdvance').value)};const {error}=await db.from('schedule_settings').update(payload).eq('id',1);if(error){message('Could not save booking rules.',true);return;}settings={defaultBufferMinutes:payload.default_buffer_minutes,minNoticeMinutes:payload.min_notice_minutes,maxAdvanceDays:payload.max_advance_days};renderSettings();message('Booking rules saved and published to the website.');});
 $('undoDayBtn')?.addEventListener('click',async()=>{const {data,error}=await db.rpc('undo_last_schedule_day_change',{p_day:adminSelectedDate});if(error){message('Could not undo the last day change.',true);return;}await loadPublicData();await loadHistory();await loadAdminDraft();renderAdmin();renderHistory();message(data||'Previous state restored.');});
@@ -587,7 +587,36 @@ $('backToSettingsBtn')?.addEventListener('click',()=>{
   qsa('[data-admin-tab]').forEach(b=>b.classList.toggle('active',b.dataset.adminTab==='settings'));
   qsa('[data-admin-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.adminPanel!=='settings'));
 });
-qsa('[data-admin-tab]').forEach(btn=>btn.addEventListener('click',()=>{qsa('[data-admin-tab]').forEach(b=>b.classList.toggle('active',b===btn));qsa('[data-admin-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.adminPanel!==btn.dataset.adminTab));if(btn.dataset.adminTab==='history')renderHistory();if(btn.dataset.adminTab==='bookings')renderBookingsPanels();}));
+function activateAdminTab(tabName,{scroll=true}={}){
+  qsa('[data-admin-tab]').forEach(button=>{
+    const active=button.dataset.adminTab===tabName;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-selected',String(active));
+    button.setAttribute('role','tab');
+    button.tabIndex=active?0:-1;
+  });
+  qsa('[data-admin-panel]').forEach(panel=>{
+    const active=panel.dataset.adminPanel===tabName;
+    panel.classList.toggle('hidden',!active);
+    panel.setAttribute('role','tabpanel');
+    panel.setAttribute('aria-hidden',String(!active));
+  });
+  if(tabName==='history') renderHistory();
+  if(tabName==='bookings') renderBookingsPanels();
+  if(tabName==='location') {
+    renderAdmin();
+    if(scroll && window.matchMedia('(max-width: 700px)').matches){
+      window.setTimeout(()=>{
+        const panel=document.querySelector('[data-admin-panel="location"]');
+        panel?.scrollIntoView({behavior:'smooth',block:'nearest'});
+        $('dailyLocationChoice')?.focus({preventScroll:true});
+      },60);
+    }
+  }
+}
+qsa('[data-admin-tab]').forEach(btn=>btn.addEventListener('click',()=>activateAdminTab(btn.dataset.adminTab)));
+qsa('[data-admin-tab]').forEach(btn=>{btn.setAttribute('role','tab');btn.setAttribute('aria-selected',String(btn.classList.contains('active')));});
+
 
 $('prevMonth')?.addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()-1,1);renderPublic();});
 $('nextMonth')?.addEventListener('click',()=>{viewDate=new Date(viewDate.getFullYear(),viewDate.getMonth()+1,1);renderPublic();});

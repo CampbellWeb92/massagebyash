@@ -1198,3 +1198,45 @@ input:focus,textarea:focus{
   #dailyLocationChoice,#dailyLocationOther{min-height:44px;width:100%;font-size:16px}
   #saveDailyLocationBtn{min-height:46px;width:100%;white-space:normal}
 }
+
+/* Mobile usability hardening — preserves the existing palette, wording and effects. */
+@media (max-width:700px){
+  #adminModal{align-items:stretch!important;justify-content:stretch!important;padding:0!important}
+  #adminModal .admin-card{margin:0!important}
+  .admin-card{box-sizing:border-box!important;width:100vw!important;max-width:100vw!important;max-height:100dvh!important;height:100dvh!important;margin:0!important;border-radius:0!important;padding:14px!important;overflow-y:auto!important;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+  .admin-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important;min-width:0!important}
+  .manage-panel,.admin-calendar-panel,.admin-calendar,.manage-panel *{min-width:0;max-width:100%}
+  .manage-panel{width:100%!important;overflow-wrap:anywhere}
+  .mobile-location-shortcut{position:sticky!important;top:0;z-index:45;box-shadow:0 4px 14px rgba(0,0,0,.12)!important;touch-action:manipulation}
+  .dashboard-tabs{position:sticky!important;top:54px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:8px 0 14px!important;z-index:44!important}
+  .dashboard-tab{min-height:44px!important;gap:5px!important;overflow-wrap:anywhere;touch-action:manipulation}
+  .admin-tab-panel{width:100%;min-width:0;scroll-margin-top:112px}
+  .admin-tab-panel label,.manage-panel label{display:block;min-width:0;max-width:100%}
+  .manage-panel input:not([type=checkbox]):not([type=radio]),.manage-panel select,.manage-panel textarea,.admin-tab-panel input,.admin-tab-panel select,.admin-tab-panel textarea{box-sizing:border-box!important;width:100%;max-width:100%;min-height:44px;font-size:16px!important}
+  .manage-panel textarea,.admin-tab-panel textarea{min-height:88px}
+  .admin-button-row,.quick-actions,.appointment-actions,.alert-settings-actions{display:grid;grid-template-columns:minmax(0,1fr)!important;gap:8px}
+  .admin-button-row button,.quick-actions button,.appointment-actions button,.admin-tab-panel button,.manage-panel button{min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;touch-action:manipulation}
+  .appointment-card{grid-template-columns:minmax(0,1fr)!important;min-width:0}
+  .appointment-actions{grid-column:auto}
+  .admin-slots{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .range-grid,.copy-row{grid-template-columns:minmax(0,1fr)!important;min-width:0}
+  .range-grid>* ,.copy-row>*{min-width:0;max-width:100%}
+  .calendar-grid,.weekdays{grid-template-columns:repeat(7,minmax(0,1fr))!important}
+  .day{min-width:0;padding:5px 1px;overflow-wrap:anywhere}
+  .slot-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .booking-alert-popup{max-height:calc(100dvh - 28px);overflow-y:auto}
+  .modal-card,.booking-modal,.booking-form-card{box-sizing:border-box;max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);overflow-y:auto;overscroll-behavior:contain}
+  img,video,iframe{max-width:100%}
+  input,select,textarea,button{scroll-margin-bottom:120px}
+}
+@media(max-width:380px){
+  .admin-card{padding:10px!important}
+  .dashboard-tabs{gap:4px!important;padding:4px!important}
+  .dashboard-tab{font-size:11px!important;padding:8px 4px!important}
+  .count-badge{min-width:18px;height:18px;padding:0 4px}
+  .month-controls{gap:4px}
+  .day{min-height:43px}
+}
+@media(min-width:701px){
+  .mobile-location-shortcut{display:none!important}
+}
