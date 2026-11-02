@@ -23,7 +23,7 @@ BOOKING FORM RULES
 ------------------
 - Tuesday to Friday: 09:00–17:00
 - Saturday: 09:00–15:00
-- Sunday and Monday: unavailable
+- Monday and Sunday: unavailable
 - Strictly by appointment
 - Available start times adjust to the selected appointment duration
 

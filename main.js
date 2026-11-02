@@ -162,12 +162,7 @@
       const minutes = Number(parts.hour) * 60 + Number(parts.minute);
       let isOpen = false;
       let closingTime = "";
-
-     
-if (day === "Mon") {
-  isOpen = minutes >= 600 && minutes < 960;
-  closingTime = "16:00";
-} else if (["Tue", "Wed", "Thu", "Fri"].includes(day)) {
+      if (["Tue", "Wed", "Thu", "Fri"].includes(day)) {
   isOpen = minutes >= 540 && minutes < 1020;
   closingTime = "17:00";
 } else if (day === "Sat") {
@@ -327,12 +322,12 @@ if (day === "Mon") {
     else if(holiday){holidayName=holiday.name;slots=holiday.customSlots?.length?holiday.customSlots:makeBusinessSlots(9,15);}
     else {
       const wd=date.getDay();
-      if(wd===0) closed=true;
-      else if(wd===1) slots=makeBusinessSlots(10,17);
+      if(wd===0||wd===1) closed=true;
       else if(wd===6) slots=makeBusinessSlots(9,15);
       else slots=makeBusinessSlots(9,17);
     }
-    if(dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();}
+    if(dayData.customSlots?.length && date.getDay()!==0 && date.getDay()!==1){closed=false;slots=[...dayData.customSlots].sort();}
+    if(date.getDay()===0||date.getDay()===1){closed=true;slots=[];}
     return {closed,holiday:!!holiday,holidayName,slots};
   };
   const johannesburgParts = () => Object.fromEntries(new Intl.DateTimeFormat("en-ZA",{timeZone:"Africa/Johannesburg",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(({type,value})=>[type,value]));
