@@ -287,10 +287,11 @@
   const baseAvailabilityForDay = (key) => {
     const date=parseLocalDate(key); if(!date)return{closed:true,holiday:false,holidayName:"",slots:[]};
     const dayData=getScheduleDay(key),holiday=holidayInfoFor(key); let closed=false,slots=[],holidayName="";
-    if(holiday?.closed){closed=true;holidayName=holiday.name;}
+    // Explicit custom hours take priority over public holidays and normally closed days.
+    if(dayData.customSlots?.length){closed=false;slots=[...dayData.customSlots].sort();holidayName=holiday?.name||"";}
+    else if(holiday?.closed){closed=true;holidayName=holiday.name;}
     else if(holiday){holidayName=holiday.name;slots=holiday.customSlots?.length?holiday.customSlots:makeBusinessSlots(9,15);}
     else {const wd=date.getDay();if(wd===0||wd===1)closed=true;else if(wd===6)slots=makeBusinessSlots(9,15);else slots=makeBusinessSlots(9,17);}
-    if(dayData.customSlots?.length && date.getDay()!==0 && date.getDay()!==1){closed=false;slots=[...dayData.customSlots].sort();}
     return {closed,holiday:!!holiday,holidayName,slots};
   };
   const johannesburgParts = () => Object.fromEntries(new Intl.DateTimeFormat("en-ZA",{timeZone:"Africa/Johannesburg",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(({type,value})=>[type,value]));
@@ -414,7 +415,7 @@
   calendarNext?.addEventListener("click",()=>{calendarViewDate=new Date(calendarViewDate.getFullYear(),calendarViewDate.getMonth()+1,1);renderBookingCalendar();});
 
   const updateAddonAvailability = () => {const service=getSelectedService(),allowed=Boolean(service?.coveredAddonAllowed);if(coveredAddon){coveredAddon.disabled=!allowed;if(!allowed)coveredAddon.checked=false;}coveredAddonLabel?.classList.toggle("is-disabled",!allowed);if(addonHelp)addonHelp.textContent=allowed?"Covered oral is available for the selected Sensual Massage appointment.":"Select a Sensual Massage option to enable the covered-oral add-on.";};
-  const getPriceBreakdown = () => {const service=getSelectedService(),base=service?.price||0,isReturning=clientType?.value==="returning",gfePrice=gfeAddon?.checked?(isReturning?0:300):0,coveredPrice=coveredAddon?.checked?100:0,addons=gfePrice+coveredPrice,total=base+addons,deposit=clientType?.value==="new"&&total?Math.min(500,total):0,balance=total?total-deposit:0;return{service,base,gfePrice,coveredPrice,addons,total,deposit,balance};};
+  const getPriceBreakdown = () => {const service=getSelectedService(),base=service?.price||0,isReturning=clientType?.value==="returning",gfePrice=gfeAddon?.checked?300:0,coveredPrice=coveredAddon?.checked?100:0,addons=gfePrice+coveredPrice,total=base+addons,deposit=clientType?.value==="new"&&total?Math.min(500,total):0,balance=total?total-deposit:0;return{service,base,gfePrice,coveredPrice,addons,total,deposit,balance};};
   const updatePriceSummary = () => {const p=getPriceBreakdown();if(basePriceOutput)basePriceOutput.textContent=p.service?formatMoney(p.base):"—";if(addonPriceOutput)addonPriceOutput.textContent=formatMoney(p.addons);if(totalPriceOutput)totalPriceOutput.textContent=p.service?formatMoney(p.total):"—";if(depositPriceOutput){if(!clientType?.value)depositPriceOutput.textContent="Choose client type";else if(clientType.value==="new")depositPriceOutput.textContent=formatMoney(p.deposit||500);else depositPriceOutput.textContent="Not required";}if(balancePriceOutput)balancePriceOutput.textContent=p.service?formatMoney(p.balance):"—";};
   serviceSelect?.addEventListener("change",()=>{updateAddonAvailability();if(timeInput)timeInput.value="";renderBookingCalendar();renderTimeButtons(selectedDateKey);findNextAvailable();updatePriceSummary();});
   clientType?.addEventListener("change",updatePriceSummary);gfeAddon?.addEventListener("change",updatePriceSummary);coveredAddon?.addEventListener("change",updatePriceSummary);
@@ -439,7 +440,7 @@
     if(whatsappWindow) whatsappWindow.opener=null;
     await loadLiveSchedule();
     if(!validateDateAndTime()){whatsappWindow?.close();return;}
-    const price=getPriceBreakdown(),addOns=[];if(gfeAddon?.checked)addOns.push(price.gfePrice===0?"GFE add-on (repeat-client rate: R0)":"GFE add-on (+R300)");if(coveredAddon?.checked)addOns.push("Covered oral add-on (+R100)");
+    const price=getPriceBreakdown(),addOns=[];if(gfeAddon?.checked)addOns.push("GFE add-on (+R300)");if(coveredAddon?.checked)addOns.push("Covered oral add-on (+R100)");
     const submit=bookingForm.querySelector("button[type=submit]");if(submit){submit.disabled=true;submit.textContent="Saving request…";}
     const pending=await savePendingRequest(price);
     if(submit){submit.disabled=false;submit.textContent="Continue to WhatsApp";}

@@ -101,8 +101,11 @@ function baseAvailabilityForDay(key) {
   const holiday=holidayInfoFor(key);
   let closed=false, slots=[], label='', holidayName='';
 
-  // Public holiday hours take priority over ordinary weekday hours.
-  if (holiday?.closed) {
+  // Explicit custom hours take priority over public holidays and normally closed days.
+  if (dayData.customSlots?.length) {
+    closed=false; slots=[...dayData.customSlots].sort(); label='Custom hours';
+    holidayName=holiday?.name||'';
+  } else if (holiday?.closed) {
     closed=true; label='Closed for public holiday'; holidayName=holiday.name;
   } else if (holiday) {
     closed=false; label='Public holiday hours'; holidayName=holiday.name;
@@ -114,11 +117,6 @@ function baseAvailabilityForDay(key) {
     else { slots=makeBusinessSlots(9,17); label='Business hours'; }
   }
 
-  // Custom daily slots may adjust ordinary days, but never override public holiday hours.
-  if (!holiday && dayData.customSlots?.length && date.getDay()!==0 && date.getDay()!==1) {
-    closed=false; slots=[...dayData.customSlots].sort(); label='Custom hours';
-  }
-  if(date.getDay()===0||date.getDay()===1){closed=true;slots=[];label='Closed';}
   return { closed, holiday:!!holiday, holidayName, label, slots };
 }
 function allSlotsForDay(key) { return baseAvailabilityForDay(key).slots; }
