@@ -53,7 +53,7 @@
         "logo": "https://massagebyash.co.za/logo.webp",
         "description": "Private, appointment-only massage services in Parkmore, Johannesburg, near Sandton and Rosebank.",
         "telephone": "+27 79 556 7346",
-        "priceRange": "R1000-R1800",
+        "priceRange": "R900-R1500",
         "areaServed": [
           {"@type": "Place", "name": "Parkmore"},
           {"@type": "Place", "name": "Sandton"},
@@ -229,8 +229,9 @@
             <h3>Sensual Massage with FH</h3>
             <span class="sub">Covered oral included</span>
             <div class="price-list">
-              
-              </button>
+              <div class="price-item" aria-disabled="true">
+                <span class="price-duration">30 Mins</span><strong class="price-amount">Not available</strong><span class="book-cue">Duration too short</span>
+              </div>
               <button type="button" class="price-item service-option-link" data-book-service="sensual-fh-60" aria-label="Choose Sensual Massage with FH for 1 hour in the WhatsApp booking form">
                 <span class="price-duration">1 Hour</span><strong class="price-amount">R1300</strong><span class="book-cue" aria-hidden="true">Book →</span>
               </button>
@@ -424,9 +425,9 @@
             <select id="service" name="service" class="form-hidden-select" tabindex="-1" aria-hidden="true">
               <option value="">Choose a service</option>
               <option value="sensual-30" data-title="Sensual Massage" data-duration="30" data-price="900" data-covered-addon="true">Sensual Massage · 30 mins · R900</option>
-              <option value="sensual-60" data-title="Sensual Massage" data-duration="60" data-price="1100" data-covered-addon="true">Sensual Massage · 60 mins · R1200</option>
+              <option value="sensual-60" data-title="Sensual Massage" data-duration="60" data-price="1200" data-covered-addon="true">Sensual Massage · 60 mins · R1200</option>
               <option value="sensual-fh-60" data-title="Sensual Massage with FH" data-duration="60" data-price="1300">Sensual Massage with FH · 60 mins · R1300</option>
-              <option value="fh-30" data-title="FH" data-duration="30" data-price="1300">FH · 30 mins · R1200</option>
+              <option value="fh-30" data-title="FH" data-duration="30" data-price="1200">FH · 30 mins · R1200</option>
               <option value="fh-60" data-title="FH" data-duration="60" data-price="1500">FH · 60 mins · R1500</option>
             </select>
 
@@ -445,7 +446,7 @@
               <div class="addon-options">
                 <label class="check-option" for="gfeAddon">
                   <input id="gfeAddon" name="gfeAddon" type="checkbox">
-                  <span><strong>GFE add-on</strong><small id="gfeAddonPriceText">+R300 for new clients · included for returning clients</small></span>
+                  <span><strong>GFE add-on</strong><small id="gfeAddonPriceText">+R300</small></span>
                 </label>
                 <label class="check-option" for="coveredAddon" id="coveredAddonLabel" hidden>
                   <input id="coveredAddon" name="coveredAddon" type="checkbox" disabled>
